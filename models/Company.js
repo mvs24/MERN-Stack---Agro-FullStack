@@ -1,0 +1,24 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const companySchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  place: String,
+  products: [
+      {
+        product: {
+            type: Schema.Types.ObjectId,
+            ref: 'Product'
+        }
+      }
+  ],
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  }
+});
+
+module.exports = mongoose.model('Company', companySchema);

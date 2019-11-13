@@ -1,0 +1,32 @@
+.header_container{
+    max-height: 5rem;
+    background: rgb(139, 201, 142);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.user{
+    font-size: 18px;
+    font-style: italic;
+    padding: 0.5rem;
+}
+.u-center-text{
+    text-align: center;
+    margin-top: 50rem;
+}
+.icon-flex {
+    display: flex;
+    justify-content: space-between;
+}
+.iconLink {
+    font-size: 28px;
+}
+.iconLink:not(:last-child){
+    margin-right: 5rem;
+}
+.fa-sign-out-alt::after {
+    content: "";
+    display: block;
+    border: 0.4px solid red;
+    border-radius: 50%;
+}
