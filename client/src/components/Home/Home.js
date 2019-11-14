@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import {getUserData} from '../../store/actions/user';
 
-import Header from '../Header/Header'
+import Header from '../Header/Header';
+import Sidebar from '../Sidebar/Sidebar';
 
 class Home extends Component {
     componentDidMount() {
@@ -15,9 +16,10 @@ class Home extends Component {
 
     render() {
         return (
-            <Header userData={this.props.user.user} >
-                
-            </Header>
+            <div>
+                <Header userData={this.props.user.user} ></Header>
+                <Sidebar/>
+            </div>
         )
     }
 }

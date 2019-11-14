@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const {validateCompany} = require('../validation/company');
+const { auth } = require('../middleware/auth');
 const Company = require('../models/Company');
 const User = require('../models/User');
 
@@ -28,6 +29,18 @@ router.post('/', (req, res) => {
                 return res.status(200).json(savedCompany);
         })
     })
+})
+
+router.get('/', auth, (req, res) => {
+    Company.find().populate('user').then(companies => {
+        return res.status(200).json(companies);
+    }).catch(err => res.status(400).json(err));
+})
+
+router.get('/:companyId', auth, (req, res) => {
+    Company.findOne({_id: req.params.companyId}).populate('user').then(company => {
+        return res.status(200).json(company);
+    }).catch(err => res.status(404).json(err))
 })
 
 module.exports = router;

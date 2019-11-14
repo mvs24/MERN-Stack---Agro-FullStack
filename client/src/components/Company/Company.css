@@ -1,0 +1,36 @@
+.company_container{
+    background: linear-gradient(to right bottom, rgb(141, 218, 141), rgb(94, 192, 94));
+    display: flex;
+    flex-basis: 20%;
+    width: 20%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 0.1px solid white;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+.company_container:hover{
+   background: grey;
+   color: green;
+}
+.company_info{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.4rem;
+}
+
+h5{
+    color: #fff;
+    font-size: 18px;
+}
+h6{
+    color: #fff;
+    font-size: 16px;
+}
+
+.fullname{
+    font-size: 14px;
+}
