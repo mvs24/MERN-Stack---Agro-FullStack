@@ -1,4 +1,4 @@
-import { COMPANY_CREATION_ERROR, CREATE_COMPANY, GET_ALL_COMPANIES } from "../actions/types";
+import { COMPANY_CREATION_ERROR, CREATE_COMPANY, GET_ALL_COMPANIES, GET_COMPANY_DETAILS_ERROR, GET_COMPANY_DETAILS } from "../actions/types";
 
 const initialState = {
     companyError: null,
@@ -21,6 +21,16 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 companies: action.payload
+            }
+        case GET_COMPANY_DETAILS_ERROR:
+            return {
+                ...state,
+                companyDetailError: action.payload
+            }
+        case GET_COMPANY_DETAILS:
+            return {
+                ...state,
+                companyDetail: action.payload
             }
         default:
             return state;

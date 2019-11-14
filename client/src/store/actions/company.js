@@ -1,6 +1,13 @@
 import axios from 'axios';
 
-import { COMPANY_CREATION_ERROR, CREATE_COMPANY, GET_COMPANIES_ERROR, GET_ALL_COMPANIES } from './types';
+import { COMPANY_CREATION_ERROR,
+         CREATE_COMPANY,
+         GET_COMPANIES_ERROR,
+         GET_ALL_COMPANIES,
+         GET_COMPANY_DETAILS_ERROR,
+         GET_COMPANY_DETAILS
+} from './types';
+
 
 export const createCompany = (data, history) => dispatch => {
    axios.post('/api/company', data).then(res => {
@@ -32,6 +39,12 @@ export const getAllCompanies = () => dispatch => {
 
 export const getCompanyDetails = (companyId, history) => dispatch => {
     axios.get('/api/company/' + companyId).then(res => {
-        console.log(res.data);
-    }).catch(err => console.log(err.response.data));
+        dispatch({
+            type: GET_COMPANY_DETAILS,
+            payload: res.data
+        })
+    }).catch(err => dispatch({
+        type: GET_COMPANY_DETAILS_ERROR,
+        payload: err.response.data.companyNotFound
+    }));
 }

@@ -30,7 +30,7 @@ class CreateCompany extends Component {
 
   render() {
       const companyErrors = this.props.company.companyError;
-      console.log(companyErrors);
+      // console.log(companyErrors);
     return (
       <div>
         <form className="signUp" onSubmit={this.create} autoComplete="off">
