@@ -4,8 +4,7 @@ import "./SignUp.css";
 import { Link } from "react-router-dom";
 import Select from 'react-select'
 
-import { signUpUser } from "../../store/actions/user";
-import {createCompany} from '../../store/actions/company';
+import { signUpUser, goToCompany } from "../../store/actions/user";
 
 const options = [
   { value: 'user', label: 'User' },
@@ -19,8 +18,7 @@ export class SignUp extends Component {
     email: "",
     password: "",
     place: '', 
-    role: 'user',
-    roleChanged: false
+    role: 'user'
   };
 
   onChange = e => {
@@ -31,18 +29,20 @@ export class SignUp extends Component {
 
   signUp = e => {
     e.preventDefault();
-    let company = undefined;
-    const data = {
+    let data = {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
       lastname: this.state.lastname,
       place: this.state.place,
-      role: this.state.role.value,
-      company: this.state.company 
+      role: this.state.role.value
     };
     if(data.role === 'seller') {
-        this.props.createCompany(data, history);
+      this.props.goToCompany(data, this.props.history)
+      // this.props.history.push({
+      //   pathname: '/createCompany',
+      //   state: {data}
+      // })
     } else {
       this.props.signUpUser(data, this.props.history);
     }
@@ -192,5 +192,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {signUpUser, createCompany}
+  {signUpUser, goToCompany}
 )(SignUp);

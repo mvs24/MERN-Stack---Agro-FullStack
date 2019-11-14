@@ -9,6 +9,10 @@ class Home extends Component {
     componentDidMount() {
         this.props.getUserData();
     }
+
+    // TODO: WITH componentDidMount() to create an action to get myCompanies looping through 
+    // all the companies and finding the companies corresponding to the logged in user
+
     render() {
         return (
             <Header userData={this.props.user.user} >

@@ -8,9 +8,11 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
 import userReducer from './store/reducers/user';
+import companyReducer from './store/reducers/company';
 
 const rootReducer = combineReducers({
-    user: userReducer
+    user: userReducer,
+    company: companyReducer
 });
 
 const initialState = {};

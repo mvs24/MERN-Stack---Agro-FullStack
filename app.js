@@ -22,9 +22,11 @@ app.use(cookieParser());
 
 const user = require("./routes/user");
 const product = require('./routes/product');
+const company = require('./routes/company');
 
 app.use("/api/user", user);
 app.use("/api/product", product);
+app.use("/api/company", company);
 
 
 const port = 5000;
