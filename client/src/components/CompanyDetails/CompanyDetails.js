@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { getCompanyDetails } from '../../store/actions/company';
 import Spinner from '../Spinner/Spinner';
-import CompanyDetails from './CompanyDetails.css';
+import './CompanyDetails.css';
 
 class CompanyDetails extends Component {
    componentDidMount() {
@@ -20,8 +20,8 @@ class CompanyDetails extends Component {
         return (
             <div className='companyDetail_container'>
                 <div className='companyDetailInfo'>
-                    <h3>Company: <span>{companyDetail.name}</span></h3>
-                    <div>
+                    <h3 className='companyName'>Company: <span>{companyDetail.name}</span></h3>
+                    <div className='placeUser'>
                         <p>Place: {companyDetail.place}</p>
                         <p>Owner: {companyDetail.user.name} {companyDetail.user.lastname}</p>
                     </div>

@@ -1,0 +1,30 @@
+.companyDetail_container{
+    margin: 0 auto;
+    text-align: center;
+    transform: translateY(50%);
+    background: white;
+    width: 50%;
+    height: 100%;
+    border-radius: 0.8rem;
+    overflow: hidden;
+}
+.companyDetailInfo {
+    background: rgb(157, 207, 157);
+    padding: 1rem;
+}
+.companyName{
+    font-size: 18px;
+    color: rgb(80, 78, 78);
+    text-align: center;
+    margin: 0rem 0 1rem 0;
+}
+
+.placeUser{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.placeUser p{
+    font-size: 16px;
+    color: rgb(80, 78, 78);
+}
