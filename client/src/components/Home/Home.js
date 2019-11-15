@@ -5,6 +5,7 @@ import {getUserData} from '../../store/actions/user';
 
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
+import MyCompany from '../MyCompany/MyCompany';
 
 class Home extends Component {
     componentDidMount() {
@@ -19,6 +20,9 @@ class Home extends Component {
             <div>
                 <Header userData={this.props.user.user} ></Header>
                 <Sidebar/>
+                <div>
+                    <MyCompany/>
+                </div>
             </div>
         )
     }

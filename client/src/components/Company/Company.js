@@ -1,16 +1,11 @@
 import React from "react";
 import { withRouter, Link } from 'react-router-dom';
 
-// import {getCompanyDetails} from '../../store/actions/company'
 import './Company.css';
 
 const Company = props => {
   const companyName = props.company.name;
   const companyOwner = props.company.user;
-
-  // const getCompany = (companyId, history) => {
-  //   dispatch(getCompanyDetails(companyId, history));
-  // }
 
   return (
     <Link  
