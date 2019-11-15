@@ -19,7 +19,7 @@ router.get("/", auth, protect("user", "seller", "admin"), (req, res) => {
 
 router.post("/:companyId", auth, protect("seller"), (req, res) => {
   Company.findOne({ _id: req.params.companyId }).then(company => {
-    if (company.user.toString() === req.user._id) {
+    if (company.user.toString() === req.user._id.toString()) {
       const newProduct = new Product({
         name: req.body.name,
         user: req.user._id,
@@ -31,16 +31,21 @@ router.post("/:companyId", auth, protect("seller"), (req, res) => {
 
       newProduct
         .save()
-        .then(savedProduct => res.json(savedProduct))
+        .then(savedProduct => {
+          return res.status(200).json(savedProduct);
+        })
         .catch(err => res.status(400).json(err));
     } else {
-      return res
-        .status(400)
-        .json({
-          createProductErr: "You do not have permission to do this action"
-        });
+      return res.status(400).json({
+        createProductErr: "You do not have permission to do this action"
+      });
     }
   });
 });
+
+
+router.get('/all/:companyId', auth, (req, res) => {
+  Product.find({ company: req.params.companyId }).then(products => res.json(products))
+}).catch(err => res.status(404).json(err));
 
 module.exports = router;

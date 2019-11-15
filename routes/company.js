@@ -32,19 +32,19 @@ router.post('/', (req, res) => {
 })
 
 router.get('/', auth, (req, res) => {
-    Company.find().populate('user').then(companies => {
+    Company.find().populate('user').populate('products').then(companies => {
         return res.status(200).json(companies);
     }).catch(err => res.status(400).json(err));
 })
 
 router.get('/:companyId', auth, (req, res) => {
-    Company.findOne({_id: req.params.companyId}).populate('user').then(company => {
+    Company.findOne({_id: req.params.companyId}).populate('user').populate('products').then(company => {
         return res.status(200).json(company);
     }).catch(err => res.status(404).json({companyNotFound: "This company does not exists"}))
 })
 
 router.get('/my/myCompany', auth, (req, res) => {
-    Company.findOne({user: req.user._id}).populate('user').then(company => {
+    Company.findOne({user: req.user._id}).populate('user').populate('products').then(company => {
         if(company) {
             return res.status(200).json(company);
         } else {
