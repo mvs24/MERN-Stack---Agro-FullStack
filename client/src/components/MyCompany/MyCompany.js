@@ -2,38 +2,36 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import './MyCompany.css';
-import Spinner from '../Spinner/Spinner';
-import axios from 'axios';
+import { getMyCompany } from '../../store/actions/company';
+import CompanyDetail from '../CompanyDetail/CompanyDetail';
 
 class MyCompany extends Component {
 
-    state = {
-        myCompany: null
-    }
-    
-    getMyCompany = userId => {
-        axios.get(`/api/company/user/${userId}`).then(res => {
-            console.log(res);
-        })
+    componentDidMount() {
+        this.props.getMyCompany();
     }
 
     render() {
-        const user = this.props.user;
-
-        if (!user) return <Spinner/>
-        if (user.role === 'user') {
-            return <div>
-                You need to be a seller to have your own company
-            </div>
-        } else {
-            this.getMyCompany(user._id)
-        }
+        if (!this.props.company.myCompany) return null;
+        const myCompany = this.props.company.myCompany;
+        console.log(myCompany);
+        
         return (
             <div>
-                my company
+                <CompanyDetail 
+                myCompany={true}
+                name={myCompany.name}
+                place={myCompany.place}
+                username={myCompany.user.name}
+                lastname={myCompany.user.lastname}
+                />
             </div>
         )
     }
 }
 
-export default connect(null)(MyCompany);
+const mapStateToProps = state => ({
+  company: state.company
+});
+
+export default connect(mapStateToProps, { getMyCompany })(MyCompany);

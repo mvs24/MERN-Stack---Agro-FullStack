@@ -1,36 +1,43 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import {getUserData} from '../../store/actions/user';
+import { getUserData } from "../../store/actions/user";
 
-import './Home.css';
-import Header from '../Header/Header';
-import Sidebar from '../Sidebar/Sidebar';
-import MyCompany from '../MyCompany/MyCompany';
+import "./Home.css";
+import Header from "../Header/Header";
+import Sidebar from "../Sidebar/Sidebar";
+import MyCompany from "../MyCompany/MyCompany";
 
 class Home extends Component {
-    componentDidMount() {
-        this.props.getUserData();
-    }
+  componentDidMount() {
+    this.props.getUserData();
+  }
 
-    // TODO: WITH componentDidMount() to create an action to get myCompanies looping through 
-    // all the companies and finding the companies corresponding to the logged in user
+  // TODO: WITH componentDidMount() to create an action to get myCompanies looping through
+  // all the companies and finding the companies corresponding to the logged in user
 
-    render() {
-        return (
-            <div>
-                <Header userData={this.props.user.user} ></Header>
-                <Sidebar/>
-                <div className='myCompany'>
-                    <MyCompany user={this.props.user.user}/>
-                </div>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <main className='main'>
+        <Header userData={this.props.user.user}></Header>
+       
+          <div className="sidebar">
+            <Sidebar />
+          </div>
+          <div className='products'>
+                <h1>products</h1>
+          </div>
+          <div className="myCompany">
+            <MyCompany />
+  
+        </div>
+      </main>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps, {getUserData})(Home);
+export default connect(mapStateToProps, { getUserData })(Home);

@@ -43,10 +43,16 @@ router.get('/:companyId', auth, (req, res) => {
     }).catch(err => res.status(404).json({companyNotFound: "This company does not exists"}))
 })
 
-router.get('/user/:userId', auth, (req, res) => {
-    Company.findOne({user: req.user._id}).then(company => {
-        console.log(company);
-    }) 
+router.get('/my/myCompany', auth, (req, res) => {
+    Company.findOne({user: req.user._id}).populate('user').then(company => {
+        if(company) {
+            return res.status(200).json(company);
+        } else {
+            return res.status(404).json({companyNotFound: "This company does not exists"})
+        }
+    }).catch(err => res.status(404).json({companyNotFound: "This company does not exists"}))
 })
+
+
 
 module.exports = router;
