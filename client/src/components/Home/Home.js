@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import {getUserData} from '../../store/actions/user';
 
+import './Home.css';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 import MyCompany from '../MyCompany/MyCompany';
@@ -20,8 +21,8 @@ class Home extends Component {
             <div>
                 <Header userData={this.props.user.user} ></Header>
                 <Sidebar/>
-                <div>
-                    <MyCompany/>
+                <div className='myCompany'>
+                    <MyCompany user={this.props.user.user}/>
                 </div>
             </div>
         )

@@ -48,3 +48,4 @@ export const getCompanyDetails = (companyId, history) => dispatch => {
         payload: err.response.data.companyNotFound
     }));
 }
+

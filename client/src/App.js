@@ -8,6 +8,7 @@ import CreateCompany from './components/CreateCompany/CreateCompany';
 import CompanyDetails from './components/CompanyDetails/CompanyDetails';
 
 
+
 export default () => {
   return (
     <BrowserRouter>

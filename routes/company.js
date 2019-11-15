@@ -43,4 +43,10 @@ router.get('/:companyId', auth, (req, res) => {
     }).catch(err => res.status(404).json({companyNotFound: "This company does not exists"}))
 })
 
+router.get('/user/:userId', auth, (req, res) => {
+    Company.findOne({user: req.user._id}).then(company => {
+        console.log(company);
+    }) 
+})
+
 module.exports = router;
