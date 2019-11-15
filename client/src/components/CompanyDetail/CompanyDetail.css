@@ -45,11 +45,31 @@
     background: rgb(111, 201, 111);
     display: inline-block;
     padding: 1rem;
+   
 }
 .myCompanyName h3{
     font-size: 16px;
     color: rgba(0, 0, 0, 0.212);
 }
 .btnContainer{
-    /* bac */
+    background: transparent;
+    margin: 1rem 0.5rem;
+    transition: all .5s;
+
+}
+.btnContainer .button{
+    padding: 1rem;
+    border: 1px solid white;
+    background: rgb(103, 192, 115);
+    color: white;
+    cursor: pointer;
+    transition: all .5s;
+}
+.btnContainer:hover .btnContainer{
+    color: rgb(103, 192, 115);
+    background: white;
+}
+.button:hover {
+    color: rgb(103, 192, 115);
+    background: white;
 }

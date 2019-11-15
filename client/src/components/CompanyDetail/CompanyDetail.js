@@ -1,8 +1,18 @@
 import React from "react";
+import { useDispatch } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
+import { addNewProduct } from '../../store/actions/company';
 import "./CompanyDetail.css";
 
-export default ({ username, lastname, place, name, myCompany }) => {
+
+const CompanyDetail = ({ username, lastname, place, name, myCompany, companyId, history }) => {
+    const dispatch = useDispatch();
+
+    const addProduct = cid => {
+        dispatch(addNewProduct(cid, history));
+    }
+
   if (myCompany) {
     return (
       <div className="myCompanyContainer">
@@ -12,7 +22,7 @@ export default ({ username, lastname, place, name, myCompany }) => {
           </h3>
         </div>
         <div className='btnContainer'>
-            <button type='button'>Add a new Product</button>
+            <button className='button' onClick={() => addProduct(companyId)}>Add a new Product</button>
         </div>
       </div>
     );
@@ -21,7 +31,6 @@ export default ({ username, lastname, place, name, myCompany }) => {
     <div className="companyDetail_container">
       <div className="companyDetailInfo">
         <h3 className="companyName">
-          {" "}
           Company: <span>{name}</span>
         </h3>
         <div className="placeUser">
@@ -38,3 +47,5 @@ export default ({ username, lastname, place, name, myCompany }) => {
     </div>
   );
 };
+
+export default withRouter(CompanyDetail);

@@ -33,12 +33,12 @@ const userSchema = new Schema({
     type: Array,
     default: []
   },
-  companies: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "Company"
-    }
-  ],
+  // companies: [
+  //   {
+  //     type: mongoose.Schema.ObjectId,
+  //     ref: "Company"
+  //   }
+  // ],
   token: String
 });
 

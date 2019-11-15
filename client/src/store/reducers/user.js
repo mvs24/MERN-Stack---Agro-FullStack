@@ -1,4 +1,4 @@
-import { USER_ERROR, SIGN_IN_USER, USER_ERROR_LOGIN, GET_USER_DATA } from "../actions/types";
+import { USER_ERROR, SIGN_IN_USER, USER_ERROR_LOGIN, GET_USER_DATA, SIGN_OUT_USER } from "../actions/types";
 
 const initialState = {
     user: null,
@@ -41,6 +41,13 @@ export default (state = initialState, action) => {
                 registerError: null,
                 loginError: null
             }
+        case SIGN_OUT_USER:
+            return {
+                ...state,
+                user: null,
+                registerError: null,
+                loginError: null
+            };
         default: 
             return state;
     }

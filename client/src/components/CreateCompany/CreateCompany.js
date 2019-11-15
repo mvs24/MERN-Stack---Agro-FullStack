@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 import "../SignUp/SignUp.css";
-import { createCompany } from '../../store/actions/company';
+import { createCompany } from "../../store/actions/company";
 
 class CreateCompany extends Component {
   state = {
@@ -18,19 +18,23 @@ class CreateCompany extends Component {
 
   create = e => {
     e.preventDefault();
-    const user = this.props.location.state.data;
+
+    let user = undefined;
+    if (this.props.location.state.data) {
+       user = this.props.location.state.data;
+    }
 
     let data = {
-        email: user.email,
-        companyName: this.state.companyName,
-        companyPlace: this.state.companyPlace
-    }
+      email: user.email,
+      companyName: this.state.companyName,
+      companyPlace: this.state.companyPlace
+    };
     this.props.createCompany(data, this.props.history);
-  }
+  };
 
   render() {
-      const companyErrors = this.props.company.companyError;
-      // console.log(companyErrors);
+    const companyErrors = this.props.company.companyError;
+    // console.log(companyErrors);
     return (
       <div>
         <form className="signUp" onSubmit={this.create} autoComplete="off">
@@ -50,7 +54,9 @@ class CreateCompany extends Component {
                 <i className="fas fa-user icon"></i>
                 {companyErrors ? (
                   <div className="error">
-                    {companyErrors.name ? <span>{companyErrors.name}</span> : null}
+                    {companyErrors.name ? (
+                      <span>{companyErrors.name}</span>
+                    ) : null}
                   </div>
                 ) : null}
               </div>
@@ -65,14 +71,14 @@ class CreateCompany extends Component {
                 <i className="fas fa-user icon"></i>
                 {companyErrors ? (
                   <div className="error">
-                    {companyErrors.place ? <span>{companyErrors.place}</span> : null}
+                    {companyErrors.place ? (
+                      <span>{companyErrors.place}</span>
+                    ) : null}
                   </div>
                 ) : null}
               </div>
             </div>
-            <button className="signUpBtn">
-              CREATE COMPANY
-            </button>
+            <button className="signUpBtn">CREATE COMPANY</button>
           </div>
         </form>
       </div>

@@ -28,7 +28,7 @@ class Home extends Component {
                 <h1>products</h1>
           </div>
           <div className="myCompany">
-            <MyCompany />
+            <MyCompany userData={this.props.user.user}/>
   
         </div>
       </main>

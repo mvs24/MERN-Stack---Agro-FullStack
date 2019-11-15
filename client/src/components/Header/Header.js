@@ -1,10 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 
 import Spinner from "../Spinner/Spinner";
 import "./Header.css";
+import {signOutUser} from '../../store/actions/user';
 
 const Header = ({ userData, children }) => {
+
+  const dispatch = useDispatch();
+
+  const signOut = () => {
+    dispatch(signOutUser());
+  }
+
   if (!userData)
     return (
       <div className="u-center-text">
@@ -25,7 +34,7 @@ const Header = ({ userData, children }) => {
               <i className="fas fa-shopping-cart"></i>
             </Link> 
               </div>
-            <div className="iconLink">
+            <div onClick={signOut} className="iconLink">
                  <Link to="/">
               <i className="fas fa-sign-out-alt"></i>
             </Link>
