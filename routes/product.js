@@ -45,7 +45,9 @@ router.post("/:companyId", auth, protect("seller"), (req, res) => {
 
 
 router.get('/all/:companyId', auth, (req, res) => {
-  Product.find({ company: req.params.companyId }).then(products => res.json(products))
-}).catch(err => res.status(404).json(err));
+  Product.find({ company: req.params.companyId })
+    .then(products => res.json(products))
+    .catch(err => res.status(404).json(err));
+})
 
 module.exports = router;

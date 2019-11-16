@@ -68,8 +68,10 @@
 .btnContainer:hover .btnContainer{
     color: rgb(103, 192, 115);
     background: white;
+    outline: none;
 }
 .button:hover {
     color: rgb(103, 192, 115);
     background: white;
+    outline: none;
 }

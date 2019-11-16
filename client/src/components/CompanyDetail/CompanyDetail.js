@@ -1,16 +1,16 @@
 import React from "react";
-import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { addNewProduct } from '../../store/actions/company';
 import "./CompanyDetail.css";
 
 
 const CompanyDetail = ({ username, lastname, place, name, myCompany, companyId, history }) => {
-    const dispatch = useDispatch();
+   
 
     const addProduct = cid => {
-        dispatch(addNewProduct(cid, history));
+        history.push({
+         pathname: `/addProduct?cid=${cid}`
+        })  
     }
 
   if (myCompany) {

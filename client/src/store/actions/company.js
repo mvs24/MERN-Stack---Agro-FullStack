@@ -65,7 +65,3 @@ export const getMyCompany = () => dispatch => {
         })
     })
 }
-
-export const addNewProduct = (companyId, history) => dispatch => {
-    
-}
