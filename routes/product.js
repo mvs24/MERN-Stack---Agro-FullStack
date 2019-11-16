@@ -4,18 +4,21 @@ const mongoose = require("mongoose");
 const formidable = require('express-formidable');
 const cloudinary = require('cloudinary');
 
+const { cloudinaryApiKey, cloudinaryName, cloudinaryApiSecret } = require('../keys/secret');
+
 const Product = require("../models/Product");
 const Company = require("../models/Company");
 const { protect } = require("../middleware/protect");
 const { auth } = require("../middleware/auth");
 const { validateProduct } = require("../validation/product");
-const { cloudinaryApiKey, cloudinaryName, cloudinaryApiSecret } = require('../keys/secret');
+
 
 cloudinary.config({
   cloud_name: cloudinaryName,
   api_key: cloudinaryApiKey,
   api_secret: cloudinaryApiSecret
 })
+
 
 router.get("/", auth, protect("user", "seller", "admin"), (req, res) => {
   Product.find()
@@ -58,14 +61,22 @@ router.post("/:companyId", auth, protect("seller"), (req, res) => {
   });
 });
 
-router.post('/uploadImage', auth, protect("seller"), (req, res) => {
-
+router.post('/uploadImage', auth, protect("seller"), formidable(), (req, res) => {
+  cloudinary.uploader.upload(req.files.file.path, (result) => {
+    console.log(result);
+    res.status(200).json({ public_id: result.public_id, url: result.url })
+  }, {
+    public_id: `${Date.now()}`,
+    resource_type: "auto"
+  })
 })
+
 
 router.get("/all/:companyId", auth, (req, res) => {
   Product.find({ company: req.params.companyId })
     .then(products => res.json(products))
     .catch(err => res.status(404).json(err));
 });
+
 
 module.exports = router;

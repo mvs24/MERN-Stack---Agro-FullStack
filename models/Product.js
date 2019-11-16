@@ -25,7 +25,10 @@ const productSchema = new Schema({
       type: Date,
       default: Date.now
   },
-  image: String,
+  images:{
+    type: Array,
+    default:[]
+  },
   prejardhja: String
 });
 

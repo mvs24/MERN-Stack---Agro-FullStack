@@ -25,6 +25,7 @@ class FileUpload extends Component {
     formData.append('file', files[0]);
     axios.post('/api/product/uploadImage', formData, config)
       .then(res => {
+        console.log(res.data);
         this.setState({
           uploading: false,
           finished: true,

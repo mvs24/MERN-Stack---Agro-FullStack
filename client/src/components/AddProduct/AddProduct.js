@@ -1,26 +1,29 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { addNewProduct } from "../../store/actions/product";
 import { getMyCompany } from "../../store/actions/company";
-import FileUpload from '../../utils/FileUpload';
+// import FileUpload from '../../utils/FileUpload';
 
 class AddProduct extends Component {
   state = {
     productName: "",
     productQuantity: "",
     productSmallPrice: "",
-    productBigPrice: "",
-    images: {
-      value: []
-    }
+    productBigPrice: ""
+    // images: {
+    //   value: []
+    // }
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.getMyCompany();
   }
 
-  imagesHandler = () => {}
+  // imagesHandler = (images) => {
+  //   console.log(images);
+  // }
 
   onChange = e => {
     this.setState({
@@ -40,97 +43,103 @@ class AddProduct extends Component {
     const { productError } = this.props.product;
 
     return (
-      <form
-        className="signUp"
-        onSubmit={e => this.createProduct(e, companyId)}
-        autoComplete="off"
-      >
-        <div className="signUpContainer">
-          <div className="createAccount">
-            <h1>Create a product for your company</h1>
-          </div>
-          <div className="formContainer">
-            <div className="input">
-              <input
-                value={this.state.productName}
-                onChange={this.onChange}
-                name="productName"
-                placeholder="Name of the Product"
-                type="text"
-              />
-              <i className="fas fa-user icon"></i>
-              {productError ? (
-                <div className="error">
-                  {productError.productName ? (
-                    <span>{productError.productName}</span>
-                  ) : null}
-                </div>
-              ) : null}
+      <div>
+        <Link to="/home"> Go to the Home Page </Link>
+        <form
+          className="signUp"
+          onSubmit={e => this.createProduct(e, companyId)}
+          autoComplete="off"
+        >
+          <div className="signUpContainer">
+            <div className="createAccount">
+              <h1>Create a product for your company</h1>
             </div>
-            <div className="input">
-              <input
-                value={this.state.productQuantity}
-                onChange={this.onChange}
-                name="productQuantity"
-                placeholder="Quantity (kg)"
-                type="number"
-              />
-              <i className="fas fa-user icon"></i>
-              {productError ? (
-                <div className="error">
-                  {productError.productQuantity ? (
-                    <span>{productError.productQuantity}</span>
-                  ) : null}
-                </div>
-              ) : null}
-            </div>
-            <div className="input">
-              <input
-                value={this.state.productSmallPrice}
-                onChange={this.onChange}
-                name="productSmallPrice"
-                placeholder="Price ($), Starting from"
-                type="number"
-              />
-              <i className="fas fa-user icon"></i>
-              {productError ? (
-                <div className="error">
-                  {productError.productSmallPrice ? (
-                    <span>{productError.productSmallPrice}</span>
-                  ) : null}
-                </div>
-              ) : null}
-            </div>
-            <div className="input">
-              <input
-                value={this.state.productBigPrice}
-                onChange={this.onChange}
-                name="productBigPrice"
-                placeholder="Price ($), Ending to"
-                type="number"
-              />
-              <i className="fas fa-user icon"></i>
-              {productError ? (
-                <div className="error">
-                  {productError.productBigPrice ? (
-                    <span>{productError.productBigPrice}</span>
-                  ) : null}
-                </div>
-              ) : null}
-            </div>
-            <FileUpload
+            <div className="formContainer">
+              <div className="input">
+                <input
+                  value={this.state.productName}
+                  onChange={this.onChange}
+                  name="productName"
+                  placeholder="Name of the Product"
+                  type="text"
+                />
+                <i className="fas fa-user icon"></i>
+                {productError ? (
+                  <div className="error">
+                    {productError.productName ? (
+                      <span>{productError.productName}</span>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+              <div className="input">
+                <input
+                  value={this.state.productQuantity}
+                  onChange={this.onChange}
+                  name="productQuantity"
+                  placeholder="Quantity (kg)"
+                  type="number"
+                />
+                <i className="fas fa-user icon"></i>
+                {productError ? (
+                  <div className="error">
+                    {productError.productQuantity ? (
+                      <span>{productError.productQuantity}</span>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+              <div className="input">
+                <input
+                  value={this.state.productSmallPrice}
+                  onChange={this.onChange}
+                  name="productSmallPrice"
+                  placeholder="Price ($), Starting from"
+                  type="number"
+                />
+                <i className="fas fa-user icon"></i>
+                {productError ? (
+                  <div className="error">
+                    {productError.productSmallPrice ? (
+                      <span>{productError.productSmallPrice}</span>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+              <div className="input">
+                <input
+                  value={this.state.productBigPrice}
+                  onChange={this.onChange}
+                  name="productBigPrice"
+                  placeholder="Price ($), Ending to"
+                  type="number"
+                />
+                <i className="fas fa-user icon"></i>
+                {productError ? (
+                  <div className="error">
+                    {productError.productBigPrice ? (
+                      <span>{productError.productBigPrice}</span>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+              {/* <FileUpload
             imagesHandler={images => this.imagesHandler(images)}
-            />
+            /> */}
+            </div>
+            <button className="signUpBtn">CREATE PRODUCT</button>
           </div>
-          <button className="signUpBtn">CREATE PRODUCT</button>
-        </div>
-      </form>
+        </form>
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  product: state.product
+  product: state.product,
+  user: state.user
 });
 
-export default connect(mapStateToProps, { addNewProduct, getMyCompany })(AddProduct);
+export default connect(mapStateToProps, { addNewProduct, getMyCompany })(
+  AddProduct
+);
