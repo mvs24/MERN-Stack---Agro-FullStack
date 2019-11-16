@@ -11,19 +11,20 @@ class MyCompany extends Component {
   }
 
   render() {
-    if (!this.props.company.myCompany) return <div>You do not have a company.</div>;
+    if (!this.props.company.myCompany) return null;
     const myCompany = this.props.company.myCompany;
 
     return (
       <div>
         <CompanyDetail
-          myCompany={true}
+          myCompanyInSide={true}
           name={myCompany.name}
           place={myCompany.place}
           username={myCompany.user.name}
           lastname={myCompany.user.lastname}
           companyId={myCompany._id}
         />
+
       </div>
     );
   }

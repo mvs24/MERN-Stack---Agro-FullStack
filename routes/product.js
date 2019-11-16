@@ -6,6 +6,7 @@ const Product = require("../models/Product");
 const Company = require("../models/Company");
 const { protect } = require("../middleware/protect");
 const { auth } = require("../middleware/auth");
+const { validateProduct } = require("../validation/product");
 
 router.get("/", auth, protect("user", "seller", "admin"), (req, res) => {
   Product.find()
@@ -20,14 +21,19 @@ router.get("/", auth, protect("user", "seller", "admin"), (req, res) => {
 router.post("/:companyId", auth, protect("seller"), (req, res) => {
   Company.findOne({ _id: req.params.companyId }).then(company => {
     if (company.user.toString() === req.user._id.toString()) {
+      let validation = validateProduct(req.body);
+      if (validation[validation.length - 1] === false) {
+        return res.status(400).json(validation[0]);
+      }
       const newProduct = new Product({
-        name: req.body.name,
+        name: req.body.productName,
         user: req.user._id,
         company: req.params.companyId,
-        quantity: req.body.quantity,
-        smallPrice: req.body.smallPrice,
-        bigPrice: req.body.bigPrice
+        quantity: req.body.productQuantity,
+        smallPrice: req.body.productSmallPrice,
+        bigPrice: req.body.productBigPrice
       });
+      newProduct.medPrice = (newProduct.smallPrice + newProduct.bigPrice) / 2;
 
       newProduct
         .save()
@@ -43,11 +49,10 @@ router.post("/:companyId", auth, protect("seller"), (req, res) => {
   });
 });
 
-
-router.get('/all/:companyId', auth, (req, res) => {
+router.get("/all/:companyId", auth, (req, res) => {
   Product.find({ company: req.params.companyId })
     .then(products => res.json(products))
     .catch(err => res.status(404).json(err));
-})
+});
 
 module.exports = router;

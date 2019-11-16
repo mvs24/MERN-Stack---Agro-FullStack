@@ -7,6 +7,7 @@ import Home from './components/Home/Home';
 import CreateCompany from './components/CreateCompany/CreateCompany';
 import CompanyDetails from './components/CompanyDetails/CompanyDetails';
 import AddProduct from './components/AddProduct/AddProduct';
+import MyCompanyPage from './components/MyCompanyPage/MyCompanyPage';
 
 export default () => {
   return (
@@ -17,7 +18,8 @@ export default () => {
         <Route path='/home' exact component={Home}/>
         <Route path='/createCompany' exact component={CreateCompany}/>
         <Route path='/company' component={CompanyDetails}/>
-        <Route path='/addProduct' component={AddProduct}/>
+        <Route path='/addProduct/:cid'  component={AddProduct}/>
+        <Route path='/myCompanyPage/:cid' exact component={MyCompanyPage}/>
       </Switch>
     </BrowserRouter>
   );

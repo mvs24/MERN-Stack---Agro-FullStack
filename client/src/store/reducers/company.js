@@ -6,7 +6,8 @@ import {
   GET_COMPANY_DETAILS,
   GET_MY_COMPANY_ERROR,
   GET_MY_COMPANY,
-  SIGN_OUT_USER
+  SIGN_OUT_USER,
+  ADD_NEW_PRODUCT
 } from "../actions/types";
 
 const initialState = {
@@ -64,7 +65,11 @@ export default (state = initialState, action) => {
         companyDetail: null,
         companyDetailError: null
       };
+    case ADD_NEW_PRODUCT:
+      return {
+        ...state
+      }
     default:
-      return state;
+      return {...state}
   }
 };

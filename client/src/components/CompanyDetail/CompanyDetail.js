@@ -1,51 +1,63 @@
 import React from "react";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 import "./CompanyDetail.css";
 
 
-const CompanyDetail = ({ username, lastname, place, name, myCompany, companyId, history }) => {
-   
+class CompanyDetail extends React.Component {
 
-    const addProduct = cid => {
-        history.push({
-         pathname: `/addProduct?cid=${cid}`
-        })  
-    }
+  addProduct = (cid, history) => {
+    history.push({
+      pathname: `/addProduct/${cid}`
+    });
+  };
+  render() {
+    const {
+      username,
+      lastname,
+      place,
+      name,
+      myCompanyInSide,
+      companyId,
+      history
+    } = this.props;
 
-  if (myCompany) {
-    return (
-      <div className="myCompanyContainer">
-        <div className="myCompanyName">
-          <h3 className="">
-            My Company: <span>{name}</span>
-          </h3>
+    if (myCompanyInSide) {
+      return (
+        <div className="myCompanyContainer">
+          <div className="myCompanyName">
+            <h3 className="">
+              My Company: <span>{name}</span>
+            </h3>
+          </div>
+          <div className="btnContainer">
+            <button className="button" onClick={() => this.addProduct(companyId, history)}>
+              Add a new Product
+            </button>
+          </div>
         </div>
-        <div className='btnContainer'>
-            <button className='button' onClick={() => addProduct(companyId)}>Add a new Product</button>
+      );
+    }
+    return (
+      <div className="companyDetail_container">
+        <div className="companyDetailInfo">
+          <h3 className="companyName">
+            Company: <span>{name}</span>
+          </h3>
+          <div className="placeUser">
+            <p>Place: {place}</p>
+            <p>
+              Owner: {username} {lastname}
+            </p>
+          </div>
+        </div>
+        <div className="companyProducts">
+          <h1>Products</h1>
+          <div></div>
         </div>
       </div>
     );
   }
-  return (
-    <div className="companyDetail_container">
-      <div className="companyDetailInfo">
-        <h3 className="companyName">
-          Company: <span>{name}</span>
-        </h3>
-        <div className="placeUser">
-          <p>Place: {place}</p>
-          <p>
-            Owner: {username} {lastname}
-          </p>
-        </div>
-      </div>
-      <div className="companyProducts">
-        <h1>Products</h1>
-        <div></div>
-      </div>
-    </div>
-  );
-};
+}
 
 export default withRouter(CompanyDetail);
