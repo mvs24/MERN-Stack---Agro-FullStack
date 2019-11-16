@@ -19,7 +19,8 @@ class CompanyDetail extends React.Component {
       name,
       myCompanyInSide,
       companyId,
-      history
+      history,
+      products
     } = this.props;
 
     if (myCompanyInSide) {
@@ -53,7 +54,12 @@ class CompanyDetail extends React.Component {
         </div>
         <div className="companyProducts">
           <h1>Products</h1>
-          <div></div>
+          <div>
+            {!products && (<div>No products found for this company</div>)}
+          </div>
+          <div>
+            {/* {products && products.map(product => {console.log(product)})} */}
+          </div>
         </div>
       </div>
     );

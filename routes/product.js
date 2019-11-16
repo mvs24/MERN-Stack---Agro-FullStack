@@ -1,12 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const formidable = require('express-formidable');
+const cloudinary = require('cloudinary');
 
 const Product = require("../models/Product");
 const Company = require("../models/Company");
 const { protect } = require("../middleware/protect");
 const { auth } = require("../middleware/auth");
 const { validateProduct } = require("../validation/product");
+const { cloudinaryApiKey, cloudinaryName, cloudinaryApiSecret } = require('../keys/secret');
+
+cloudinary.config({
+  cloud_name: cloudinaryName,
+  api_key: cloudinaryApiKey,
+  api_secret: cloudinaryApiSecret
+})
 
 router.get("/", auth, protect("user", "seller", "admin"), (req, res) => {
   Product.find()
@@ -48,6 +57,10 @@ router.post("/:companyId", auth, protect("seller"), (req, res) => {
     }
   });
 });
+
+router.post('/uploadImage', auth, protect("seller"), (req, res) => {
+
+})
 
 router.get("/all/:companyId", auth, (req, res) => {
   Product.find({ company: req.params.companyId })

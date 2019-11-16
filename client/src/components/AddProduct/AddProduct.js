@@ -3,18 +3,24 @@ import { connect } from "react-redux";
 
 import { addNewProduct } from "../../store/actions/product";
 import { getMyCompany } from "../../store/actions/company";
+import FileUpload from '../../utils/FileUpload';
 
 class AddProduct extends Component {
   state = {
     productName: "",
     productQuantity: "",
     productSmallPrice: "",
-    productBigPrice: ""
+    productBigPrice: "",
+    images: {
+      value: []
+    }
   };
 
   componentDidMount(){
     this.props.getMyCompany();
   }
+
+  imagesHandler = () => {}
 
   onChange = e => {
     this.setState({
@@ -112,6 +118,9 @@ class AddProduct extends Component {
                 </div>
               ) : null}
             </div>
+            <FileUpload
+            imagesHandler={images => this.imagesHandler(images)}
+            />
           </div>
           <button className="signUpBtn">CREATE PRODUCT</button>
         </div>

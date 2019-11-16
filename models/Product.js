@@ -25,6 +25,7 @@ const productSchema = new Schema({
       type: Date,
       default: Date.now
   },
+  image: String,
   prejardhja: String
 });
 
