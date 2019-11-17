@@ -10,11 +10,13 @@ import { Provider } from 'react-redux';
 import userReducer from './store/reducers/user';
 import companyReducer from './store/reducers/company';
 import productReducer from './store/reducers/product';
+import companyProductsReducer from './store/reducers/companyProducts';
 
 const rootReducer = combineReducers({
     user: userReducer,
     company: companyReducer,
-    product: productReducer
+    product: productReducer,
+    companyProducts: companyProductsReducer
 });
 
 const initialState = {};

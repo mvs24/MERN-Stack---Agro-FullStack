@@ -63,6 +63,7 @@ router.post("/:companyId", auth, protect("seller"), (req, res) => {
 
 router.post('/uploadImage', auth, protect("seller"), formidable(), (req, res) => {
   cloudinary.uploader.upload(req.files.file.path, (result) => {
+    console.log('-----')
     console.log(result);
     res.status(200).json({ public_id: result.public_id, url: result.url })
   }, {
@@ -77,6 +78,12 @@ router.get("/all/:companyId", auth, (req, res) => {
     .then(products => res.json(products))
     .catch(err => res.status(404).json(err));
 });
+
+router.get('/companyDetails/:cid', auth, protect('user', 'seller', 'admin'), (req, res) => {
+  Product.find({company: req.params.cid}).then(products => {
+    return res.status(200).json(products);
+  }).catch(err => res.status(404).json(err))
+})
 
 
 module.exports = router;

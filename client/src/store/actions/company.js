@@ -7,7 +7,8 @@ import { COMPANY_CREATION_ERROR,
          GET_COMPANY_DETAILS_ERROR,
          GET_COMPANY_DETAILS,
          GET_MY_COMPANY,
-         GET_MY_COMPANY_ERROR
+         GET_MY_COMPANY_ERROR,
+         GET_COMPANY_PRODUCTS
 } from './types';
 
 
@@ -39,7 +40,8 @@ export const getAllCompanies = () => dispatch => {
     }))
 }
 
-export const getCompanyDetails = (companyId, history) => dispatch => {
+export const getCompanyDetails = (companyId) => dispatch => {
+    
     axios.get('/api/company/' + companyId).then(res => {
         dispatch({
             type: GET_COMPANY_DETAILS,
@@ -51,6 +53,17 @@ export const getCompanyDetails = (companyId, history) => dispatch => {
     }));
 }
 
+export const getCompanyProducts = (companyId) => dispatch => {
+    axios.get(`/api/product/companyDetails/${companyId}`).then(res => {
+        dispatch({
+            type: GET_COMPANY_PRODUCTS,
+            payload: res.data
+        })
+    }).catch(err => {
+        console.log(err.response.data);
+    })
+}
+
 export const getMyCompany = () => dispatch => {
     axios.get('/api/company/my/myCompany').then(res => {
         dispatch({
@@ -58,10 +71,11 @@ export const getMyCompany = () => dispatch => {
             payload: res.data
         })
     }).catch(err => {
-        dispatch({
-            type: GET_MY_COMPANY_ERROR,
-            payload: err.response.data
+  
+        // dispatch({
+        //     type: GET_MY_COMPANY_ERROR,
+        //     payload: err.response.data
 
-        })
+        // })
     })
 }

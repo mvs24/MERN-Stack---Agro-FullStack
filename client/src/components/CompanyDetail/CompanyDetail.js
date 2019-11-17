@@ -22,7 +22,7 @@ class CompanyDetail extends React.Component {
       products
     } = this.props;
 
-    let minHeight = Math.ceil((products.length / 3)) * 100;
+    let minHeight = products ? Math.ceil((products.length / 3)) * 100 : undefined;
 
     if (myCompanyInSide) {
       return (

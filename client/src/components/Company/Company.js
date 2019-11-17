@@ -10,8 +10,7 @@ const Company = props => {
   return (
     <Link  
     to={{
-      pathname: '/company',
-      search: `?companyId=${props.company._id}`,
+      pathname: `/company/${props.company._id}`
      }} 
      className='company_container'>
       <div><h5> Company: {companyName}</h5></div>

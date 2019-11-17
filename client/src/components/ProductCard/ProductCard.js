@@ -17,6 +17,7 @@ class ProductCard extends Component {
       nameOfProduct: product.name,
       productId: product._id
     };
+    console.log(dataToBuy)
     // this.props.addProductToCart
   };
 
@@ -133,7 +134,7 @@ class ProductCard extends Component {
                 value={this.state.quantity}
                 placeholder="Quantity to buy"
               />
-              {/* <input type="text" value={}/> */}
+              <input className="quantityInput priceInput" type="text" value={'Price: $' + this.state.quantity * 1 * product.medPrice * 1}/>
               <button
                 disabled={this.state.quantity <= 0}
                 className={

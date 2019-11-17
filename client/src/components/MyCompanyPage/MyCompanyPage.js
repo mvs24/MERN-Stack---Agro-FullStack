@@ -10,7 +10,9 @@ import Spinner from "../Spinner/Spinner";
 class MyCompanyPage extends Component {
   componentDidMount() {
     this.props.getUserData();
+
     this.props.getMyCompany();
+
     this.props.getAllProducts(this.props.match.params.cid);
   }
 
@@ -21,7 +23,8 @@ class MyCompanyPage extends Component {
 
     const { myCompanyProducts } = this.props.product;
     if (!myCompanyProducts) return null;
-    
+    console.log(myCompanyProducts);
+
     return (
       <CompanyDetail
         cid={myCompanyId}

@@ -17,7 +17,7 @@ export default () => {
         <Route path='/' exact component={SignUp}/>
         <Route path='/home' exact component={Home}/>
         <Route path='/createCompany' exact component={CreateCompany}/>
-        <Route path='/company' component={CompanyDetails}/>
+        <Route path='/company/:cid' component={CompanyDetails}/>
         <Route path='/addProduct/:cid'  component={AddProduct}/>
         <Route path='/myCompanyPage/:cid' exact component={MyCompanyPage}/>
       </Switch>
