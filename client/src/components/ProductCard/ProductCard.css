@@ -4,6 +4,12 @@
     position: relative;
     margin-bottom: 2rem;
 }
+.cardOwner{
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    position: relative;
+    margin-bottom: 2rem;
+}
 
 .card__side{
     font-size: 1.3rem;
@@ -33,7 +39,7 @@
     background: linear-gradient(to right bottom,#ffb900, #ff7730 );
 }
 .card__side__back__0{
-    background: linear-gradient(to right bottom,#ffb900, #ff7730 );
+    background: linear-gradient(to right bottom,#7ed56f, #28b485 );
 }
 .card:hover .card__side__front{
     transform: rotateY(-180deg);
@@ -85,4 +91,38 @@
 .card__detail li:not(:last-child){
     border-bottom: 1px solid #eee;
 
+}
+.btnPos{
+    position: absolute;
+    top: 80%;
+    width: 60%;
+    left: 20%;
+    border: none;
+    outline: none;
+    background: rgb(38, 175, 100);
+    padding: 1rem 5rem;
+    color: white;
+    border: 1px solid white;
+    border-radius: 1.5rem;
+    font-weight: 300;
+    transition: all 1s ease-in-out;
+    
+}
+.pointer{
+    cursor: pointer;
+}
+.quantityInput{
+         border: 1px solid white;
+        width: 60%;
+        outline: none;
+        margin: 10rem 5rem;
+        padding: 0.7rem 0.5rem;
+        background: white;
+        text-align: center;
+        color: rgb(112, 109, 109);
+
+}
+
+.quantityInput::placeholder {
+    padding: 1.4rem;
 }
