@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/User");
+const Product = require('../models/Product');
 const { auth } = require("../middleware/auth");
+const { protect } = require("../middleware/protect");
 const { validateUser } = require("../validation/user");
 
 router.post("/register", (req, res) => {
@@ -72,5 +74,34 @@ router.get("/logout", auth, (req, res) => {
 });
 
 router.get("/current", auth, (req, res) => res.json(req.user));
+
+router.post('/addToCart', auth, protect('user', 'seller'), (req, res) => {
+  User.findOne({_id: req.user._id}).then(user => {
+    let item = user.cart.find(el => el.productId.toString() == req.body.productId.toString());
+
+    if(!item) {
+      user.cart.unshift(req.body);
+      user.save().then(savedUser => res.status(200).json(savedUser))
+      .catch(err => res.status(400).json(err));       
+    } else {
+      const newQuantity = item.quantity + req.body.quantity;
+      const newPrice = item.price.toFixed(2) * 1 + req.body.price.toFixed(2) * 1;
+      user.cart = user.cart.map(el => {
+        if(el.productId.toString() === req.body.productId.toString()) {
+          return {
+            ...el,
+            quantity: newQuantity,
+            price: newPrice
+          }
+        } else {
+          return el;
+        }
+      })
+
+      user.save().then(savedUser => res.status(200).json(savedUser))
+        .catch(err => res.status(400).json(err));       
+    } 
+  })
+})
 
 module.exports = router;

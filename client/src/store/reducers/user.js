@@ -1,4 +1,10 @@
-import { USER_ERROR, SIGN_IN_USER, USER_ERROR_LOGIN, GET_USER_DATA, SIGN_OUT_USER } from "../actions/types";
+import { USER_ERROR, 
+         SIGN_IN_USER,
+         USER_ERROR_LOGIN,
+         GET_USER_DATA,
+         SIGN_OUT_USER,
+         ADD_PRODUCT_TO_CARD 
+} from "../actions/types";
 
 const initialState = {
     user: null,
@@ -48,6 +54,11 @@ export default (state = initialState, action) => {
                 registerError: null,
                 loginError: null
             };
+        case ADD_PRODUCT_TO_CARD:
+            return {
+                ...state,
+                user: action.payload
+            }
         default: 
             return state;
     }

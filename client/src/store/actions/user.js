@@ -6,7 +6,8 @@ import { USER_ERROR,
          GET_USER_DATA,
          GET_USER_DATA_ERROR,
          SIGN_OUT_USER,
-         SIGN_OUT_USER_ERROR
+         SIGN_OUT_USER_ERROR,
+         ADD_PRODUCT_TO_CARD
 } from "./types";
 
 export const signUpUser = (userData, history) => dispatch => {
@@ -58,4 +59,13 @@ export const signOutUser = () => dispatch => {
       type: SIGN_OUT_USER_ERROR,
       payload: err.response.data
   }))
+}
+
+export const addProductToCard = (dataToBuy) => dispatch => {
+  axios.post('/api/user/addToCart', dataToBuy).then(res => {
+    dispatch({
+      type: ADD_PRODUCT_TO_CARD,
+      payload: res.data
+    })
+  }).catch(err => console.log(err.response.data));
 }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Moment from "react-moment";
 import { connect } from "react-redux";
 
+import {addProductToCard} from '../../store/actions/user';
 import "./ProductCard.css";
 
 class ProductCard extends Component {
@@ -13,12 +14,12 @@ class ProductCard extends Component {
   addToCart = product => {
     let dataToBuy = {
       price: this.state.quantity * 1 * product.medPrice * 1,
-      date: Date.now,
+      date: Date.now(),
       nameOfProduct: product.name,
-      productId: product._id
+      productId: product._id,
+      quantity: this.state.quantity * 1
     };
-    console.log(dataToBuy)
-    // this.props.addProductToCart
+    this.props.addProductToCard(dataToBuy)
   };
 
   render() {
@@ -156,4 +157,4 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps)(ProductCard);
+export default connect(mapStateToProps, { addProductToCard })(ProductCard);
