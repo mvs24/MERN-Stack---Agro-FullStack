@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Moment from 'react-moment';
 
 import "./ProductCard.css";
 
@@ -53,7 +54,7 @@ class ProductCard extends Component {
                 <li >Big Price: {product.bigPrice}</li>
                 <li>Medium Price: {product.medPrice}</li>
                 <li>Quantity: {product.quantity}</li>
-                <li>Date: {product.date}</li>
+                <li>Date: <Moment format='dd-mm-yyyy'> {product.date}</Moment></li>
               </ul>
             </div>
           </div>

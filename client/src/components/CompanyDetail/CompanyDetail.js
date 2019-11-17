@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 
 import "./CompanyDetail.css";
-import ProductCard from '../ProductCard/ProductCard';
+import ProductCard from "../ProductCard/ProductCard";
 
 class CompanyDetail extends React.Component {
   addProduct = (cid, history) => {
@@ -21,6 +21,8 @@ class CompanyDetail extends React.Component {
       history,
       products
     } = this.props;
+
+    let minHeight = Math.ceil((products.length / 3)) * 100;
 
     if (myCompanyInSide) {
       return (
@@ -59,13 +61,17 @@ class CompanyDetail extends React.Component {
             {!products ? (
               <div>No products found for this company</div>
             ) : (
-              <span style={{padding: '1rem'}}>Total: {products.length} Products</span>
+              <span style={{ padding: "1rem" }}>
+                Total: {products.length} Products
+              </span>
             )}
           </div>
         </div>
-        <div className='grid'>
+        <div className="grid" style={{ minHeight: `${minHeight}vh` }}>
           {products &&
-            products.map(product => <ProductCard key={product._id} product={product} />)}
+            products.map(product => (
+              <ProductCard key={product._id} product={product} />
+            ))}
         </div>
       </div>
     );
