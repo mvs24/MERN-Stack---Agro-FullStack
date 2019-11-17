@@ -1,0 +1,26 @@
+.cartItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10rem;
+    border: 0.1px solid rgb(219, 193, 193);
+    background: white;
+}
+.cartItem:first-child{
+    margin-top: 2rem;
+}
+img{
+    width: 10rem;
+    height: 10rem;
+    padding: 3rem;
+}
+.link {
+    font-size: 2rem;
+    margin: 0 2rem;
+    cursor: pointer;
+}
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -22,6 +22,11 @@ const Header = ({ userData, children }) => {
   return (
     <div>
       <div className="header_container">
+        <div style={{ marginRight: "2rem" }} className="iconLink">
+          <Link to="/home">
+            <i className="fas fa-home"></i>
+          </Link>
+        </div>
         <div className="user">
           Welcome {userData.name.toUpperCase()}{" "}
           {userData.lastname.toUpperCase()}
@@ -31,6 +36,7 @@ const Header = ({ userData, children }) => {
             {userData.role !== "user" ? null : (
               <div className="iconLink">
                 <Link to="/cart">
+                  <span className="cartLength">{userData.cart.length}</span>
                   <i className="fas fa-shopping-cart"></i>
                 </Link>
               </div>

@@ -11,7 +11,7 @@ const mongoURI = "mongodb://localhost:27017/agro";
 mongoose.connect(
   mongoURI,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
-  () => console.log("Mongo Connected")
+  () => console.log("Mongo Connected")  
 );
 
 mongoose.set('useCreateIndex', true);

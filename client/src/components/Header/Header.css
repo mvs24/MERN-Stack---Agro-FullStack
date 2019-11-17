@@ -20,6 +20,8 @@
 }
 .iconLink {
     font-size: 28px;
+    position: relative;
+    color: white;
 }
 .iconLink:not(:last-child){
     margin-right: 5rem;
@@ -29,4 +31,13 @@
     display: block;
     border: 0.4px solid red;
     border-radius: 50%;
+}
+.cartLength{
+    position: absolute;
+    top: -10%;
+    right: -40%;
+    color: red;
+    font-size: 15px;
+    border: 2px solid white;
+    border-radius: 60%;
 }

@@ -17,7 +17,8 @@ class ProductCard extends Component {
       date: Date.now(),
       nameOfProduct: product.name,
       productId: product._id,
-      quantity: this.state.quantity * 1
+      quantity: this.state.quantity * 1,
+      singleItemPrice: product.medPrice
     };
     this.props.addProductToCard(dataToBuy)
   };
@@ -44,7 +45,7 @@ class ProductCard extends Component {
 
     return (
       <div className="col-1-of-3">
-        <div className= {product.user.toString() === userId.toString() ? "cardOwner" : "card"}>
+        <div className= {this.props.user.user.role === 'seller' ? "cardOwner" : "card"}>
           {product.user.toString() === userId.toString() ? (
             <div className="card__side card__side__front">
             <div

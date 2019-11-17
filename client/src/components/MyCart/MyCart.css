@@ -1,0 +1,19 @@
+.cart__background {
+  min-height: 10vh;
+  background: rgb(173, 165, 165);
+}
+.cart__background span {
+  font-size: 20px;
+  padding: 3rem;
+  margin: 1rem auto;
+  color: white;
+}
+.shopCart__container {
+  min-width: 100%;
+  min-height: 100%;
+}
+.cart__list{
+  width: 60%;
+  margin: 0 40% 0 0;
+  margin-left: 2rem;
+}

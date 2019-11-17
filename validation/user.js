@@ -7,7 +7,7 @@ const validateUser = data => {
 
   if (!data.name || data.name.trim().length < 2) {
     errors.name = "Name must be more than 2 letters";
-    isValid = false;
+    isValid = false;        
   }
   if (!data.lastname || data.lastname.trim().length < 2) {
     errors.lastname = "Lastname must be more than 2 letters";

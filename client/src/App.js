@@ -8,6 +8,7 @@ import CreateCompany from './components/CreateCompany/CreateCompany';
 import CompanyDetails from './components/CompanyDetails/CompanyDetails';
 import AddProduct from './components/AddProduct/AddProduct';
 import MyCompanyPage from './components/MyCompanyPage/MyCompanyPage';
+import MyCart from './components/MyCart/MyCart';
 
 export default () => {
   return (
@@ -20,6 +21,7 @@ export default () => {
         <Route path='/company/:cid' component={CompanyDetails}/>
         <Route path='/addProduct/:cid'  component={AddProduct}/>
         <Route path='/myCompanyPage/:cid' exact component={MyCompanyPage}/>
+        <Route path='/cart' exact component={MyCart}/>
       </Switch>
     </BrowserRouter>
   );

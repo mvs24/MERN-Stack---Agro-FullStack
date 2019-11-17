@@ -3,7 +3,8 @@ import { USER_ERROR,
          USER_ERROR_LOGIN,
          GET_USER_DATA,
          SIGN_OUT_USER,
-         ADD_PRODUCT_TO_CARD 
+         ADD_PRODUCT_TO_CARD, 
+         DECREASE_ITEM_QUANTITY
 } from "../actions/types";
 
 const initialState = {
@@ -55,6 +56,11 @@ export default (state = initialState, action) => {
                 loginError: null
             };
         case ADD_PRODUCT_TO_CARD:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case DECREASE_ITEM_QUANTITY:
             return {
                 ...state,
                 user: action.payload

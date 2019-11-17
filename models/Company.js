@@ -6,14 +6,6 @@ const companySchema = new Schema({
     type: String
   },
   place: String,
-  // products: [
-  //     {
-  //       product: {
-  //           type: Schema.Types.ObjectId,
-  //           ref: 'Product'
-  //       }
-  //     }
-  // ],
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User'

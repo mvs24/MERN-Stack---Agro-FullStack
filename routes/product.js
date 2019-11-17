@@ -75,14 +75,15 @@ router.post('/uploadImage', auth, protect("seller"), formidable(), (req, res) =>
 
 router.get("/all/:companyId", auth, (req, res) => {
   Product.find({ company: req.params.companyId })
+    .populate('user')
     .then(products => res.json(products))
     .catch(err => res.status(404).json(err));
 });
 
 router.get('/companyDetails/:cid', auth, protect('user', 'seller', 'admin'), (req, res) => {
-  Product.find({company: req.params.cid}).then(products => {
+  Product.find({company: req.params.cid}).populate('user').then(products => {
     return res.status(200).json(products);
-  }).catch(err => res.status(404).json(err))
+  }).catch(err => res.status(404).json(err));
 })
 
 
