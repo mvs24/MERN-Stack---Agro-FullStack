@@ -37,5 +37,5 @@ export const getTodayProducts = (currentDate) => dispatch => {
             type: GET_TODAY_PRODUCTS,
             payload: res.data
         })
-    }).catch(err => console.log(err.response.data)); 
+    }).catch(err => console.log(err)); 
 } 

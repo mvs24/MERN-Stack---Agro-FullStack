@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Moment from "react-moment";
 import { connect } from "react-redux";
 
-import {addProductToCard} from '../../store/actions/user';
+import { addProductToCard } from "../../store/actions/user";
 import "./ProductCard.css";
 
 class ProductCard extends Component {
@@ -20,7 +20,7 @@ class ProductCard extends Component {
       quantity: this.state.quantity * 1,
       singleItemPrice: product.medPrice
     };
-    this.props.addProductToCard(dataToBuy)
+    this.props.addProductToCard(dataToBuy);
   };
 
   render() {
@@ -45,46 +45,13 @@ class ProductCard extends Component {
 
     return (
       <div className="col-1-of-3">
-        <div className= {this.props.user.user.role === 'seller' ? "cardOwner" : "card"}>
+        <div
+          className={
+            this.props.user.user.role === "seller" ? "cardOwner" : "card"
+          }
+        >
           {product.user.toString() === userId.toString() ? (
             <div className="card__side card__side__front">
-            <div
-              className="card__picture"
-              style={{
-                backgroundImage: `url(${image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                height: "14.375rem"
-              }}
-            >
-              &nbsp;
-            </div>
-            <div className="card__heading">
-              <span
-                style={{
-                  fontSize: "1.1rem",
-                  color: "rgb(197, 187, 187)"
-                }}
-              >
-                Name:
-              </span>
-              {product.name}
-            </div>
-            <div className="card__detail">
-              <ul>
-                <li>Small Price: {product.smallPrice}</li>
-                <li>Big Price: {product.bigPrice}</li>
-                <li>Medium Price: {product.medPrice}</li>
-                <li>Quantity: {product.quantity}</li>
-                <li>
-                  Date:{" "}
-                  <Moment format="DD:MM:YYYY  HH:mm">{product.date}</Moment>
-                </li>
-              </ul>
-            </div>
-          </div>
-          ) : (
-              <div className="card__side card__side__front">
               <div
                 className="card__picture"
                 style={{
@@ -109,6 +76,45 @@ class ProductCard extends Component {
               </div>
               <div className="card__detail">
                 <ul>
+                  <li>Company: {product.company.name}</li>
+                  <li>Small Price: {product.smallPrice}</li>
+                  <li>Big Price: {product.bigPrice}</li>
+                  <li>Medium Price: {product.medPrice}</li>
+                  <li>Quantity: {product.quantity}</li>
+                  <li>
+                    Date:{" "}
+                    <Moment format="DD:MM:YYYY  HH:mm">{product.date}</Moment>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          ) : (
+            <div className="card__side card__side__front">
+              <div
+                className="card__picture"
+                style={{
+                  backgroundImage: `url(${image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  height: "14.375rem"
+                }}
+              >
+                &nbsp;
+              </div>
+              <div className="card__heading">
+                <span
+                  style={{
+                    fontSize: "1.1rem",
+                    color: "rgb(197, 187, 187)"
+                  }}
+                >
+                  Name:
+                </span>
+                {product.name}
+              </div>
+              <div className="card__detail">
+                <ul>
+                  <li>Company: {product.company.name}</li>
                   <li>Small Price: {product.smallPrice}</li>
                   <li>Big Price: {product.bigPrice}</li>
                   <li>Medium Price: {product.medPrice}</li>
@@ -121,7 +127,7 @@ class ProductCard extends Component {
               </div>
             </div>
           )}
-        
+
           {product.user.toString() === userId.toString() ? null : (
             <div className={classNames}>
               <input
@@ -136,7 +142,13 @@ class ProductCard extends Component {
                 value={this.state.quantity}
                 placeholder="Quantity to buy"
               />
-              <input className="quantityInput priceInput" type="text" value={'Price: $' + this.state.quantity * 1 * product.medPrice * 1}/>
+              <input
+                className="quantityInput priceInput"
+                type="text"
+                value={
+                  "Price: $" + this.state.quantity * 1 * product.medPrice * 1
+                } 
+              />
               <button
                 disabled={this.state.quantity <= 0}
                 className={

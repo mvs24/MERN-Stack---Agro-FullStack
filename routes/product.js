@@ -23,6 +23,7 @@ cloudinary.config({
 router.get("/", auth, protect("user", "seller", "admin"), (req, res) => {
   Product.find()
     .populate("user")
+    .populate('company')
     .then(products => {
       products;
       return res.json(products);
@@ -44,7 +45,7 @@ router.post("/:companyId", auth, protect("seller"), (req, res) => {
         quantity: req.body.productQuantity,
         smallPrice: req.body.productSmallPrice,
         bigPrice: req.body.productBigPrice
-      });
+      }); 
       newProduct.medPrice = (newProduct.smallPrice + newProduct.bigPrice) / 2;
 
       newProduct
@@ -76,12 +77,14 @@ router.post('/uploadImage', auth, protect("seller"), formidable(), (req, res) =>
 router.get("/all/:companyId", auth, (req, res) => {
   Product.find({ company: req.params.companyId })
     .populate('user')
+    .populate('company')
     .then(products => res.json(products))
     .catch(err => res.status(404).json(err));
 });
 
 router.get('/companyDetails/:cid', auth, protect('user', 'seller', 'admin'), (req, res) => {
-  Product.find({company: req.params.cid}).populate('user').then(products => {
+  Product.find({company: req.params.cid}).populate('user').populate('company')
+  .then(products => {
     return res.status(200).json(products);
   }).catch(err => res.status(404).json(err));
 })
@@ -95,7 +98,7 @@ router.get('/todayProducts', auth, protect('user', 'seller', 'admin'), (req, res
         if((new Date(product.date).getDate() == todayDate.getDate())
           && ( new Date(product.date).getMonth() == todayDate.getMonth())
           && ( new Date(product.date).getFullYear() == todayDate.getFullYear() )
-        ) {   
+        ) {     
           results.unshift(product);
         }
       })
