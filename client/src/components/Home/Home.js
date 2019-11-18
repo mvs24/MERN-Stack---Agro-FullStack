@@ -7,6 +7,7 @@ import "./Home.css";
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import MyCompany from "../MyCompany/MyCompany";
+import TodayProducts from '../TodayProducts/TodayProducts';
 
 class Home extends Component {
   componentDidMount() {
@@ -25,7 +26,7 @@ class Home extends Component {
             <Sidebar />
           </div>
           <div className='products'>
-                <h1>products</h1>
+            <TodayProducts/>
           </div>
           <div className="myCompany">
             <MyCompany userData={this.props.user.user}/>

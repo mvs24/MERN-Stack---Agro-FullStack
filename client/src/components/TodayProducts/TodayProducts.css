@@ -1,0 +1,10 @@
+.grid{
+    margin-top: 10%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+    margin-bottom: 5rem;
+}
+.grid:last-child{
+    margin-left: 1rem;
+}

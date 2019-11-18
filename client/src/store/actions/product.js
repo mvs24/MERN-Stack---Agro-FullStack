@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {ADD_NEW_PRODUCT_ERROR, ADD_NEW_PRODUCT, ALL_PRODUCTS_MY_COMPANY, ALL_PRODUCTS_MY_COMPANY_ERROR } from './types';
+import {ADD_NEW_PRODUCT_ERROR, ADD_NEW_PRODUCT, ALL_PRODUCTS_MY_COMPANY, ALL_PRODUCTS_MY_COMPANY_ERROR, GET_TODAY_PRODUCTS } from './types';
 
 export const addNewProduct = (companyId, data, history) => dispatch => {
     axios.post(`/api/product/${companyId}`, data).then(res => {
@@ -30,3 +30,12 @@ export const getAllProducts = cid => dispatch => {
         })
     })
 }
+
+export const getTodayProducts = (currentDate) => dispatch => {
+    axios.get('/api/product/todayProducts').then(res => {
+        dispatch({
+            type: GET_TODAY_PRODUCTS,
+            payload: res.data
+        })
+    }).catch(err => console.log(err.response.data)); 
+} 

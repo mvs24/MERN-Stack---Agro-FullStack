@@ -1,8 +1,9 @@
-import { ADD_NEW_PRODUCT_ERROR, ADD_NEW_PRODUCT, ALL_PRODUCTS_MY_COMPANY } from "../actions/types";
+import { ADD_NEW_PRODUCT_ERROR, ADD_NEW_PRODUCT, ALL_PRODUCTS_MY_COMPANY, GET_TODAY_PRODUCTS } from "../actions/types";
 
 const initialState = {
     productError: null,
-    myCompanyProducts: null
+    myCompanyProducts: null,
+    todayProducts: null
 };
 
 export default (state = initialState, action) => {
@@ -20,6 +21,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 myCompanyProducts: action.payload
+            }
+        case GET_TODAY_PRODUCTS:
+            return {
+                ...state,
+                todayProducts: action.payload
             }
         default:
             return state;

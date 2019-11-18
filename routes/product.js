@@ -86,5 +86,22 @@ router.get('/companyDetails/:cid', auth, protect('user', 'seller', 'admin'), (re
   }).catch(err => res.status(404).json(err));
 })
 
+router.get('/todayProducts', auth, protect('user', 'seller', 'admin'), (req, res) => {
+  let results = []; 
+  let todayDate = new Date(Date.now());
+  Product.find().populate('user').populate('company')
+    .then(products => {
+      products.forEach(product => {
+        if((new Date(product.date).getDate() == todayDate.getDate())
+          && ( new Date(product.date).getMonth() == todayDate.getMonth())
+          && ( new Date(product.date).getFullYear() == todayDate.getFullYear() )
+        ) {   
+          results.unshift(product);
+        }
+      })
+      return res.json(results);
+    }).catch(err => res.status(400).json(err));
+})
+
 
 module.exports = router;
