@@ -12,8 +12,8 @@ mongoose.connect(
   mongoURI,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
   () => console.log("Mongo Connected")  
-);
-
+); 
+   
 mongoose.set('useCreateIndex', true);
 
 app.use(bodyParser.urlencoded({ extended: true }));

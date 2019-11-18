@@ -13,7 +13,12 @@
   min-height: 100%;
 }
 .cart__list{
-  width: 60%;
-  margin: 0 40% 0 0;
+  width: 70%;
   margin-left: 2rem;
+  margin-right: 5%;
+}
+.flex{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }

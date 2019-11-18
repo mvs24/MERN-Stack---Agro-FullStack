@@ -177,6 +177,7 @@ router.post(
       });
 
      const savedUser = await user.save();
+     savedUser.password = undefined;
      return res.status(200).json(savedUser);
      
     } catch (err) {
@@ -184,5 +185,19 @@ router.post(
     }
   }
 );
+
+router.post('/removeItemFromCart', auth, protect('user'), async (req, res) => {
+  try {
+    const user = await User.findOne({_id: req.user._id});
+    user.cart = user.cart.filter(el => el.productId.toString() !== req.body.productId.toString());
+
+    const savedUser = await user.save();
+    savedUser.password = undefined;
+    return res.status(200).json(savedUser);
+
+  } catch (err) {
+    return res.status(400).json(err);
+  }
+})
 
 module.exports = router;

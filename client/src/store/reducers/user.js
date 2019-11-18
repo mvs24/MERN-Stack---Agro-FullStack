@@ -4,7 +4,9 @@ import { USER_ERROR,
          GET_USER_DATA,
          SIGN_OUT_USER,
          ADD_PRODUCT_TO_CARD, 
-         DECREASE_ITEM_QUANTITY
+         DECREASE_ITEM_QUANTITY,
+         INCREASE_ITEM_QUANTITY,
+         REMOVE_ITEM_FROM_CART
 } from "../actions/types";
 
 const initialState = {
@@ -61,6 +63,16 @@ export default (state = initialState, action) => {
                 user: action.payload
             }
         case DECREASE_ITEM_QUANTITY:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case INCREASE_ITEM_QUANTITY:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case REMOVE_ITEM_FROM_CART:
             return {
                 ...state,
                 user: action.payload

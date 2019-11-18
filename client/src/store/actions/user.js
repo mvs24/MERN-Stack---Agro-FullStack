@@ -8,7 +8,9 @@ import { USER_ERROR,
          SIGN_OUT_USER,
          SIGN_OUT_USER_ERROR,
          ADD_PRODUCT_TO_CARD,
-         DECREASE_ITEM_QUANTITY
+         DECREASE_ITEM_QUANTITY,
+         INCREASE_ITEM_QUANTITY,
+         REMOVE_ITEM_FROM_CART
 } from "./types";
 
 export const signUpUser = (userData, history) => dispatch => {
@@ -82,8 +84,18 @@ export const decreaseItemQuantity = item => dispatch => {
 
 export const increaseItemQuantity = item => dispatch => {
   axios.post('/api/user/increaseItemQuantity', item).then(res => {
-    console.log(res.data);
+    dispatch({
+      type: INCREASE_ITEM_QUANTITY,
+      payload: res.data
+    })
   }).catch(err => console.log(err.response.data));
 };
 
-export const removeItemFromCart = item => dispatch => {};
+export const removeItemFromCart = item => dispatch => {
+  axios.post('/api/user/removeItemFromCart', item).then(res => {
+    dispatch({
+      type: REMOVE_ITEM_FROM_CART,
+      payload: res.data
+    })
+  }).catch(err => console.log(err.response.data));
+};
