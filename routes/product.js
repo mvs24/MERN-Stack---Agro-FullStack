@@ -39,7 +39,7 @@ router.post("/:companyId", auth, protect("seller"), (req, res) => {
         return res.status(400).json(validation[0]);
       }
       const newProduct = new Product({
-        name: req.body.productName,
+        name: req.body.productName,   
         user: req.user._id,
         company: req.params.companyId,
         quantity: req.body.productQuantity,
@@ -72,27 +72,43 @@ router.post('/uploadImage', auth, protect("seller"), formidable(), (req, res) =>
     resource_type: "auto"
   })
 })
-
+ 
 
 router.get("/all/:companyId", auth, (req, res) => {
+  let limit = 6;
+  let page = req.query.page * 1 || 2;
+  let skip = (page - 1) * limit; 
+
   Product.find({ company: req.params.companyId })
     .populate('user')
     .populate('company')
+    .skip(skip)
+    .limit(limit) 
     .then(products => res.json(products))
-    .catch(err => res.status(404).json(err));
+    .catch(err => res.status(404).json(err)); 
 });
 
 router.get('/companyDetails/:cid', auth, protect('user', 'seller', 'admin'), (req, res) => {
   Product.find({company: req.params.cid}).populate('user').populate('company')
+    .limit(6)
   .then(products => {
     return res.status(200).json(products);
   }).catch(err => res.status(404).json(err));
 })
 
+router.get('/companyProductsLength/:cid', auth, protect('user', 'seller', 'admin'), (req, res) => {
+  Product.find({company: req.params.cid}).populate('user').populate('company')
+  .then(products => {
+    return res.status(200).json(products.length);
+  }).catch(err => res.status(404).json(err));
+})
+
+
 router.get('/todayProducts', auth, protect('user', 'seller', 'admin'), (req, res) => {
   let results = []; 
   let todayDate = new Date(Date.now());
   Product.find().populate('user').populate('company')
+
     .then(products => {
       products.forEach(product => {
         if((new Date(product.date).getDate() == todayDate.getDate())

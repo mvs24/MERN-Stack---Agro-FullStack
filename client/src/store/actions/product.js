@@ -1,6 +1,13 @@
 import axios from "axios";
 
-import {ADD_NEW_PRODUCT_ERROR, ADD_NEW_PRODUCT, ALL_PRODUCTS_MY_COMPANY, ALL_PRODUCTS_MY_COMPANY_ERROR, GET_TODAY_PRODUCTS } from './types';
+import {ADD_NEW_PRODUCT_ERROR,
+        ADD_NEW_PRODUCT,
+        ALL_PRODUCTS_MY_COMPANY,
+        ALL_PRODUCTS_MY_COMPANY_ERROR,
+        GET_TODAY_PRODUCTS, 
+        LOAD_MORE_PRODUCTS,
+        LOAD_LESS_PRODUCTS
+} from './types';
 
 export const addNewProduct = (companyId, data, history) => dispatch => {
     axios.post(`/api/product/${companyId}`, data).then(res => {
@@ -39,3 +46,23 @@ export const getTodayProducts = (currentDate) => dispatch => {
         })
     }).catch(err => console.log(err)); 
 } 
+
+export const loadMoreProducts = (page, cid) => dispatch => {
+    
+    axios.get(`/api/product/all/${cid}?page=${page}`).then(res => {
+        dispatch({
+            type: LOAD_MORE_PRODUCTS,
+            payload: res.data
+        })
+    }).catch(err => console.log(err.response.data))
+}
+
+export const loadLessProducts = (page, cid) => dispatch => {
+    
+    axios.get(`/api/product/all/${cid}?page=${page}`).then(res => {
+        dispatch({
+            type: LOAD_LESS_PRODUCTS,
+            payload: res.data
+        })
+    }).catch(err => console.log(err.response.data))
+}

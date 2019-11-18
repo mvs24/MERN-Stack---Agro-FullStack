@@ -1,10 +1,22 @@
-.grid{
-    margin-top: 10%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 1rem;
-    margin-bottom: 5rem;
+.grid2 {
+  margin-top: 10%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
+  margin-bottom: 5rem;
 }
-.grid:last-child{
-    margin-left: 1rem;
+.grid2:last-child {
+  margin-left: 1rem;
+}
+
+.today__products {
+
+  backface-visibility: hidden;
+  margin-top: -6.5%; 
+  width: 60vw;
+  margin-left: -33%;
+}
+.today__products span {
+  font-size: 20px;
+  padding: 2rem;
 }

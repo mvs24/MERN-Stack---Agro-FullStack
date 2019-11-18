@@ -1,0 +1,134 @@
+.card{
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    position: relative;
+    margin-bottom: 2rem;
+    backface-visibility: hidden;
+}
+.cardOwner{
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.card__side{
+    font-size: 1.3rem;
+    color: white;
+    height: 32.2rem;
+    transition: all .6s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 88%;
+    backface-visibility: hidden;
+    border-radius: 3px;
+    box-shadow: 0 1.1rem 3rem rgba(0, 0, 0, .15);
+    overflow: 'hidden';
+}
+.card__side__front{
+    background: white;
+}
+.card__side__back{
+    background: green;
+    transform: rotateY(180deg);
+}
+.card__side__back__1{
+    background: linear-gradient(to right bottom,#2998ff, #5643fa );
+}
+.card__side__back__2{
+    background: linear-gradient(to right bottom,#ffb900, #ff7730 );
+}
+.card__side__back__0{
+    background: linear-gradient(to right bottom,#7ed56f, #28b485 );
+}
+.card:hover .card__side__front{
+    transform: rotateY(-180deg);
+}
+.card:hover .card__side__back{
+    transform: rotateY(0);
+
+}
+.card__picture{
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  background-blend-mode: screen;
+}
+.card__heading{
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    color: rgb(197, 187, 187);
+    position: absolute;
+    top: 14rem;
+    right: 5rem;
+    text-align: right;
+}
+/* .card__heading__0{
+    background-image: linear-gradient(to right bottom,#ffb900, #ff7730 );
+}
+.card__heading__1{
+    background: linear-gradient(to right bottom,#2998ff, #5643fa );
+   
+}
+.card__heading__2{
+    background: linear-gradient(to right bottom,#2998ff, #5643fa );
+   
+} */ 
+
+.card__detail {
+    padding: 30px;
+}
+.card__detail ul {
+    list-style: none;
+    width: 80%;
+    margin: 0 auto;
+}
+.card__detail li {
+    font-size: 15px;
+    padding: 10px;
+    text-align: center;
+    color: rgb(187, 159, 159);
+
+}
+.card__detail li:not(:last-child){
+    border-bottom: 1px solid #eee;
+
+}
+.btnPos{
+    position: absolute;
+    top: 80%;
+    width: 60%;
+    left: 20%;
+    border: none;
+    outline: none;
+    background: rgb(38, 175, 100);
+    padding: 1rem 5rem;
+    color: white;
+    border: 1px solid white;
+    border-radius: 1.5rem;
+    font-weight: 300;
+    transition: all 1s ease-in-out;
+    
+}
+.pointer{
+    cursor: pointer;
+}
+.quantityInput{
+         border: 1px solid white;
+        width: 60%;
+        outline: none;
+        margin: 10rem 5rem;
+        padding: 0.7rem 0.5rem;
+        background: white;
+        text-align: center;
+        color: rgb(112, 109, 109);
+
+}
+
+.quantityInput::placeholder {
+    padding: 1.4rem;
+}
+.priceInput{
+    position: absolute;
+    top: 20%;
+    left: 0%;
+}
