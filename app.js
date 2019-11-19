@@ -54,7 +54,7 @@ app.post('/api/uploadFile', auth, protect('seller'), formidable(), (req, res) =>
 app.get(`/api/removeFile`, auth, protect('seller'), (req, res) => {
   const {public_id} = req.query;
 
-  cloudinary.uploader.destroy(public_id, (err) => {
+  cloudinary.uploader.destroy(public_id, (err) => { 
     res.status(200).send('success');
   })
 })

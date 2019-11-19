@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { addNewProduct } from "../../store/actions/product";
 import { getMyCompany } from "../../store/actions/company";
-import FileUpload from '../../utils/FileUpload';
+import FileUpload from "../../utils/FileUpload";
 
 class AddProduct extends Component {
   state = {
@@ -21,13 +21,13 @@ class AddProduct extends Component {
     this.props.getMyCompany();
   }
 
-  imagesHandler = (images) => {
+  imagesHandler = images => {
     const updatedState = {
       ...this.state
-    }
+    };
     updatedState.images.value = images;
-    this.setState({ images: updatedState.images })
-  }
+    this.setState({ images: updatedState.images });
+  };
 
   onChange = e => {
     this.setState({
@@ -39,6 +39,7 @@ class AddProduct extends Component {
     e.preventDefault();
 
     const data = { ...this.state };
+    data.images = this.state.images.value;
     this.props.addNewProduct(cid, data, this.props.history);
   };
 
@@ -46,7 +47,7 @@ class AddProduct extends Component {
     const companyId = this.props.match.params.cid;
     const { productError } = this.props.product;
 
-     return (
+    return (
       <div>
         <Link to="/home"> Go to the Home Page </Link>
         <form
@@ -125,11 +126,11 @@ class AddProduct extends Component {
                       <span>{productError.productBigPrice}</span>
                     ) : null}
                   </div>
-                ) : null} 
+                ) : null}
               </div>
               <FileUpload
-            imagesHandler={images => this.imagesHandler(images)}
-            />
+                imagesHandler={images => this.imagesHandler(images)}
+              />
             </div>
             <button className="signUpBtn">CREATE PRODUCT</button>
           </div>

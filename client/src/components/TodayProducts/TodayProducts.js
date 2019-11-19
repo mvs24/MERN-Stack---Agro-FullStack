@@ -55,7 +55,7 @@ class TodayProducts extends Component {
          </button>
        
           <button
-            disabled={(nrTodayProducts - this.state.page) === 0}
+            disabled={(nrTodayProducts - this.state.page) === 0 || (nrTodayProducts - this.state.page) === 1}
             className="load__more"
             onClick={() => this.loadMore(this.state.page + 2)}
           >

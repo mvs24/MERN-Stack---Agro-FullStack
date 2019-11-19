@@ -32,7 +32,8 @@ router.post("/:companyId", auth, protect("seller"), (req, res) => {
         company: req.params.companyId,
         quantity: req.body.productQuantity,
         smallPrice: req.body.productSmallPrice,
-        bigPrice: req.body.productBigPrice
+        bigPrice: req.body.productBigPrice,
+        images: req.body.images 
       });
       newProduct.medPrice = (newProduct.smallPrice + newProduct.bigPrice) / 2;
 
@@ -110,49 +111,11 @@ router.get(
     let limit = 2;
     let page = req.query.page * 1 || 2;
     let skip = (page - 1) * limit;
-
-    let todayDay = new Date(
-      todayDate.getFullYear(),
-      todayDate.getMonth(),
-      todayDate.getDate() + 1
-    );
-    let yesterday = new Date(
-      todayDate.getFullYear(),
-      todayDate.getMonth(),
-      todayDate.getDate()
-    );
-    // let today = "";
-    // today += todayDate.getFullYear();
-    // today += "-";
-    // today += todayDate.getMonth() + 1;
-    // today += "-";
-    // today += todayDate.getDate();
-
-    // { '$where': 'this.created_on.toJSON().slice(0, 10) == "2012-07-14"' }
+    
     Product
-      .find
-      //   {
-      //   "created_on": {$lte: new Date(2019, 11, 19)}
-      //   // created_on: {
-      //   //   $gte: new Date(
-      //   //     2019, 11, 18
-      //   //     // todayDate.getFullYear(),
-      //   //     // todayDate.getMonth() + 1,
-      //   //     // todayDate.getDate() - 1
-      //   //   ),
-      //   //   $lt: new Date(
-      //   //     2019, 11, 20
-      //   //   //   // todayDate.getFullYear(),
-      //   //   //   // todayDate.getMonth() + 1,
-      //   //   //   // todayDate.getDate()
-      //   //   )
-      //   // }
-      // }
-      ()
+      .find()
       .populate("user")
       .populate("company")
-      // .skip(skip)
-      // .limit(limit)
       .then(products => {
         products.forEach(product => {
           if (

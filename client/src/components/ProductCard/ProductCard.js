@@ -26,6 +26,7 @@ class ProductCard extends Component {
   render() {
     const product = this.props.product;
     const userId = this.props.user.user._id;
+    let image = undefined;
 
     const randomNumber = () => {
       if (this.state.shouldChange) {
@@ -33,8 +34,12 @@ class ProductCard extends Component {
       }
     };
 
-    let image =
-      "https://1740009751.rsc.cdn77.org/sites/balkanbaba/docs/al/image_1430320148_32.png";
+    if (product.images.length > 0) {
+      image = product.images[0].url;
+    } else {
+      image =
+        "https://1740009751.rsc.cdn77.org/sites/balkanbaba/docs/al/image_1430320148_32.png";
+    }
 
     let classNames = [
       "card__side",
@@ -147,7 +152,7 @@ class ProductCard extends Component {
                 type="text"
                 value={
                   "Price: $" + this.state.quantity * 1 * product.medPrice * 1
-                } 
+                }
               />
               <button
                 disabled={this.state.quantity <= 0}
