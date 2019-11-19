@@ -13,7 +13,7 @@ const { auth } = require("../middleware/auth");
 const { validateProduct } = require("../validation/product");
 
 
-cloudinary.config({
+cloudinary.config({      
   cloud_name: cloudinaryName,
   api_key: cloudinaryApiKey,
   api_secret: cloudinaryApiSecret
@@ -85,7 +85,7 @@ router.get("/all/:companyId", auth, (req, res) => {
     .skip(skip)
     .limit(limit) 
     .then(products => res.json(products))
-    .catch(err => res.status(404).json(err)); 
+    .catch(err => res.status(404).json(err));  
 });
 
 router.get('/companyDetails/:cid', auth, protect('user', 'seller', 'admin'), (req, res) => {
@@ -120,6 +120,11 @@ router.get('/todayProducts', auth, protect('user', 'seller', 'admin'), (req, res
       })
       return res.json(results);
     }).catch(err => res.status(400).json(err));
+})
+
+router.get('/allProducts/:cid', auth, protect('user', 'seller', 'admin'), (req, res) => {
+  Product.find({company: req.params.cid}).then(products => res.json(products))
+    .catch(err => res.status(400).json(err));
 })
 
 

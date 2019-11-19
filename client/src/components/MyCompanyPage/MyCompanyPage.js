@@ -23,7 +23,7 @@ class MyCompanyPage extends Component {
 
     const { myCompanyProducts } = this.props.product;
     if (!myCompanyProducts) return null;
-    console.log(myCompanyProducts);
+    console.log(this.props)
 
     return (
       <CompanyDetail

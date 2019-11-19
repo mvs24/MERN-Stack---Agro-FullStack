@@ -25,12 +25,12 @@ export const addNewProduct = (companyId, data, history) => dispatch => {
 }
 
 export const getAllProducts = cid => dispatch => {
-    axios.get(`/api/product/all/${cid}`).then(res => {
+    axios.get(`/api/product/allProducts/${cid}`).then(res => {
         dispatch({
             type: ALL_PRODUCTS_MY_COMPANY,
             payload: res.data
         })
-    }).catch(err => {
+    }).catch(err => { 
         dispatch({
             type: ALL_PRODUCTS_MY_COMPANY_ERROR,
             payload: err.response.data

@@ -28,19 +28,13 @@ class CompanyDetail extends React.Component {
   };
 
   loadMore = async (page, cid) => {
-    let results = await this.props.loadMoreProducts(page, cid);
+    await this.props.loadMoreProducts(page, cid);
     this.setState({ page: this.state.page + 1 });
   };
 
   loadLess = async (page, cid) => {
-    let results = await this.props.loadLessProducts(page, cid);
+    await this.props.loadLessProducts(page, cid);
     this.setState({ page: this.state.page - 1 });
-  };
-
-  addProduct = (cid, history) => {
-    history.push({
-      pathname: `/addProduct/${cid}`
-    });
   };
 
   render() {
@@ -49,9 +43,6 @@ class CompanyDetail extends React.Component {
       lastname,
       place,
       name,
-      myCompanyInSide,
-      companyId,
-      history,
       products,
       todayProducts
     } = this.props;
@@ -61,25 +52,7 @@ class CompanyDetail extends React.Component {
 
     if (productsLength === "") return null;
 
-    if (myCompanyInSide) {
-      return (
-        <div className="myCompanyContainer">
-          <div className="myCompanyName">
-            <h3 className="">
-              My Company: <span>{name}</span>
-            </h3>
-          </div>
-          <div className="btnContainer">
-            <button
-              className="button"
-              onClick={() => this.addProduct(companyId, history)}
-            >
-              Add a new Product
-            </button>
-          </div>
-        </div>
-      );
-    }
+   
     if (todayProducts) {
       return (
         <div>
@@ -144,7 +117,7 @@ class CompanyDetail extends React.Component {
             >
               Load More
             </button>
-          )}
+          )} 
         </div>
       </div>
     );
