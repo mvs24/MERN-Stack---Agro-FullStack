@@ -7,14 +7,19 @@ import TodayProductCard from "../TodayProductCard/TodayProductCard";
 import './TodayProducts.css';
 
 class TodayProducts extends Component {
+  state = {
+    page: 1
+  }
+
   componentDidMount() {
-    this.props.getTodayProducts(Date.now());
+    this.props.getTodayProducts(this.state.page);
   }
   render() {
     const { todayProducts } = this.props.product;
     if (todayProducts === null) return <Spinner />;
     if (todayProducts.length === 0) return <div>No products found today</div>;
     let minHeight = Math.ceil(todayProducts.length / 3) * 100;
+    
 
     return (
       <div className='today__products' >

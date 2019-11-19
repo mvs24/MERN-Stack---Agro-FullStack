@@ -38,8 +38,9 @@ export const getAllProducts = cid => dispatch => {
     })
 }
 
-export const getTodayProducts = (currentDate) => dispatch => {
-    axios.get('/api/product/todayProducts').then(res => {
+export const getTodayProducts = (page) => dispatch => {
+    axios.get(`/api/product/todayProducts?page=${page}`).then(res => {
+        console.log(res.data)
         dispatch({
             type: GET_TODAY_PRODUCTS,
             payload: res.data
