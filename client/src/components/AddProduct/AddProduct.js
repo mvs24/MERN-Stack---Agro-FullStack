@@ -4,26 +4,30 @@ import { Link } from "react-router-dom";
 
 import { addNewProduct } from "../../store/actions/product";
 import { getMyCompany } from "../../store/actions/company";
-// import FileUpload from '../../utils/FileUpload';
+import FileUpload from '../../utils/FileUpload';
 
 class AddProduct extends Component {
   state = {
     productName: "",
     productQuantity: "",
     productSmallPrice: "",
-    productBigPrice: ""
-    // images: {
-    //   value: []
-    // }
+    productBigPrice: "",
+    images: {
+      value: []
+    }
   };
 
   componentDidMount() {
     this.props.getMyCompany();
   }
 
-  // imagesHandler = (images) => {
-  //   console.log(images);
-  // }
+  imagesHandler = (images) => {
+    const updatedState = {
+      ...this.state
+    }
+    updatedState.images.value = images;
+    this.setState({ images: updatedState.images })
+  }
 
   onChange = e => {
     this.setState({
@@ -42,7 +46,7 @@ class AddProduct extends Component {
     const companyId = this.props.match.params.cid;
     const { productError } = this.props.product;
 
-    return (
+     return (
       <div>
         <Link to="/home"> Go to the Home Page </Link>
         <form
@@ -121,11 +125,11 @@ class AddProduct extends Component {
                       <span>{productError.productBigPrice}</span>
                     ) : null}
                   </div>
-                ) : null}
+                ) : null} 
               </div>
-              {/* <FileUpload
+              <FileUpload
             imagesHandler={images => this.imagesHandler(images)}
-            /> */}
+            />
             </div>
             <button className="signUpBtn">CREATE PRODUCT</button>
           </div>

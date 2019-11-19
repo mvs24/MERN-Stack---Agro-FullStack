@@ -1,26 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const formidable = require("express-formidable");
-const cloudinary = require("cloudinary");
-
-const {
-  cloudinaryApiKey,
-  cloudinaryName,
-  cloudinaryApiSecret
-} = require("../keys/secret");
 
 const Product = require("../models/Product");
 const Company = require("../models/Company");
 const { protect } = require("../middleware/protect");
 const { auth } = require("../middleware/auth");
 const { validateProduct } = require("../validation/product");
-
-cloudinary.config({
-  cloud_name: cloudinaryName,
-  api_key: cloudinaryApiKey,
-  api_secret: cloudinaryApiSecret
-});
 
 router.get("/", auth, protect("user", "seller", "admin"), (req, res) => {
   Product.find()
@@ -64,26 +50,7 @@ router.post("/:companyId", auth, protect("seller"), (req, res) => {
   });
 });
 
-router.post(
-  "/uploadImage",
-  auth,
-  protect("seller"),
-  formidable(),
-  (req, res) => {
-    cloudinary.uploader.upload(
-      req.files.file.path,
-      result => {
-        console.log("-----");
-        console.log(result);
-        res.status(200).json({ public_id: result.public_id, url: result.url });
-      },
-      {
-        public_id: `${Date.now()}`,
-        resource_type: "auto"
-      }
-    );
-  }
-);
+
 
 router.get("/all/:companyId", auth, (req, res) => {
   let limit = 6;
@@ -227,7 +194,7 @@ router.get("/numberOfTodayProducts", auth, (req, res) => {
         new Date(product.date).getMonth() == todayDate.getMonth() &&
         new Date(product.date).getFullYear() == todayDate.getFullYear()
       ) {
-        results.unshift(product);
+        results.unshift(product); 
       }
     });
     return res.status(200).json({ nrOfTodayProducts: results.length });
