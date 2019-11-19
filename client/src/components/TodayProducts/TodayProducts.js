@@ -37,7 +37,7 @@ class TodayProducts extends Component {
     if (todayProducts.length === 0) return <div>No products found today</div>;
     const {nrTodayProducts} = this.props.product
     if(nrTodayProducts === null) return null;
-
+  
     return (
       <div className="today__products">
         <div className="grid2">
@@ -55,7 +55,7 @@ class TodayProducts extends Component {
          </button>
        
           <button
-            disabled={(nrTodayProducts - this.state.page) === 0 || (nrTodayProducts - this.state.page) === 1}
+            disabled={(nrTodayProducts - this.state.page) <= 0 }
             className="load__more"
             onClick={() => this.loadMore(this.state.page + 2)}
           >

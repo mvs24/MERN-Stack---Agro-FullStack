@@ -6,6 +6,7 @@ import { getUserData } from "../../store/actions/user";
 import { getMyCompany } from "../../store/actions/company";
 import CompanyDetail from "../CompanyDetail/CompanyDetail";
 import Spinner from "../Spinner/Spinner";
+import Header from '../Header/Header'
 
 class MyCompanyPage extends Component {
   componentDidMount() {
@@ -20,12 +21,15 @@ class MyCompanyPage extends Component {
     const myCompany = this.props.company.myCompany;
     const myCompanyId = this.props.match.params.cid;
     if (!myCompany) return <Spinner />;
+    if(!this.props.user.user) return null;
 
     const { myCompanyProducts } = this.props.product;
     if (!myCompanyProducts) return null;
     
     return (
-      <CompanyDetail
+      <div>
+        <Header userData={this.props.user.user}></Header>
+        <CompanyDetail
         cid={myCompanyId}
         name={myCompany.name}
         place={myCompany.place}
@@ -33,13 +37,16 @@ class MyCompanyPage extends Component {
         lastname={myCompany.user.lastname}
         products={myCompanyProducts}
       />
+      </div>
+     
     );
   }
 }
 
 const mapStateToProps = state => ({
   company: state.company,
-  product: state.product
+  product: state.product,
+  user: state.user
 });
 
 export default connect(mapStateToProps, {

@@ -1,5 +1,5 @@
 .grid2 {
-  margin-top: 10%;
+  margin-top: 14%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 1rem;

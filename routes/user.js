@@ -86,7 +86,7 @@ router.post("/addToCart", auth, protect("user"), (req, res) => {
     if (!item) {
       user.cart.unshift(req.body);
       user
-        .save()
+        .save() 
         .then(savedUser => res.status(200).json(savedUser))
         .catch(err => res.status(400).json(err));
     } else {

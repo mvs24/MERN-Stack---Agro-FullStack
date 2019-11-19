@@ -6,7 +6,7 @@ import Spinner from "../Spinner/Spinner";
 import "./Header.css";
 import { signOutUser } from "../../store/actions/user";
 
-const Header = ({ userData, children }) => {
+const Header = ({ userData, nrTodayProducts, children }) => {
   const dispatch = useDispatch();
 
   const signOut = () => {
@@ -31,6 +31,7 @@ const Header = ({ userData, children }) => {
           Welcome {userData.name.toUpperCase()}{" "}
           {userData.lastname.toUpperCase()}
         </div>
+        <div className="user">Today's Products: {nrTodayProducts}</div>
         <div className="cart">
           <div className="icon-flex">
             {userData.role !== "user" ? null : (

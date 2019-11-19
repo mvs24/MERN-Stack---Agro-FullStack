@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 import "./MyCompany.css";
 import { getMyCompany } from "../../store/actions/company";
 import { getUserData } from "../../store/actions/user";
-import CompanyDetail from "../CompanyDetail/CompanyDetail";
 
 class MyCompany extends Component {
   componentDidMount() {
@@ -16,7 +15,7 @@ class MyCompany extends Component {
     history.push({
       pathname: `/addProduct/${cid}`
     });
-  };
+  }; 
   render() {
     if (!this.props.company.myCompany) return null;
 
@@ -25,11 +24,11 @@ class MyCompany extends Component {
     return (
       <div>
         <div className="myCompanyContainer">
-          <div className="myCompanyName">
+          <Link style={{textDecoration: 'white', color: '#eee'}} to={{pathname: `/myCompanyPage/${myCompany._id}`}} className="myCompanyName">
             <h3 className="">
               My Company: <span>{myCompany.name}</span>
             </h3>
-          </div>
+          </Link>
           <div className="btnContainer">
             <button
               className="button"

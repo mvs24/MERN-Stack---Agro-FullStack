@@ -18,13 +18,18 @@ class ProductCard extends Component {
       nameOfProduct: product.name,
       productId: product._id,
       quantity: this.state.quantity * 1,
-      singleItemPrice: product.medPrice
+      singleItemPrice: product.medPrice,
     };
+    if(product.images.length > 0) {
+      dataToBuy.image = product.images[0].url
+    }
+    
     this.props.addProductToCard(dataToBuy);
   };
 
   render() {
     const product = this.props.product;
+ 
     const userId = this.props.user.user._id;
     let image = undefined;
 

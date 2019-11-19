@@ -19,8 +19,16 @@ class CartItem extends Component {
 
   render() {
     const { item } = this.props;
-    let image =
+   
+    let image = undefined;
+
+    if(item.image) {
+      image = item.image;
+    } else {
+      image = 
       "https://1740009751.rsc.cdn77.org/sites/balkanbaba/docs/al/image_1430320148_32.png";
+
+    }
 
     return (
       <div className='cartItem'>

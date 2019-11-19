@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 import { addNewProduct } from "../../store/actions/product";
 import { getMyCompany } from "../../store/actions/company";
+import { getUserData } from "../../store/actions/user";
 import FileUpload from "../../utils/FileUpload";
+import Header from '../Header/Header'
 
 class AddProduct extends Component {
+  componentDidMount() {
+    this.props.getUserData();
+    this.props.getMyCompany();
+  }
+
   state = {
     productName: "",
     productQuantity: "",
@@ -16,10 +22,6 @@ class AddProduct extends Component {
       value: []
     }
   };
-
-  componentDidMount() {
-    this.props.getMyCompany();
-  }
 
   imagesHandler = images => {
     const updatedState = {
@@ -46,10 +48,11 @@ class AddProduct extends Component {
   render() {
     const companyId = this.props.match.params.cid;
     const { productError } = this.props.product;
+    if(!this.props.user.user) return null;
 
     return (
       <div>
-        <Link to="/home"> Go to the Home Page </Link>
+        <Header userData={this.props.user.user}/>
         <form
           className="signUp"
           onSubmit={e => this.createProduct(e, companyId)}
@@ -145,6 +148,6 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps, { addNewProduct, getMyCompany })(
+export default connect(mapStateToProps, { addNewProduct, getMyCompany, getUserData })(
   AddProduct
 );
