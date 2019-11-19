@@ -139,7 +139,6 @@ router.get(
     let previousResults = [];
 
     let todayDate = new Date(Date.now());
-    
 
     let limit = 2;
     let page = req.query.page * 1 || 2;
@@ -163,41 +162,41 @@ router.get(
     // today += todayDate.getDate();
 
     // { '$where': 'this.created_on.toJSON().slice(0, 10) == "2012-07-14"' }
-    Product.find(
-    //   {
-    //   "created_on": {$lte: new Date(2019, 11, 19)}
-    //   // created_on: {
-    //   //   $gte: new Date(
-    //   //     2019, 11, 18
-    //   //     // todayDate.getFullYear(),
-    //   //     // todayDate.getMonth() + 1,
-    //   //     // todayDate.getDate() - 1
-    //   //   ),
-    //   //   $lt: new Date(
-    //   //     2019, 11, 20
-    //   //   //   // todayDate.getFullYear(),
-    //   //   //   // todayDate.getMonth() + 1,
-    //   //   //   // todayDate.getDate()
-    //   //   )
-    //   // }
-    // }
-    )
+    Product
+      .find
+      //   {
+      //   "created_on": {$lte: new Date(2019, 11, 19)}
+      //   // created_on: {
+      //   //   $gte: new Date(
+      //   //     2019, 11, 18
+      //   //     // todayDate.getFullYear(),
+      //   //     // todayDate.getMonth() + 1,
+      //   //     // todayDate.getDate() - 1
+      //   //   ),
+      //   //   $lt: new Date(
+      //   //     2019, 11, 20
+      //   //   //   // todayDate.getFullYear(),
+      //   //   //   // todayDate.getMonth() + 1,
+      //   //   //   // todayDate.getDate()
+      //   //   )
+      //   // }
+      // }
+      ()
       .populate("user")
       .populate("company")
       // .skip(skip)
       // .limit(limit)
       .then(products => {
-       
         products.forEach(product => {
-          if((new Date(product.date).getDate() == todayDate.getDate())
-            && ( new Date(product.date).getMonth() == todayDate.getMonth())
-            && ( new Date(product.date).getFullYear() == todayDate.getFullYear() )
+          if (
+            new Date(product.date).getDate() == todayDate.getDate() &&
+            new Date(product.date).getMonth() == todayDate.getMonth() &&
+            new Date(product.date).getFullYear() == todayDate.getFullYear()
           ) {
-
             results.unshift(product);
-            previousResults.unshift(product)
+            previousResults.unshift(product);
           }
-        })
+        });
         previousResults = results.splice(page - 2, skip);
         results = previousResults.splice(0, 2);
         return res.json(results);
@@ -216,5 +215,23 @@ router.get(
       .catch(err => res.status(400).json(err));
   }
 );
+
+router.get("/numberOfTodayProducts", auth, (req, res) => {
+  let todayDate = new Date(Date.now());
+  let results = [];
+
+  Product.find().then(products => {
+    products.forEach(product => {
+      if (
+        new Date(product.date).getDate() == todayDate.getDate() &&
+        new Date(product.date).getMonth() == todayDate.getMonth() &&
+        new Date(product.date).getFullYear() == todayDate.getFullYear()
+      ) {
+        results.unshift(product);
+      }
+    });
+    return res.status(200).json({ nrOfTodayProducts: results.length });
+  });
+});
 
 module.exports = router;

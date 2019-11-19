@@ -17,7 +17,7 @@ class Sidebar extends Component {
         if (companies.length === 0) return <Spinner/>
         return (
             <div>
-                <div className='companyName'>Companies</div>
+                <div>Companies</div>
                 {companies.map(company => <Company key={company._id} company={company}/>)}
             </div>
         )
