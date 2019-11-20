@@ -10,7 +10,7 @@ const StripeButton = props => {
   const priceForStripe = props.price * 100;
 
   const onToken = token => {
-      dispatch(paymentSuccess(props.user, token));
+      dispatch(paymentSuccess(props.user));
     alert("Payment successful");
   };
 

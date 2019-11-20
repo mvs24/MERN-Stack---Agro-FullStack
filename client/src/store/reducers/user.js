@@ -6,7 +6,8 @@ import { USER_ERROR,
          ADD_PRODUCT_TO_CARD, 
          DECREASE_ITEM_QUANTITY,
          INCREASE_ITEM_QUANTITY,
-         REMOVE_ITEM_FROM_CART
+         REMOVE_ITEM_FROM_CART,
+         PAYMENT_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -73,6 +74,11 @@ export default (state = initialState, action) => {
                 user: action.payload
             }
         case REMOVE_ITEM_FROM_CART:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case PAYMENT_SUCCESS:
             return {
                 ...state,
                 user: action.payload

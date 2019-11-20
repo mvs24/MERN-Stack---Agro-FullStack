@@ -200,4 +200,12 @@ router.post('/removeItemFromCart', auth, protect('user'), async (req, res) => {
   }
 })
 
+router.post('/paymentSuccess/:userId', auth, protect('user'), (req, res) => {
+  User.findOne({_id: req.params.userId}).then(user => {
+    user.cart = [];
+    user.save().then(savedUser => res.status(200).json(savedUser))
+      .catch(err => res.status(400).json(err))
+  })
+})
+
 module.exports = router;
