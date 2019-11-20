@@ -28,8 +28,8 @@ const Header = ({ userData, nrTodayProducts, children }) => {
           </Link>
         </div>
         <div className="user">
-          Welcome {userData.name.toUpperCase()}{" "}
-          {userData.lastname.toUpperCase()}
+          Welcome: {userData.name}
+          {userData.lastname}
         </div>
         <div className="user">Today's Products: {nrTodayProducts}</div>
         <div className="cart">

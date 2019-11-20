@@ -99,3 +99,10 @@ export const removeItemFromCart = item => dispatch => {
     })
   }).catch(err => console.log(err.response.data));
 };
+
+export const paymentSuccess = (user, token) => dispatch => {
+  console.log(user, token)
+  axios.post(`/api/user/paymentSuccess/${user._id}`).then(res => {
+    console.log(res.data)
+  })
+}

@@ -57,8 +57,9 @@ app.get(`/api/removeFile`, auth, protect('seller'), (req, res) => {
   cloudinary.uploader.destroy(public_id, (err) => { 
     res.status(200).send('success');
   })
-})  
+})   
 
 
 const port = 5000;
 app.listen(port, () => console.log("App listening on port " + port));
+  

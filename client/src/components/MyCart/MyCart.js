@@ -5,7 +5,7 @@ import "./MyCart.css";
 import { getUserData } from "../../store/actions/user";
 import Header from "../Header/Header";
 import CartItem from "../CartItem/CartItem";
-import Paypal from "../../utils/Paypal";
+import StripeButton from "../../utils/StripeButton";
 
 class MyCart extends Component {
   componentDidMount() {
@@ -42,12 +42,9 @@ class MyCart extends Component {
                 Total Price: <strong>${totalPrice}</strong>{" "}
               </span>
             </div>
-            <Paypal
-              toPay={totalPrice}
-              transctionError={data => this.transactionError(data)}
-              transctionCanceled={data => this.transactionCanceledr(data)}
-              onSuccess={data => this.transactionSuccess(data)}
-           />
+            <StripeButton
+              user={user}
+              price={totalPrice} />
           </div>
         </div>
       </div>
