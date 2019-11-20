@@ -5,12 +5,17 @@ import "./MyCart.css";
 import { getUserData } from "../../store/actions/user";
 import Header from "../Header/Header";
 import CartItem from "../CartItem/CartItem";
+import Paypal from "../../utils/Paypal";
 
 class MyCart extends Component {
   componentDidMount() {
     this.props.getUserData();
   }
-  
+
+  transactionError = () => {};
+  transactionCanceled = () => {};
+  transactionSuccess = () => {};
+
   render() {
     const user = this.props.user.user;
     if (!user) return null;
@@ -23,11 +28,9 @@ class MyCart extends Component {
       <div className="shopCart__container">
         <Header userData={user} />
         <div className="cart__background">
-            {" "}
-            <span>Shopping Cart</span>
-          </div>
-        <div className='flex'>
-          
+          <span>Shopping Cart</span>
+        </div>
+        <div className="flex">
           <div className="cart__list">
             {user.cart.length === 0 && <span>No items found in your cart</span>}
             {user.cart.length > 0 &&
@@ -35,9 +38,16 @@ class MyCart extends Component {
           </div>
           <div>
             <div>
-              <span>Total Price: <strong>${totalPrice}</strong> </span>
+              <span>
+                Total Price: <strong>${totalPrice}</strong>{" "}
+              </span>
             </div>
-            <button>Checkout</button>
+            <Paypal
+              toPay={totalPrice}
+              transctionError={data => this.transactionError(data)}
+              transctionCanceled={data => this.transactionCanceledr(data)}
+              onSuccess={data => this.transactionSuccess(data)}
+           />
           </div>
         </div>
       </div>
