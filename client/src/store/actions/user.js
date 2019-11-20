@@ -108,4 +108,8 @@ export const paymentSuccess = (user) => dispatch => {
       payload: res.data
     })
   })
-} 
+}
+
+export const paymentSuccessMail = token => dispatch => {
+  axios.post('/api/user/successPayment/email', token);
+}

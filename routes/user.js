@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const nodemailer = require('nodemailer');
 
 const User = require("../models/User");
 const Product = require("../models/Product");
@@ -206,6 +207,18 @@ router.post('/paymentSuccess/:userId', auth, protect('user'), (req, res) => {
     user.save().then(savedUser => res.status(200).json(savedUser))
       .catch(err => res.status(400).json(err))
   })
+})
+
+const smtpTransport = nodemailer.createTransport({
+   service: 'gmail',
+   auth: {
+     user: 'agropriceapp@gmail.com',
+     password: ''
+   }
+})
+
+router.post('/successPayment/email', auth, (req, res) => {
+  console.log(req.body)
 })
 
 module.exports = router;
