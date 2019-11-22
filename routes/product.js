@@ -96,7 +96,7 @@ router.get(
         products.forEach(el => {
           if(el.quantity > 0) {
             length++;
-          }
+          } 
         })
         return res.status(200).json(length);
       })

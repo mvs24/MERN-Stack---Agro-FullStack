@@ -12,7 +12,8 @@ import { USER_ERROR,
          INCREASE_ITEM_QUANTITY,
          REMOVE_ITEM_FROM_CART,
          PAYMENT_SUCCESS,
-         REMOVE_QUANTITY_OF_PRODUCT
+         REMOVE_QUANTITY_OF_PRODUCT,
+         INCREASE_ITEM_QUANTITY_ERROR
 } from "./types";
 
 export const signUpUser = (userData, history) => dispatch => {
@@ -96,7 +97,12 @@ export const increaseItemQuantity = item => dispatch => {
       type: INCREASE_ITEM_QUANTITY,
       payload: res.data
     })
-  }).catch(err => console.log(err.response.data));
+  }).catch(err => {
+      dispatch({
+        type: INCREASE_ITEM_QUANTITY_ERROR,
+        payload: err.response.data
+      })
+  });
 };
 
 export const removeItemFromCart = item => dispatch => {

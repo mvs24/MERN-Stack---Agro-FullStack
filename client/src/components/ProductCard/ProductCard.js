@@ -28,9 +28,9 @@ class ProductCard extends Component {
     this.props.addProductToCard(dataToBuy);
   };
 
-  render() {
+  render() { 
     const product = this.props.product;
-    
+
     if (product.quantity <= 0) return null;
 
     const userId = this.props.user.user._id;

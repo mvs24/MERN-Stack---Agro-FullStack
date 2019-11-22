@@ -136,8 +136,7 @@ router.post(
   async (req, res) => {
     try {
       const user = await User.findOne({ _id: req.user._id });
-      const product = await Product.findOne({_id: req.body.productId});
-      console.log(req.body);
+      
       const itemInCart = user.cart.find(
         el => el.productId.toString() === req.body.productId.toString()
       );
@@ -177,6 +176,11 @@ router.post(
   async (req, res) => {
     try {
       const user = await User.findOne({ _id: req.user._id });
+      const product = await Product.findOne({_id: req.body.productId});
+      
+      if(req.body.quantity > product.quantity - 1) {
+        return res.status(400).json(`You can not buy more than ${product.quantity}`)
+      }
       const itemInCart = user.cart.find(
         el => el.productId.toString() === req.body.productId.toString()
       );

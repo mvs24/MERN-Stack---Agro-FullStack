@@ -7,7 +7,8 @@ import { USER_ERROR,
          DECREASE_ITEM_QUANTITY,
          INCREASE_ITEM_QUANTITY,
          REMOVE_ITEM_FROM_CART,
-         PAYMENT_SUCCESS
+         PAYMENT_SUCCESS,
+         INCREASE_ITEM_QUANTITY_ERROR
 } from "../actions/types";
 
 const initialState = {
@@ -82,6 +83,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 user: action.payload
+            }
+        case INCREASE_ITEM_QUANTITY_ERROR:
+            return {
+                ...state,
+                increaseItemQuantityError: action.payload
             }
         default: 
             return state;
