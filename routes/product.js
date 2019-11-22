@@ -88,11 +88,17 @@ router.get(
   auth,
   protect("user", "seller", "admin"),
   (req, res) => {
+    let length = 0;
     Product.find({ company: req.params.cid })
       .populate("user")
       .populate("company")
       .then(products => {
-        return res.status(200).json(products.length);
+        products.forEach(el => {
+          if(el.quantity > 0) {
+            length++;
+          }
+        })
+        return res.status(200).json(length);
       })
       .catch(err => res.status(404).json(err));
   }

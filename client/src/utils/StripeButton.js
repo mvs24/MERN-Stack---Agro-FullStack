@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 
-import { paymentSuccess, paymentSuccessMail } from '../store/actions/user';
+import { paymentSuccess, paymentSuccessMail, removeQuantityOfProduct } from '../store/actions/user';
 
 const StripeButton = props => {
   const dispatch = useDispatch();
@@ -13,7 +13,8 @@ const StripeButton = props => {
       dispatch(paymentSuccess(props.user));
       dispatch(paymentSuccessMail(token));
       alert("Payment successful");
-  };
+      dispatch(removeQuantityOfProduct(props.user)) 
+  }; 
 
   return (
     <div>

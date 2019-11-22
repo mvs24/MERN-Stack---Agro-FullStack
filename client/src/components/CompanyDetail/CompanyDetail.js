@@ -22,7 +22,7 @@ class CompanyDetail extends React.Component {
 
   getProductsLength = async () => {
     let productsLength = await axios.get(
-      `/api/product//companyProductsLength/${this.props.match.params.cid}`
+      `/api/product/companyProductsLength/${this.props.match.params.cid}`
     );
     this.setState({ productsLength: productsLength.data });
   };

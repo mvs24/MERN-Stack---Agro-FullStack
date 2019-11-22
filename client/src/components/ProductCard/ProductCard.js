@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Moment from "react-moment";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import { addProductToCard } from "../../store/actions/user";
 import "./ProductCard.css";
@@ -11,25 +12,27 @@ class ProductCard extends Component {
     shouldChange: true
   };
 
-  addToCart = product => {
+  addToCart = async product => {
     let dataToBuy = {
       price: this.state.quantity * 1 * product.medPrice * 1,
       date: Date.now(),
       nameOfProduct: product.name,
       productId: product._id,
       quantity: this.state.quantity * 1,
-      singleItemPrice: product.medPrice,
+      singleItemPrice: product.medPrice
     };
-    if(product.images.length > 0) {
-      dataToBuy.image = product.images[0].url
+    if (product.images.length > 0) {
+      dataToBuy.image = product.images[0].url;
     }
-    
+
     this.props.addProductToCard(dataToBuy);
   };
 
   render() {
     const product = this.props.product;
- 
+    
+    if (product.quantity <= 0) return null;
+
     const userId = this.props.user.user._id;
     let image = undefined;
 
@@ -180,4 +183,6 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps, { addProductToCard })(ProductCard);
+export default withRouter(
+  connect(mapStateToProps, { addProductToCard })(ProductCard)
+);

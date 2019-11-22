@@ -7,7 +7,8 @@ import {
   GET_MY_COMPANY_ERROR,
   GET_MY_COMPANY,
   SIGN_OUT_USER,
-  ADD_NEW_PRODUCT
+  ADD_NEW_PRODUCT,
+  REMOVE_QUANTITY_OF_PRODUCT
 } from "../actions/types";
 
 const initialState = {

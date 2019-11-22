@@ -12,10 +12,6 @@ class MyCart extends Component {
     this.props.getUserData();
   }
 
-  transactionError = () => {};
-  transactionCanceled = () => {};
-  transactionSuccess = () => {};
-
   render() {
     const user = this.props.user.user;
     if (!user) return null;

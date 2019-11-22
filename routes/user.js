@@ -78,40 +78,54 @@ router.get("/logout", auth, (req, res) => {
 });
 
 router.get("/current", auth, (req, res) => res.json(req.user));
-
+ 
 router.post("/addToCart", auth, protect("user"), (req, res) => {
   User.findOne({ _id: req.user._id }).then(user => {
-    let item = user.cart.find(
-      el => el.productId.toString() == req.body.productId.toString()
-    );
- 
-    if (!item) {
-      user.cart.unshift(req.body);
-      user
-        .save()
-        .then(savedUser => res.status(200).json(savedUser))
-        .catch(err => res.status(400).json(err));
-    } else {
-      const newQuantity = item.quantity + req.body.quantity;
-      const newPrice =
-        item.price.toFixed(2) * 1 + req.body.price.toFixed(2) * 1;
-      user.cart = user.cart.map(el => {
-        if (el.productId.toString() === req.body.productId.toString()) {
-          return {
-            ...el,
-            quantity: newQuantity,
-            price: newPrice
-          };
-        } else {
-          return el;
-        }
-      });
+    Product.findOne({ _id: req.body.productId }).then(product => {
+      if (req.body.quantity > product.quantity) {
+        return res
+          .status(400)
+          .json(`You can not buy more than ${product.quantity}`);
+      }
 
-      user
-        .save()
-        .then(savedUser => res.status(200).json(savedUser))
-        .catch(err => res.status(400).json(err));
-    }
+      let item = user.cart.find(
+        el => el.productId.toString() == req.body.productId.toString()
+      );
+
+      if (!item) {
+        user.cart.unshift(req.body);
+        user
+          .save()
+          .then(savedUser => {
+            return res.json({ savedUser, savedProduct });
+          })
+
+          .catch(err => res.status(400).json(err));
+      } else {
+        const newQuantity = item.quantity + req.body.quantity;
+        const newPrice =
+          item.price.toFixed(2) * 1 + req.body.price.toFixed(2) * 1;
+        user.cart = user.cart.map(el => {
+          if (el.productId.toString() === req.body.productId.toString()) {
+            return {
+              ...el,
+              quantity: newQuantity,
+              price: newPrice
+            };
+          } else {
+            return el;
+          }
+        });
+
+        user
+          .save()
+          .then(savedUser => {
+            res.status(200).json({ savedUser, savedProduct });
+          })
+
+          .catch(err => res.status(400).json(err));
+      }
+    });
   });
 });
 
@@ -122,6 +136,8 @@ router.post(
   async (req, res) => {
     try {
       const user = await User.findOne({ _id: req.user._id });
+      const product = await Product.findOne({_id: req.body.productId});
+      console.log(req.body);
       const itemInCart = user.cart.find(
         el => el.productId.toString() === req.body.productId.toString()
       );
@@ -130,7 +146,7 @@ router.post(
       if (itemInCart.quantity > 1) {
         user.cart = user.cart.map(el => {
           if (el.productId.toString() === req.body.productId.toString()) {
-            return {
+            return { 
               ...el,
               price: el.price - priceToRemove,
               quantity: el.quantity - 1
@@ -238,5 +254,20 @@ router.post("/successPayment/email", auth, (req, res) => {
     smtpTransport.close();
   });
 });
+
+router.post('/removeQuantityOfProduct', auth, protect('user'), (req, res) => {
+  const userCart = req.body;
+  userCart.forEach(el => {
+    Product.findOne({_id: el.productId}).then(product => {
+      product.quantity -= el.quantity;
+      if(product.quantity <= 0) {
+        product = undefined;
+      }
+      product.save().then(savedProduct => {
+        res.status(200).json(savedProduct)
+      })
+    })
+  }) 
+})
 
 module.exports = router;
