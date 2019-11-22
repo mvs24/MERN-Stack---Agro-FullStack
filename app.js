@@ -6,6 +6,7 @@ const formidable = require('express-formidable');
 const cloudinary = require('cloudinary');
 
 const app = express();
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const {auth} = require('./middleware/auth')
 const {protect} = require('./middleware/protect')

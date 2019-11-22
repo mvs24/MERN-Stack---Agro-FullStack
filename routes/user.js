@@ -2,13 +2,14 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 const User = require("../models/User");
 const Product = require("../models/Product");
 const { auth } = require("../middleware/auth");
 const { protect } = require("../middleware/protect");
 const { validateUser } = require("../validation/user");
+const mailPass = require("../mailKeys/mail");
 
 router.post("/register", (req, res) => {
   const validation = validateUser(req.body);
@@ -83,11 +84,11 @@ router.post("/addToCart", auth, protect("user"), (req, res) => {
     let item = user.cart.find(
       el => el.productId.toString() == req.body.productId.toString()
     );
-
+ 
     if (!item) {
       user.cart.unshift(req.body);
       user
-        .save() 
+        .save()
         .then(savedUser => res.status(200).json(savedUser))
         .catch(err => res.status(400).json(err));
     } else {
@@ -177,48 +178,65 @@ router.post(
         }
       });
 
-     const savedUser = await user.save();
-     savedUser.password = undefined;
-     return res.status(200).json(savedUser);
-     
+      const savedUser = await user.save();
+      savedUser.password = undefined;
+      return res.status(200).json(savedUser);
     } catch (err) {
       return res.status(400).json(err);
     }
   }
 );
 
-router.post('/removeItemFromCart', auth, protect('user'), async (req, res) => {
+router.post("/removeItemFromCart", auth, protect("user"), async (req, res) => {
   try {
-    const user = await User.findOne({_id: req.user._id});
-    user.cart = user.cart.filter(el => el.productId.toString() !== req.body.productId.toString());
+    const user = await User.findOne({ _id: req.user._id });
+    user.cart = user.cart.filter(
+      el => el.productId.toString() !== req.body.productId.toString()
+    );
 
     const savedUser = await user.save();
     savedUser.password = undefined;
     return res.status(200).json(savedUser);
-
   } catch (err) {
-    return res.status(400).json(err); 
+    return res.status(400).json(err);
   }
-})
+});
 
-router.post('/paymentSuccess/:userId', auth, protect('user'), (req, res) => {
-  User.findOne({_id: req.params.userId}).then(user => {
+router.post("/paymentSuccess/:userId", auth, protect("user"), (req, res) => {
+  User.findOne({ _id: req.params.userId }).then(user => {
     user.cart = [];
-    user.save().then(savedUser => res.status(200).json(savedUser))
-      .catch(err => res.status(400).json(err))
-  })
-})
+    user
+      .save()
+      .then(savedUser => res.status(200).json(savedUser))
+      .catch(err => res.status(400).json(err));
+  });
+});
 
-const smtpTransport = nodemailer.createTransport({
-   service: 'gmail',
-   auth: {
-     user: 'agropriceapp@gmail.com',
-     password: ''
-   }
-})
+router.post("/successPayment/email", auth, (req, res) => {
+  const smtpTransport = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "agropriceapp@gmail.com",
+      pass: mailPass.pass
+    }
+  });
 
-router.post('/successPayment/email', auth, (req, res) => {
-  console.log(req.body)
-})
+  let mail = {
+    from: "Agro Price <agropriceapp@gmail.com>",
+    to: req.body.card.email,
+    subject: "Payment Success",
+    text: `Successful payment of the products`,
+    html: "<b>Successful payment</b>"
+  };
+
+  smtpTransport.sendMail(mail, (err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Email sent");
+    }
+    smtpTransport.close();
+  });
+});
 
 module.exports = router;
