@@ -40,7 +40,8 @@ class MyCart extends Component {
             </div>
             <StripeButton
               user={user}
-              price={totalPrice} />
+              price={totalPrice}
+            />
           </div>
         </div>
       </div>
@@ -52,4 +53,6 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps, { getUserData })(MyCart);
+export default connect(mapStateToProps, { getUserData })(
+  MyCart
+);

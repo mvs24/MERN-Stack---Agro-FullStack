@@ -1,45 +1,82 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 
-import { paymentSuccess, paymentSuccessMail, removeQuantityOfProduct } from '../store/actions/user';
+import {
+  paymentSuccess,
+  paymentSuccessMail,
+  removeQuantityOfProduct,
+  getUserData,
+  checkItemQuantities
+} from "../store/actions/user";
 
-const StripeButton = props => {
-  const dispatch = useDispatch();
-  const publishableKey = "pk_test_zUIsJ0pP0ioBysHoQcStX9cC00X97vuB7d";
-  const priceForStripe = props.price * 100;
+class StripeButton extends Component {
 
-  const onToken = token => {
-      dispatch(paymentSuccess(props.user));
-      dispatch(paymentSuccessMail(token));
-      alert("Payment successful");
-      dispatch(removeQuantityOfProduct(props.user)) 
-  }; 
+  componentDidMount() {
+    this.props.getUserData()
+    this.checkQuantities()
+  }
 
-  return (
-    <div>
+  checkQuantities = () => {
+    if(this.props.user.user) {
+      this.props.checkItemQuantities(this.props.user.user)
+    }
+  }
+
+  onToken = token => {
+    this.props.paymentSuccess(this.props.user);
+    this.props.paymentSuccessMail(token);
+    alert("Payment successful");
+    this.props.removeQuantityOfProduct(this.props.user);
+  };
+
+  render() {
+    let enableToBuy = true;
+    const publishableKey = "pk_test_zUIsJ0pP0ioBysHoQcStX9cC00X97vuB7d";
+    const priceForStripe = this.props.price * 100;
+
+    if(this.props.user.checkItemQuantitiesError !== undefined) {
+      enableToBuy = false;
+    }
+    console.log(enableToBuy);
+
+    return (
       <div>
-        <StripeCheckout
-          label="Pay now"
-          name="AGRO PRICE"
-          billingAddress
-          shippingAddress
-          description={`Your total is $${props.price}`}
-          amount={priceForStripe}
-          panelLabel="Pay Now"
-          token={onToken}
-          stripeKey={publishableKey}
-        />
+        <div>
+          <StripeCheckout
+            disabled={!enableToBuy}
+            label="Pay now"
+            name="AGRO PRICE"
+            billingAddress
+            shippingAddress
+            description={`Your total is $${this.props.price}`}
+            amount={priceForStripe}
+            panelLabel="Pay Now"
+            token={this.onToken}
+            stripeKey={publishableKey}
+          />
+        </div>
+
+        <span style={{ color: "red", fontSize: "18px" }}>
+          *Please use the following test credit card for payments*
+        </span>
+        <span style={{ color: "red", fontSize: "18px" }}>
+          4242 4242 4242 4242 --Exp: 01/20 --CW: 123
+        </span>
       </div>
+    );
+  }
+}
 
-      <span style={{ color: "red", fontSize: "18px" }}>
-        *Please use the following test credit card for payments*
-      </span>
-      <span style={{ color: "red", fontSize: "18px" }}>
-        4242 4242 4242 4242 --Exp: 01/20 --CW: 123
-      </span>
-    </div>
-  );
-};
+const mapStateToProps = state => ({
+  user: state.user
+});
 
-export default StripeButton;
+export default connect(mapStateToProps, {
+  paymentSuccess,
+  paymentSuccessMail,
+  removeQuantityOfProduct,
+  getUserData,
+  checkItemQuantities
+})(StripeButton);
+

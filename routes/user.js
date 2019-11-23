@@ -186,7 +186,7 @@ router.post(
       if (validation[0] === false) {
         product.increaseError = validation[validation.length - 1];
         const savedProduct = await product.save();
-        return res.status(400).json(savedProduct)
+        return res.status(400).json(savedProduct);
       }
 
       const itemInCart = user.cart.find(
@@ -208,7 +208,7 @@ router.post(
 
       const savedUser = await user.save();
       savedUser.password = undefined;
-      
+
       return res.status(200).json(savedUser);
     } catch (err) {
       return res.status(400).json(err);
@@ -275,6 +275,21 @@ router.post("/removeQuantityOfProduct", auth, protect("user"), (req, res) => {
       product.quantity -= el.quantity;
       product.save().then(savedProduct => {
         res.status(200).json(savedProduct);
+      });
+    });
+  });
+});
+
+router.post("/checkItemQuantities", auth, protect("user"), (req, res) => {
+  User.findOne({ _id: req.user._id }).then(user => {
+    user.cart.forEach(el => {
+      Product.findOne({ _id: el.productId }).then(product => {
+        if (el.quantity > product.quantity) {
+          return res.status(400).json({
+            checkItemQuantitiesErr:
+              "Control your products!!! You can not buy more than the maximum quantity of a product!"
+          });
+        }
       });
     });
   });

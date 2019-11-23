@@ -9,14 +9,16 @@ import { USER_ERROR,
          REMOVE_ITEM_FROM_CART,
          PAYMENT_SUCCESS,
          INCREASE_ITEM_QUANTITY_ERROR,
-         ADD_PRODUCT_TO_CARD_ERROR
+         ADD_PRODUCT_TO_CARD_ERROR,
+         CHECK_ITEM_QUANTITIES_ERROR
 } from "../actions/types";
 
 const initialState = {
     user: null,
     registerError: null,
     loginError: null,
-    addProductToCardError: ''
+    addProductToCardError: '',
+    checkItemQuantitiesError: null
 };
 
 export default (state = initialState, action) => {
@@ -96,6 +98,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 addProductToCardError: action.payload
+            }
+        case CHECK_ITEM_QUANTITIES_ERROR:
+            return {
+                ...state,
+                checkItemQuantitiesError: action.payload
             }
         default: 
             return state;

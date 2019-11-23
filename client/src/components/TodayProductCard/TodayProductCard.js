@@ -35,7 +35,6 @@ class TodayProductCard extends Component {
     const product = this.props.product;
     const userId = this.props.user.user._id;
     let image = undefined;
-    console.log(this.props.user.addProductToCardError);
 
     if (product.quantity === 0) return null;
 
