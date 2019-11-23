@@ -25,16 +25,17 @@ class TodayProductCard extends Component {
     if (product.images.length > 0) {
       dataToBuy.image = product.images[0].url;
     }
-    // this.props.updateCart();
+
     await this.props.addProductToCard(dataToBuy);
-    await this.props.getUserData()
-    await this.props.getUserData()
+    await this.props.getUserData();
+    await this.props.getUserData();
   };
 
   render() {
     const product = this.props.product;
     const userId = this.props.user.user._id;
     let image = undefined;
+    console.log(this.props.user.addProductToCardError);
 
     if (product.quantity === 0) return null;
 
@@ -164,7 +165,18 @@ class TodayProductCard extends Component {
                   "Price: $" + this.state.quantity * 1 * product.medPrice * 1
                 }
               />
-              {this.props.user.addProductToCardError && (<span style={{color: 'red', fontSize: '16px', textAlign: 'center'}}>{this.props.user.addProductToCardError}</span>)}
+              {Object.keys(this.props.user.addProductToCardError).length ===
+              0 ? null : (
+                <span
+                  style={{
+                    color: "red",
+                    fontSize: "16px",
+                    textAlign: "center"
+                  }}
+                >
+                  {this.props.user.addProductToCardError}
+                </span>
+              )}
               <button
                 disabled={this.state.quantity <= 0}
                 className={

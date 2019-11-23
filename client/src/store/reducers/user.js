@@ -16,7 +16,7 @@ const initialState = {
     user: null,
     registerError: null,
     loginError: null,
-    addProductToCardError: null
+    addProductToCardError: ''
 };
 
 export default (state = initialState, action) => {
@@ -65,7 +65,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 user: action.payload,
-                addProductToCardError: null
+                addProductToCardError: ''
             }
         case DECREASE_ITEM_QUANTITY:
             return {
