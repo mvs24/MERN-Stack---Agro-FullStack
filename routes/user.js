@@ -9,6 +9,9 @@ const Product = require("../models/Product");
 const { auth } = require("../middleware/auth");
 const { protect } = require("../middleware/protect");
 const { validateUser } = require("../validation/user");
+const {
+  validateIncreaseItemQuantity
+} = require("../validation/inreaseItemQuantity");
 const mailPass = require("../mailKeys/mail");
 
 router.post("/register", (req, res) => {
@@ -78,7 +81,7 @@ router.get("/logout", auth, (req, res) => {
 });
 
 router.get("/current", auth, (req, res) => res.json(req.user));
- 
+
 router.post("/addToCart", auth, protect("user"), (req, res) => {
   User.findOne({ _id: req.user._id }).then(user => {
     Product.findOne({ _id: req.body.productId }).then(product => {
@@ -136,7 +139,7 @@ router.post(
   async (req, res) => {
     try {
       const user = await User.findOne({ _id: req.user._id });
-      
+
       const itemInCart = user.cart.find(
         el => el.productId.toString() === req.body.productId.toString()
       );
@@ -145,7 +148,7 @@ router.post(
       if (itemInCart.quantity > 1) {
         user.cart = user.cart.map(el => {
           if (el.productId.toString() === req.body.productId.toString()) {
-            return { 
+            return {
               ...el,
               price: el.price - priceToRemove,
               quantity: el.quantity - 1
@@ -176,11 +179,16 @@ router.post(
   async (req, res) => {
     try {
       const user = await User.findOne({ _id: req.user._id });
-      const product = await Product.findOne({_id: req.body.productId});
-      
-      if(req.body.quantity > product.quantity - 1) {
-        return res.status(400).json(`You can not buy more than ${product.quantity}`)
+      const product = await Product.findOne({ _id: req.body.productId });
+
+      let validation = validateIncreaseItemQuantity(req.body, product);
+
+      if (validation[0] === false) {
+        product.increaseError = validation[validation.length - 1];
+        const savedProduct = await product.save();
+        return res.status(400).json(savedProduct)
       }
+
       const itemInCart = user.cart.find(
         el => el.productId.toString() === req.body.productId.toString()
       );
@@ -200,6 +208,7 @@ router.post(
 
       const savedUser = await user.save();
       savedUser.password = undefined;
+      
       return res.status(200).json(savedUser);
     } catch (err) {
       return res.status(400).json(err);
@@ -259,19 +268,19 @@ router.post("/successPayment/email", auth, (req, res) => {
   });
 });
 
-router.post('/removeQuantityOfProduct', auth, protect('user'), (req, res) => {
+router.post("/removeQuantityOfProduct", auth, protect("user"), (req, res) => {
   const userCart = req.body;
   userCart.forEach(el => {
-    Product.findOne({_id: el.productId}).then(product => {
+    Product.findOne({ _id: el.productId }).then(product => {
       product.quantity -= el.quantity;
-      if(product.quantity <= 0) {
+      if (product.quantity <= 0) {
         product = undefined;
       }
       product.save().then(savedProduct => {
-        res.status(200).json(savedProduct)
-      })
-    })
-  }) 
-})
+        res.status(200).json(savedProduct);
+      });
+    });
+  });
+});
 
 module.exports = router;

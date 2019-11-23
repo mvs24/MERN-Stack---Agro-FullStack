@@ -30,6 +30,7 @@ class ProductCard extends Component {
 
   render() { 
     const product = this.props.product;
+    console.log(product)
 
     if (product.quantity <= 0) return null;
 

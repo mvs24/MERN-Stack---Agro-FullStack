@@ -29,7 +29,8 @@ const productSchema = new Schema({
     type: Array,
     default:[]
   },
-  prejardhja: String
+  prejardhja: String,
+  increaseError: String
 });
 
 module.exports = mongoose.model('Product', productSchema);

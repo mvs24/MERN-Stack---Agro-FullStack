@@ -12,7 +12,6 @@ import { USER_ERROR,
          INCREASE_ITEM_QUANTITY,
          REMOVE_ITEM_FROM_CART,
          PAYMENT_SUCCESS,
-         REMOVE_QUANTITY_OF_PRODUCT,
          INCREASE_ITEM_QUANTITY_ERROR
 } from "./types";
 
@@ -126,3 +125,4 @@ export const paymentSuccess = (user) => dispatch => {
 export const paymentSuccessMail = token => dispatch => {
   axios.post('/api/user/successPayment/email', token);
 }
+

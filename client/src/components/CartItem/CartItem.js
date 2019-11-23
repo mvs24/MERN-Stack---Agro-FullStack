@@ -12,15 +12,18 @@ class CartItem extends Component {
   decreaseQuantity = itemToDecrease => {
     this.props.decreaseItemQuantity(itemToDecrease);
   };
+
   increaseQuantity = itemToIncrease => {
     this.props.increaseItemQuantity(itemToIncrease);
   };
+
   removeItem = itemToRemove => {
     this.props.removeItemFromCart(itemToRemove);
   };
 
   render() {
     const { item } = this.props;
+    console.log(item)
 
     let image = undefined;
 
@@ -43,12 +46,10 @@ class CartItem extends Component {
           <div>
             <div className="flex">
               <div onClick={() => this.decreaseQuantity(item)}>
-                {" "}
                 <i className="fas fa-chevron-left link"></i>
               </div>
               <p className="quantity">Quantity: {item.quantity}</p>
               <div onClick={() => this.increaseQuantity(item)}>
-                {" "}
                 <i className="fas fa-chevron-right link"></i>
               </div>
             </div>
@@ -60,13 +61,7 @@ class CartItem extends Component {
             <i className="fas fa-trash-alt link"></i>
           </div>
         </div>
-        <div>
-          {this.props.user.increaseItemQuantityError && (
-            <span style={{ color: "red" }}>
-              {this.props.user.increaseItemQuantityError}
-            </span>
-          )}
-        </div>
+        <div></div>
       </div>
     );
   }
