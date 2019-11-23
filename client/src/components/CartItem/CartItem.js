@@ -23,7 +23,6 @@ class CartItem extends Component {
 
   render() {
     const { item } = this.props;
-    console.log(item)
 
     let image = undefined;
 

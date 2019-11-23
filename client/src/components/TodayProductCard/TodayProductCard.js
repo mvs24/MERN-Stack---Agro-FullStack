@@ -32,6 +32,8 @@ class TodayProductCard extends Component {
     const userId = this.props.user.user._id;
     let image = undefined;
 
+    if (product.quantity === 0) return null;
+
     const randomNumber = () => {
       if (this.state.shouldChange) {
         return Math.floor(Math.random() * 3);

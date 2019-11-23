@@ -30,9 +30,8 @@ class ProductCard extends Component {
 
   render() { 
     const product = this.props.product;
-    console.log(product)
 
-    if (product.quantity <= 0) return null;
+    if (product.quantity === 0) return null;
 
     const userId = this.props.user.user._id;
     let image = undefined;

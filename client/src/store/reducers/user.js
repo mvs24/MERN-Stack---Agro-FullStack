@@ -8,8 +8,7 @@ import { USER_ERROR,
          INCREASE_ITEM_QUANTITY,
          REMOVE_ITEM_FROM_CART,
          PAYMENT_SUCCESS,
-         INCREASE_ITEM_QUANTITY_ERROR,
-         DELETE_ERROR
+         INCREASE_ITEM_QUANTITY_ERROR
 } from "../actions/types";
 
 const initialState = {

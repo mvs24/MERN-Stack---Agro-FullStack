@@ -266,16 +266,13 @@ router.post("/successPayment/email", auth, (req, res) => {
     }
     smtpTransport.close();
   });
-});
+}); 
 
 router.post("/removeQuantityOfProduct", auth, protect("user"), (req, res) => {
   const userCart = req.body;
   userCart.forEach(el => {
     Product.findOne({ _id: el.productId }).then(product => {
       product.quantity -= el.quantity;
-      if (product.quantity <= 0) {
-        product = undefined;
-      }
       product.save().then(savedProduct => {
         res.status(200).json(savedProduct);
       });

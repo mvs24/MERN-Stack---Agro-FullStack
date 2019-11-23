@@ -33,11 +33,14 @@ class TodayProducts extends Component {
 
   render() {
     const { todayProducts } = this.props.product;
+
     if (todayProducts === null) return <Spinner />;
     if (todayProducts.length === 0) return <div>No products found today</div>;
-    const {nrTodayProducts} = this.props.product
-    if(nrTodayProducts === null) return null;
-  
+
+    const { nrTodayProducts } = this.props.product;
+
+    if (nrTodayProducts === null) return null;
+
     return (
       <div className="today__products">
         <div className="grid2">
@@ -46,16 +49,16 @@ class TodayProducts extends Component {
           ))}
         </div>
         <div>
-           <button
-           disabled={this.state.page === 2}
-           className="load__less"
-           onClick={() => this.loadLess(this.state.page - 2)}
-         >
-           Load Less
-         </button>
-       
           <button
-            disabled={(nrTodayProducts - this.state.page) <= 0 }
+            disabled={this.state.page === 2}
+            className="load__less"
+            onClick={() => this.loadLess(this.state.page - 2)}
+          >
+            Load Less
+          </button>
+
+          <button
+            disabled={nrTodayProducts - this.state.page <= 0}
             className="load__more"
             onClick={() => this.loadMore(this.state.page + 2)}
           >

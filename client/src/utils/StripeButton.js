@@ -33,7 +33,7 @@ const StripeButton = props => {
       </div>
 
       <span style={{ color: "red", fontSize: "18px" }}>
-        *Please user the following test credit card for payments*
+        *Please use the following test credit card for payments*
       </span>
       <span style={{ color: "red", fontSize: "18px" }}>
         4242 4242 4242 4242 --Exp: 01/20 --CW: 123
