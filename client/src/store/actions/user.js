@@ -15,8 +15,7 @@ import {
   PAYMENT_SUCCESS,
   INCREASE_ITEM_QUANTITY_ERROR,
   ADD_PRODUCT_TO_CARD_ERROR,
-  CHECK_ITEM_QUANTITIES,
-  CHECK_ITEM_QUANTITIES_ERROR
+  DELETE_CARD_ERROR
 } from "./types";
 
 export const signUpUser = (userData, history) => dispatch => {
@@ -99,6 +98,12 @@ export const addProductToCard = (dataToBuy, reload) => dispatch => {
     );
 };
 
+export const deleteCardError = () => dispatch => {
+  dispatch({
+    type: DELETE_CARD_ERROR
+  })
+}
+
 export const removeQuantityOfProduct = user => dispatch => {
   axios.post("/api/user/removeQuantityOfProduct", user.cart).then(res => {
     console.log(res.data);
@@ -111,7 +116,7 @@ export const decreaseItemQuantity = item => dispatch => {
     .then(res => {
       dispatch({
         type: DECREASE_ITEM_QUANTITY,
-        payload: res.data
+        payload: res.data.userSaved
       });
     })
     .catch(err => console.log(err.response.data));
@@ -157,16 +162,4 @@ export const paymentSuccess = user => dispatch => {
 
 export const paymentSuccessMail = token => dispatch => {
   axios.post("/api/user/successPayment/email", token);
-};
-
-export const checkItemQuantities = user => dispatch => {
-  axios
-    .post("/api/user/checkItemQuantities", user)
-    .then(res => console.log(res.data))
-    .catch(err =>
-      dispatch({
-        type: CHECK_ITEM_QUANTITIES_ERROR,
-        payload: err.response.data
-      })
-    );
 };

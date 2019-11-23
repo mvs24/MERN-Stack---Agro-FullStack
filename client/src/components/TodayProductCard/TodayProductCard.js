@@ -3,7 +3,11 @@ import Moment from "react-moment";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { addProductToCard, getUserData } from "../../store/actions/user";
+import {
+  addProductToCard,
+  getUserData,
+  deleteCardError
+} from "../../store/actions/user";
 
 import "./TodayProductCard.css";
 
@@ -29,6 +33,9 @@ class TodayProductCard extends Component {
     await this.props.addProductToCard(dataToBuy);
     await this.props.getUserData();
     await this.props.getUserData();
+    setTimeout(() => {
+      this.props.deleteCardError();
+    }, 500);
   };
 
   render() {
@@ -198,5 +205,7 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { addProductToCard, getUserData })(TodayProductCard)
+  connect(mapStateToProps, { addProductToCard, getUserData, deleteCardError })(
+    TodayProductCard
+  )
 );

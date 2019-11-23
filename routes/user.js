@@ -85,10 +85,15 @@ router.get("/current", auth, (req, res) => res.json(req.user));
 router.post("/addToCart", auth, protect("user"), (req, res) => {
   User.findOne({ _id: req.user._id }).then(user => {
     Product.findOne({ _id: req.body.productId }).then(product => {
-      if (req.body.quantity > product.quantity) {
-        return res
-          .status(400)
-          .json(`You can not buy more than ${product.quantity}`);
+      const itemInTheCart = user.cart.find(
+        el => el.productId.toString() === product._id.toString()
+      );
+      if (itemInTheCart) {
+        if (req.body.quantity + itemInTheCart.quantity > product.quantity) {
+          return res
+            .status(400)
+            .json('You can not buy more than max quantity');
+        }
       }
 
       let item = user.cart.find(
@@ -165,7 +170,8 @@ router.post(
 
       const userSaved = await user.save();
       userSaved.password = undefined;
-      return res.json(userSaved);
+
+      return res.json({ userSaved });
     } catch (err) {
       return res.status(400).json(err);
     }
@@ -280,19 +286,6 @@ router.post("/removeQuantityOfProduct", auth, protect("user"), (req, res) => {
   });
 });
 
-router.post("/checkItemQuantities", auth, protect("user"), (req, res) => {
-  User.findOne({ _id: req.user._id }).then(user => {
-    user.cart.forEach(el => {
-      Product.findOne({ _id: el.productId }).then(product => {
-        if (el.quantity > product.quantity) {
-          return res.status(400).json({
-            checkItemQuantitiesErr:
-              "Control your products!!! You can not buy more than the maximum quantity of a product!"
-          });
-        }
-      });
-    });
-  });
-});
+
 
 module.exports = router;

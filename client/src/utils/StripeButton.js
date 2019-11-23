@@ -6,21 +6,14 @@ import {
   paymentSuccess,
   paymentSuccessMail,
   removeQuantityOfProduct,
-  getUserData,
-  checkItemQuantities
+  getUserData
 } from "../store/actions/user";
 
 class StripeButton extends Component {
 
   componentDidMount() {
     this.props.getUserData()
-    this.checkQuantities()
-  }
-
-  checkQuantities = () => {
-    if(this.props.user.user) {
-      this.props.checkItemQuantities(this.props.user.user)
-    }
+   
   }
 
   onToken = token => {
@@ -31,14 +24,12 @@ class StripeButton extends Component {
   };
 
   render() {
-    let enableToBuy = true;
+
     const publishableKey = "pk_test_zUIsJ0pP0ioBysHoQcStX9cC00X97vuB7d";
     const priceForStripe = this.props.price * 100;
-
-    if(this.props.user.checkItemQuantitiesError !== undefined) {
-      enableToBuy = false;
-    }
-    console.log(enableToBuy);
+    
+    if(!this.props.user.user) return null;
+    let enableToBuy = this.props.user.user.cart.length !== 0;
 
     return (
       <div>
@@ -76,7 +67,6 @@ export default connect(mapStateToProps, {
   paymentSuccess,
   paymentSuccessMail,
   removeQuantityOfProduct,
-  getUserData,
-  checkItemQuantities
+  getUserData
 })(StripeButton);
 
