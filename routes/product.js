@@ -9,7 +9,7 @@ const { auth } = require("../middleware/auth");
 const { validateProduct } = require("../validation/product");
 
 router.get("/", auth, protect("user", "seller", "admin"), (req, res) => {
-  Product.find()
+  Product.find({quantity : { $gt: 0 }})
     .populate("user")
     .populate("company")
     .then(products => {
@@ -58,7 +58,7 @@ router.get("/all/:companyId", auth, (req, res) => {
   let page = req.query.page * 1 || 2;
   let skip = (page - 1) * limit;
 
-  Product.find({ company: req.params.companyId })
+  Product.find({ company: req.params.companyId, quantity : { $gt: 0 } })
     .populate("user")
     .populate("company")
     .skip(skip)
@@ -72,7 +72,7 @@ router.get(
   auth,
   protect("user", "seller", "admin"),
   (req, res) => {
-    Product.find({ company: req.params.cid })
+    Product.find({ company: req.params.cid, quantity : { $gt: 0 } })
       .populate("user")
       .populate("company")
       .limit(6)
@@ -89,7 +89,7 @@ router.get(
   protect("user", "seller", "admin"),
   (req, res) => {
     let length = 0;
-    Product.find({ company: req.params.cid })
+    Product.find({ company: req.params.cid, quantity : { $gt: 0 } })
       .populate("user")
       .populate("company")
       .then(products => {
@@ -119,7 +119,7 @@ router.get(
     let skip = (page - 1) * limit;
     
     Product
-      .find()
+      .find({quantity : { $gt: 0 }})
       .populate("user")
       .populate("company")
       .then(products => {
@@ -146,7 +146,7 @@ router.get(
   auth,
   protect("user", "seller", "admin"),
   (req, res) => {
-    Product.find({ company: req.params.cid })
+    Product.find({ company: req.params.cid, quantity : { $gt: 0 } })
       .then(products => res.json(products))
       .catch(err => res.status(400).json(err));
   }
@@ -155,8 +155,9 @@ router.get(
 router.get("/numberOfTodayProducts", auth, (req, res) => {
   let todayDate = new Date(Date.now());
   let results = [];
+  let length = 0;
 
-  Product.find().then(products => {
+  Product.find({quantity : { $gt: 0 }}).then(products => {
     products.forEach(product => {
       if (
         new Date(product.date).getDate() == todayDate.getDate() &&
@@ -166,7 +167,12 @@ router.get("/numberOfTodayProducts", auth, (req, res) => {
         results.unshift(product); 
       }
     });
-    return res.status(200).json({ nrOfTodayProducts: results.length });
+    results.forEach(el => {
+      if(el.quantity > 0) {
+        length ++;
+      }
+    })
+    return res.status(200).json({ nrOfTodayProducts: length });
   });
 });
 

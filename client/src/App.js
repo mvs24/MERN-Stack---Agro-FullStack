@@ -22,6 +22,7 @@ export default () => {
         <Route path='/addProduct/:cid'  component={AddProduct}/>
         <Route path='/myCompanyPage/:cid' exact component={MyCompanyPage}/>
         <Route path='/cart' exact component={MyCart}/>
+        <Route path="/reload" component={null} key="reload" />
       </Switch>
     </BrowserRouter>
   );

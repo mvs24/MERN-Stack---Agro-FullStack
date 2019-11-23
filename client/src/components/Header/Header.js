@@ -5,8 +5,9 @@ import { useDispatch } from "react-redux";
 import Spinner from "../Spinner/Spinner";
 import "./Header.css";
 import { signOutUser } from "../../store/actions/user";
+import { connect } from "react-redux";
 
-const Header = ({ userData, nrTodayProducts, children }) => {
+const Header = ({ userData, nrTodayProducts, children, reload }) => {
   const dispatch = useDispatch();
 
   const signOut = () => {
@@ -28,7 +29,7 @@ const Header = ({ userData, nrTodayProducts, children }) => {
           </Link>
         </div>
         <div className="user">
-          Welcome: {userData.name}
+          Welcome: {userData.name + "  "} 
           {userData.lastname}
         </div>
         <div className="user">Today's Products: {nrTodayProducts}</div>
@@ -55,4 +56,4 @@ const Header = ({ userData, nrTodayProducts, children }) => {
   );
 };
 
-export default Header;
+export default connect()(Header);

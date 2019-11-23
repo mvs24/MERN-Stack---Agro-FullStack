@@ -266,7 +266,7 @@ router.post("/successPayment/email", auth, (req, res) => {
     }
     smtpTransport.close();
   });
-}); 
+});
 
 router.post("/removeQuantityOfProduct", auth, protect("user"), (req, res) => {
   const userCart = req.body;

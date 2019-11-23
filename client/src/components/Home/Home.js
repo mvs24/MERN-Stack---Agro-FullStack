@@ -11,20 +11,18 @@ import MyCompany from "../MyCompany/MyCompany";
 import TodayProducts from "../TodayProducts/TodayProducts";
 
 class Home extends Component {
+
+
   componentDidMount() {
     this.props.getUserData();
     this.props.getNrOfTodayProducts(); 
   }
-
-  // TODO: WITH componentDidMount() to create an action to get myCompanies looping through
-  // all the companies and finding the companies corresponding to the logged in user
 
   render() {
     if (!this.props.user.user) return null;
     const {nrTodayProducts} = this.props.product
     if(nrTodayProducts === null) return null;
     
-   
     return (
       <main className="main">
         <Header nrTodayProducts={nrTodayProducts} userData={this.props.user.user}></Header>
@@ -49,3 +47,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { getUserData, getNrOfTodayProducts })(Home);
+ 

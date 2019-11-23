@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Moment from "react-moment";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-import { addProductToCard } from "../../store/actions/user";
+import { addProductToCard, getUserData } from "../../store/actions/user";
 
 import "./TodayProductCard.css";
 
@@ -12,19 +13,22 @@ class TodayProductCard extends Component {
     shouldChange: true
   };
 
-  addToCart = product => {
+  addToCart = async product => {
     let dataToBuy = {
       price: this.state.quantity * 1 * product.medPrice * 1,
       date: Date.now(),
       nameOfProduct: product.name,
       productId: product._id,
       quantity: this.state.quantity * 1,
-      singleItemPrice: product.medPrice,
+      singleItemPrice: product.medPrice
     };
-    if(product.images.length > 0) {
+    if (product.images.length > 0) {
       dataToBuy.image = product.images[0].url;
     }
-    this.props.addProductToCard(dataToBuy);
+    // this.props.updateCart();
+    await this.props.addProductToCard(dataToBuy);
+    await this.props.getUserData()
+    await this.props.getUserData()
   };
 
   render() {
@@ -160,6 +164,7 @@ class TodayProductCard extends Component {
                   "Price: $" + this.state.quantity * 1 * product.medPrice * 1
                 }
               />
+              {this.props.user.addProductToCardError && (<span style={{color: 'red', fontSize: '16px', textAlign: 'center'}}>{this.props.user.addProductToCardError}</span>)}
               <button
                 disabled={this.state.quantity <= 0}
                 className={
@@ -181,4 +186,6 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps, { addProductToCard })(TodayProductCard);
+export default withRouter(
+  connect(mapStateToProps, { addProductToCard, getUserData })(TodayProductCard)
+);
