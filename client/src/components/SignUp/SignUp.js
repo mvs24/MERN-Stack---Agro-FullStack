@@ -39,19 +39,12 @@ export class SignUp extends Component {
     };
     if(data.role === 'seller') {
       this.props.goToCompany(data, this.props.history)
-      // this.props.history.push({
-      //   pathname: '/createCompany',
-      //   state: {data}
-      // })
     } else {
       this.props.signUpUser(data, this.props.history);
     }
   };
 
   handleChange = role => {
-    // if(role !== 'user'){
-    //   this.setState({roleChanged: !this.state.roleChanged});
-    // }
     this.setState({role})
   };
 

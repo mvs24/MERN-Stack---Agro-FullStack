@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import '../SignUp/SignUp.css';
+import './SignIn.css'
 
 import { signInUser } from '../../store/actions/user';
 
@@ -38,7 +39,7 @@ class SignIn extends Component {
             </div>
 
             <div className="formContainer">
-              <div className="input">
+              <div className="input inputS">
                 <input
                   value={this.state.email}
                   onChange={this.onChange}
@@ -53,7 +54,7 @@ class SignIn extends Component {
                   </div>
                 ) : null}
               </div>
-              <div className="input">
+              <div className="input inputS">
                 <input
                   value={this.state.password}
                   onChange={this.onChange}
@@ -82,7 +83,7 @@ class SignIn extends Component {
             </div>
             <div className="signInBtnContainer">
               <Link to="/">
-                <button className="signInBtn">SIGN UP</button>
+                <button className="signInBtn signInBtnS">SIGN UP</button>
               </Link>
             </div>
           </div>

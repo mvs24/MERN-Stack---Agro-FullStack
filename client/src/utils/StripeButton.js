@@ -10,10 +10,8 @@ import {
 } from "../store/actions/user";
 
 class StripeButton extends Component {
-
   componentDidMount() {
-    this.props.getUserData()
-   
+    this.props.getUserData();
   }
 
   onToken = token => {
@@ -24,11 +22,10 @@ class StripeButton extends Component {
   };
 
   render() {
-
     const publishableKey = "pk_test_zUIsJ0pP0ioBysHoQcStX9cC00X97vuB7d";
     const priceForStripe = this.props.price * 100;
-    
-    if(!this.props.user.user) return null;
+
+    if (!this.props.user.user) return null;
     let enableToBuy = this.props.user.user.cart.length !== 0;
 
     return (
@@ -69,4 +66,3 @@ export default connect(mapStateToProps, {
   removeQuantityOfProduct,
   getUserData
 })(StripeButton);
-

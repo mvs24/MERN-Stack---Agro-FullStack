@@ -1,0 +1,35 @@
+@media screen and (max-width: 962px) {
+  .inputS input {
+    width: 80%;
+    text-align: center;
+  }
+  .inputS {
+    margin-left: 20%;
+  }
+  .formContainer {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 762px) {
+  .inputS input {
+    width: 70%;
+    text-align: center;
+  }
+  .inputS {
+    margin-left: 20%;
+  }
+}
+
+@media screen and (max-width: 562px) {
+  .inputS input {
+    width: 70%;
+    text-align: center;
+  }
+  .inputS {
+    margin-left: 20%;
+  }
+  .signInBtnS {
+    padding: 1rem 2rem;
+  }
+}
