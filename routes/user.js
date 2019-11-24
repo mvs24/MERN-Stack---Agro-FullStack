@@ -43,6 +43,7 @@ router.post("/register", (req, res) => {
             if (err) return res.status(400).json({ error: err });
             newUser.password = hash;
             newUser.save().then(savedUser => {
+              savedUser.isAuth = false;
               res.json(savedUser);
             });
           });
@@ -90,9 +91,11 @@ router.post("/addToCart", auth, protect("user"), (req, res) => {
       );
       if (itemInTheCart) {
         if (req.body.quantity + itemInTheCart.quantity > product.quantity) {
-          return res
-            .status(400)
-            .json('You can not buy more than max quantity');
+          return res.status(400).json("You can not buy more than max quantity");
+        }
+      } else {
+        if (req.body.quantity > product.quantity) {
+          return res.status(400).json("You can not buy more than max quantity");
         }
       }
 
@@ -285,7 +288,5 @@ router.post("/removeQuantityOfProduct", auth, protect("user"), (req, res) => {
     });
   });
 });
-
-
 
 module.exports = router;

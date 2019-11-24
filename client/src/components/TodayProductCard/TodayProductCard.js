@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import {
   addProductToCard,
   getUserData,
-  deleteCardError
+  deleteQuantityError
 } from "../../store/actions/user";
 
 import "./TodayProductCard.css";
@@ -34,8 +34,8 @@ class TodayProductCard extends Component {
     await this.props.getUserData();
     await this.props.getUserData();
     setTimeout(() => {
-      this.props.deleteCardError();
-    }, 500);
+      this.props.deleteQuantityError()
+    }, 1300);
   };
 
   render() {
@@ -176,7 +176,7 @@ class TodayProductCard extends Component {
                 <span
                   style={{
                     color: "red",
-                    fontSize: "16px",
+                    fontSize: "14px",
                     textAlign: "center"
                   }}
                 >
@@ -205,7 +205,7 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { addProductToCard, getUserData, deleteCardError })(
+  connect(mapStateToProps, { addProductToCard, getUserData, deleteQuantityError })(
     TodayProductCard
   )
 );

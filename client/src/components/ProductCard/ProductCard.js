@@ -3,7 +3,7 @@ import Moment from "react-moment";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { addProductToCard } from "../../store/actions/user";
+import { addProductToCard, getUserData, deleteQuantityError } from "../../store/actions/user";
 import "./ProductCard.css";
 
 class ProductCard extends Component {
@@ -26,6 +26,11 @@ class ProductCard extends Component {
     }
 
     this.props.addProductToCard(dataToBuy);
+    await this.props.getUserData();
+    await this.props.getUserData();
+    setTimeout(() => {
+      this.props.deleteQuantityError()
+    }, 1300);
   };
 
   render() { 
@@ -162,6 +167,18 @@ class ProductCard extends Component {
                   "Price: $" + this.state.quantity * 1 * product.medPrice * 1
                 }
               />
+                {Object.keys(this.props.user.addProductToCardError).length ===
+              0 ? null : (
+                <span
+                  style={{
+                    color: "red",
+                    fontSize: "14px",
+                    textAlign: "center"
+                  }}
+                >
+                  {this.props.user.addProductToCardError}
+                </span>
+              )}
               <button
                 disabled={this.state.quantity <= 0}
                 className={
@@ -184,5 +201,5 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { addProductToCard })(ProductCard)
+  connect(mapStateToProps, { addProductToCard, getUserData, deleteQuantityError })(ProductCard)
 );

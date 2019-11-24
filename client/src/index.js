@@ -11,12 +11,14 @@ import userReducer from './store/reducers/user';
 import companyReducer from './store/reducers/company';
 import productReducer from './store/reducers/product';
 import companyProductsReducer from './store/reducers/companyProducts';
+import authReducer from './store/reducers/auth';
 
 const rootReducer = combineReducers({
     user: userReducer,
     company: companyReducer,
     product: productReducer,
-    companyProducts: companyProductsReducer
+    companyProducts: companyProductsReducer,
+    auth: authReducer
 });
 
 const initialState = {};

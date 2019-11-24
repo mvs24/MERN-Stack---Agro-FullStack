@@ -16,6 +16,7 @@ import { USER_ERROR,
 
 const initialState = {
     user: null,
+    isAuth: false,
     registerError: null,
     loginError: null,
     addProductToCardError: '',
@@ -45,7 +46,8 @@ export default (state = initialState, action) => {
                 ...state,
                 registerError: null,
                 loginError: null,
-                user
+                user,
+                isAuth: true
             }
         case GET_USER_DATA: 
             const userData = action.payload;
@@ -62,13 +64,13 @@ export default (state = initialState, action) => {
                 ...state,
                 user: null,
                 registerError: null,
-                loginError: null
+                loginError: null,
+                isAuth: false
             };
         case ADD_PRODUCT_TO_CARD:
             return {
                 ...state,
-                user: action.payload,
-                addProductToCardError: ''
+                user: action.payload
             }
         case DECREASE_ITEM_QUANTITY:
             return {
@@ -108,7 +110,7 @@ export default (state = initialState, action) => {
             }
         case DELETE_CARD_ERROR:
             return {
-                ...state, 
+                ...state,
                 addProductToCardError: ''
             }
         default: 

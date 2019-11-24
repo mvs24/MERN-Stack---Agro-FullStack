@@ -81,7 +81,7 @@ export const signOutUser = () => dispatch => {
     );
 };
 
-export const addProductToCard = (dataToBuy, reload) => dispatch => {
+export const addProductToCard = (dataToBuy) => dispatch => {
   axios
     .post("/api/user/addToCart", dataToBuy)
     .then(res => {
@@ -97,12 +97,6 @@ export const addProductToCard = (dataToBuy, reload) => dispatch => {
       })
     );
 };
-
-export const deleteCardError = () => dispatch => {
-  dispatch({
-    type: DELETE_CARD_ERROR
-  })
-}
 
 export const removeQuantityOfProduct = user => dispatch => {
   axios.post("/api/user/removeQuantityOfProduct", user.cart).then(res => {
@@ -163,3 +157,9 @@ export const paymentSuccess = user => dispatch => {
 export const paymentSuccessMail = token => dispatch => {
   axios.post("/api/user/successPayment/email", token);
 };
+
+export const deleteQuantityError = () => dispatch => {
+  dispatch({
+    type: DELETE_CARD_ERROR
+  })
+}
