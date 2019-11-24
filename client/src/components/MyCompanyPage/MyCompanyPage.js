@@ -28,7 +28,7 @@ class MyCompanyPage extends Component {
     
     return (
       <div>
-        <Header userData={this.props.user.user}></Header>
+        {/* <Header userData={this.props.user.user}></Header> */}
         <CompanyDetail
         cid={myCompanyId}
         name={myCompany.name}

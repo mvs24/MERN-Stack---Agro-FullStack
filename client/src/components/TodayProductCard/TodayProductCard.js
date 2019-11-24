@@ -55,7 +55,7 @@ class TodayProductCard extends Component {
       image = product.images[0].url;
     } else {
       image =
-        "https://1740009751.rsc.cdn77.org/sites/balkanbaba/docs/al/image_1430320148_32.png";
+        'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found.png'
     }
 
     let classNames = [

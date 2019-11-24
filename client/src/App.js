@@ -14,19 +14,27 @@ import PrivateRoute from "./hoc/PrivateRoute";
 export default () => {
   return (
     <BrowserRouter>
+      <Route path="/createCompany" exact component={CreateCompany} />
+      <Route path="/signIn" exact component={SignIn} />
+      <Route path="/" exact component={SignUp} />
       <Switch>
-        <PrivateRoute path="/home" exact component={Home} />
-        <PrivateRoute path="/createCompany" exact component={CreateCompany} />
+        <PrivateRoute path="/home" exact component={Home} />{" "}
+      </Switch>
+      <Switch>
         <PrivateRoute path="/company/:cid" component={CompanyDetails} />
+      </Switch>
+      <Switch>
         <PrivateRoute
           path="/myCompanyPage/:cid"
           exact
           component={MyCompanyPage}
         />
+      </Switch>
+      <Switch>
         <PrivateRoute path="/addProduct/:cid" component={AddProduct} />
+      </Switch>
+      <Switch>
         <PrivateRoute path="/cart" exact component={MyCart} />
-        <Route path="/signIn" exact component={SignIn} />
-        <Route path="/" exact component={SignUp} />
       </Switch>
     </BrowserRouter>
   );
