@@ -72,7 +72,7 @@ class FileUpload extends Component {
             <section>
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
-                <p>Add an image for your product</p>
+                <p style={{margin: '1rem' , cursor: 'pointer' }}>Click here to add an image for your product</p>
               </div>
             </section>
           )}

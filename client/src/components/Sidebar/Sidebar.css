@@ -5,4 +5,12 @@
     font-size: 18px;
     font-style: italic;
 }
-    
+.companies span{
+    font-size: 18px;
+}
+
+@media (max-width: 992px){
+    .companies span{
+        font-size: 14px;
+    }
+}

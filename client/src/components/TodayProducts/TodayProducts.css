@@ -37,11 +37,17 @@
   transition: all 1s ease-in-out;
   margin-right: 10%;
 }
-.load__more:hover{
-  color: rgb(82, 168, 82);
-    background: white;
+@media (max-width: 600px) {
+  .load__more {
+    left: 50%;
+    padding: 1rem;
+  }
 }
-.load__less{
+.load__more:hover {
+  color: rgb(82, 168, 82);
+  background: white;
+}
+.load__less {
   position: absolute;
   top: 1650%;
   left: 8.5%;
@@ -58,7 +64,7 @@
   margin-right: 10%;
   cursor: pointer;
 }
-.load__less:hover{
+.load__less:hover {
   color: rgb(82, 168, 82);
   background: white;
 }
@@ -67,8 +73,75 @@
   color: white;
   cursor: not-allowed;
 }
-.load__more:disabled{
+.load__more:disabled {
   background: rgb(83, 83, 83);
   color: white;
   cursor: not-allowed;
 }
+
+@media (max-width: 700px) {
+  .load__more {
+    padding: 1rem;
+    margin-top: 35%;
+    width: 7rem;
+    border-radius: 0;
+  }
+  .load__less {
+    padding: 1rem;
+    border-radius: 0;
+
+    margin-top: 35%;
+    width: 7rem;
+  }
+}
+
+/* @media (min-width: 668px) {
+  .load__more {
+    padding: 1rem;
+
+    width: 7rem;
+    border-radius: 0;
+  }
+  .load__less {
+    padding: 1rem;
+    border-radius: 0;
+
+    width: 7rem;
+  }
+}
+@media (max-width: 840px) {
+  .load__less {
+    position: absolute;
+    top: 1650%;
+    left: 8.5%;
+    border: none;
+    outline: none;
+    background: rgb(82, 168, 82);
+    padding: 1rem 5rem;
+    align-self: center;
+    color: white;
+    border: 1px solid white;
+    border-radius: 1.5rem;
+    font-weight: 300;
+    transition: all 1s ease-in-out;
+    margin-right: 10%;
+    cursor: pointer;
+  }
+  .load__more {
+    position: absolute;
+    top: 1650%;
+    left: 60%;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: rgb(82, 168, 82);
+    padding: 1rem 5rem;
+    align-self: center;
+    color: white;
+    border: 1px solid white;
+    border-radius: 1.5rem;
+    font-weight: 300;
+    transition: all 1s ease-in-out;
+    margin-right: 10%;
+  }
+} */

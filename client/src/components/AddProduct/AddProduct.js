@@ -54,7 +54,7 @@ class AddProduct extends Component {
       <div>
         <Header userData={this.props.user.user}/>
         <form
-          className="signUp"
+          className="signUp addProductForm"
           onSubmit={e => this.createProduct(e, companyId)}
           autoComplete="off"
         >
@@ -135,7 +135,7 @@ class AddProduct extends Component {
                 imagesHandler={images => this.imagesHandler(images)}
               />
             </div>
-            <button className="signUpBtn">CREATE PRODUCT</button>
+            <button className="signUpBtn createBtn">CREATE PRODUCT</button>
           </div>
         </form>
       </div>

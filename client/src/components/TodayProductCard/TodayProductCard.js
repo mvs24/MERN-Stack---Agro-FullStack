@@ -34,7 +34,7 @@ class TodayProductCard extends Component {
     await this.props.getUserData();
     await this.props.getUserData();
     setTimeout(() => {
-      this.props.deleteQuantityError()
+      this.props.deleteQuantityError();
     }, 1300);
   };
 
@@ -55,7 +55,7 @@ class TodayProductCard extends Component {
       image = product.images[0].url;
     } else {
       image =
-        'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found.png'
+        "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found.png";
     }
 
     let classNames = [
@@ -85,26 +85,17 @@ class TodayProductCard extends Component {
               >
                 &nbsp;
               </div>
-              <div className="card__heading">
-                <span
-                  style={{
-                    fontSize: "1.1rem",
-                    color: "rgb(197, 187, 187)"
-                  }}
-                >
-                  Name:
-                </span>
-                {product.name}
-              </div>
+
               <div className="card__detail">
                 <ul>
+                  <li>Name: {product.name}</li>
                   <li>Company: {product.company.name}</li>
                   <li>Small Price: {product.smallPrice}</li>
                   <li>Big Price: {product.bigPrice}</li>
                   <li>Medium Price: {product.medPrice}</li>
                   <li>Quantity: {product.quantity}</li>
                   <li>
-                    Date:{" "}
+                    Date:
                     <Moment format="DD:MM:YYYY  HH:mm">{product.date}</Moment>
                   </li>
                 </ul>
@@ -119,23 +110,14 @@ class TodayProductCard extends Component {
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   height: "14.375rem"
-                }}
+                }} 
               >
                 &nbsp;
               </div>
-              <div className="card__heading">
-                <span
-                  style={{
-                    fontSize: "1.1rem",
-                    color: "rgb(197, 187, 187)"
-                  }}
-                >
-                  Name:
-                </span>
-                {product.name}
-              </div>
+
               <div className="card__detail">
                 <ul>
+                  <li>Name: {product.name}</li>
                   <li>Company: {product.company.name}</li>
                   <li>Small Price: {product.smallPrice}</li>
                   <li>Big Price: {product.bigPrice}</li>
@@ -205,7 +187,9 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { addProductToCard, getUserData, deleteQuantityError })(
-    TodayProductCard
-  )
+  connect(mapStateToProps, {
+    addProductToCard,
+    getUserData,
+    deleteQuantityError
+  })(TodayProductCard)
 );

@@ -47,3 +47,21 @@
        font-size: 2rem;
    }
 } */
+@media (max-width: 908px) {
+    .user{
+        font-size: 14px;
+    }
+    .iconLink{
+        font-size: 20px;
+    }
+    .cartLength{
+        position: absolute;
+        top: -10%;
+        right: -40%;
+        color: red;
+        font-size: 11px;
+        border: 1px solid white;
+        border-radius: 40%;
+    }
+    
+}

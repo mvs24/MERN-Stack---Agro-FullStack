@@ -1,34 +1,45 @@
- /* .home_container{
-   max-width: 100vw;
-}     
-.home_container:not(:last-child){
-    margin-right: 20rem;
+.main {
+    width: 100%;
+  position: relative;
+}
+.products {
+  position: absolute;
+  top: 8%;
+  left: 40%;
+}
+.myCompany {
+  position: absolute;
+  top: 16%;
+  left: 80%;
 }
 
-.sidebar{
-    padding: 1rem;
-    float: left;
-    width: calc((100% - 20rem) / 3);
+@media (max-width: 700px){
+    .myCompany {
+        display: none;
+    }
+    .products {
+        width: 50%;
+        left: 40%;
+
+    }
 }
-.myCompany{
-    float: left;
-    width: calc((100% - 20rem) / 3);
-}
-.products{
-    float: left;
-    width: calc((100% - 20rem) / 3);
+/* @media (min-width: 700px){
+    .products{
+        width: 60% ;
+        left: 40%;
+    }
 } */
-
-.main{
-    position: relative;
-}
-.products{
-    position: absolute;
-    top: 20%;
-    left: 40%;
-}
-.myCompany{
-    position: absolute;
-    top: 16%;
-    left: 80%;
-}
+/* @media (min-width: 900px){
+    .products{
+        width: 60% ;
+        left: 40%;
+    }
+} */
+/* @media (min-width: 668px){
+    .products{
+        width: 70% ;
+        left: 40%;
+        height: 35rem;
+    }
+   
+} */

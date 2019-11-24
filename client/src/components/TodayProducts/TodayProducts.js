@@ -48,7 +48,7 @@ class TodayProducts extends Component {
             <TodayProductCard key={product._id} product={product} />
           ))}
         </div>
-        <div>
+        <div> 
           <button
             disabled={this.state.page === 2}
             className="load__less"

@@ -13,7 +13,7 @@ const Header = ({ userData, nrTodayProducts, children, reload }) => {
   const signOut = () => {
     dispatch(signOutUser());
   };
-
+ 
   if (!userData)
     return (
       <div className="u-center-text">
