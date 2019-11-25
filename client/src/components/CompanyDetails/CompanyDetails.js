@@ -6,11 +6,11 @@ import CompanyDetail from '../CompanyDetail/CompanyDetail';
 import Spinner from '../Spinner/Spinner';
 
 class CompanyDetails extends Component {
-   componentDidMount() {
+   componentDidMount() { 
         const companyId = this.props.match.params.cid;
         this.props.getCompanyDetails(companyId);
         this.props.getCompanyProducts(companyId);
-   }
+   } 
     render() {
         const { companyDetail } = this.props.company;
         const { companyDetailError } = this.props.company;
@@ -18,6 +18,8 @@ class CompanyDetails extends Component {
 
         if(companyDetailError) return <div>{companyDetailError}</div>
         if(!companyDetail) return <Spinner/>
+
+        console.log(companyProducts)
 
         return <CompanyDetail
         lastname={companyDetail.user.lastname}

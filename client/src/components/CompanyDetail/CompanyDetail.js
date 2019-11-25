@@ -17,7 +17,7 @@ class CompanyDetail extends React.Component {
     this.props.getUserData();
     this.getProductsLength();
   }
-
+ 
   state = {
     page: 1,
     productsLength: ""

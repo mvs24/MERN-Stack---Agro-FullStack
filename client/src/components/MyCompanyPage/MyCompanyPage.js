@@ -6,14 +6,11 @@ import { getUserData } from "../../store/actions/user";
 import { getMyCompany } from "../../store/actions/company";
 import CompanyDetail from "../CompanyDetail/CompanyDetail";
 import Spinner from "../Spinner/Spinner";
-import Header from '../Header/Header'
 
 class MyCompanyPage extends Component {
   componentDidMount() {
     this.props.getUserData();
-
     this.props.getMyCompany();
-
     this.props.getAllProducts(this.props.match.params.cid);
   }
 
@@ -21,24 +18,25 @@ class MyCompanyPage extends Component {
     const myCompany = this.props.company.myCompany;
     const myCompanyId = this.props.match.params.cid;
     if (!myCompany) return <Spinner />;
-    if(!this.props.user.user) return null;
+    if (!this.props.user.user) return null;
 
     const { myCompanyProducts } = this.props.product;
     if (!myCompanyProducts) return null;
-    
+
+    console.log(myCompanyProducts)
+ 
+
     return (
       <div>
-        {/* <Header userData={this.props.user.user}></Header> */}
         <CompanyDetail
-        cid={myCompanyId}
-        name={myCompany.name}
-        place={myCompany.place}
-        username={myCompany.user.name}
-        lastname={myCompany.user.lastname}
-        products={myCompanyProducts}
-      />
+          cid={myCompanyId}
+          name={myCompany.name}
+          place={myCompany.place}
+          username={myCompany.user.name}
+          lastname={myCompany.user.lastname}
+          products={myCompanyProducts}
+        />
       </div>
-     
     );
   }
 }

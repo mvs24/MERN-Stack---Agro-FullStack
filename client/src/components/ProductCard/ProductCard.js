@@ -3,7 +3,11 @@ import Moment from "react-moment";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { addProductToCard, getUserData, deleteQuantityError } from "../../store/actions/user";
+import {
+  addProductToCard,
+  getUserData,
+  deleteQuantityError
+} from "../../store/actions/user";
 import "./ProductCard.css";
 
 class ProductCard extends Component {
@@ -29,11 +33,11 @@ class ProductCard extends Component {
     await this.props.getUserData();
     await this.props.getUserData();
     setTimeout(() => {
-      this.props.deleteQuantityError()
+      this.props.deleteQuantityError();
     }, 1300);
   };
 
-  render() { 
+  render() {
     const product = this.props.product;
 
     if (product.quantity === 0) return null;
@@ -81,19 +85,10 @@ class ProductCard extends Component {
               >
                 &nbsp;
               </div>
-              <div className="card__heading">
-                <span
-                  style={{
-                    fontSize: "1.1rem",
-                    color: "rgb(197, 187, 187)"
-                  }}
-                >
-                  Name:
-                </span>
-                {product.name}
-              </div>
               <div className="card__detail">
                 <ul>
+                  <li>Name of Product: {product.name}</li>
+
                   <li>Company: {product.company.name}</li>
                   <li>Small Price: {product.smallPrice}</li>
                   <li>Big Price: {product.bigPrice}</li>
@@ -119,19 +114,10 @@ class ProductCard extends Component {
               >
                 &nbsp;
               </div>
-              <div className="card__heading">
-                <span
-                  style={{
-                    fontSize: "1.1rem",
-                    color: "rgb(197, 187, 187)"
-                  }}
-                >
-                  Name:
-                </span>
-                {product.name}
-              </div>
+
               <div className="card__detail">
                 <ul>
+                  <li>Name of Product: {product.name}</li>
                   <li>Company: {product.company.name}</li>
                   <li>Small Price: {product.smallPrice}</li>
                   <li>Big Price: {product.bigPrice}</li>
@@ -167,7 +153,7 @@ class ProductCard extends Component {
                   "Price: $" + this.state.quantity * 1 * product.medPrice * 1
                 }
               />
-                {Object.keys(this.props.user.addProductToCardError).length ===
+              {Object.keys(this.props.user.addProductToCardError).length ===
               0 ? null : (
                 <span
                   style={{
@@ -201,5 +187,9 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { addProductToCard, getUserData, deleteQuantityError })(ProductCard)
+  connect(mapStateToProps, {
+    addProductToCard,
+    getUserData,
+    deleteQuantityError
+  })(ProductCard)
 );

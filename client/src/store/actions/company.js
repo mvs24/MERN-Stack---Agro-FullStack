@@ -59,7 +59,7 @@ export const getCompanyProducts = (companyId) => dispatch => {
             type: GET_COMPANY_PRODUCTS,
             payload: res.data
         })
-    }).catch(err => {
+    }).catch(err => { 
         console.log(err.response.data);
     })
 }
