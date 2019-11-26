@@ -8,6 +8,7 @@ import {
   getUserData,
   deleteQuantityError
 } from "../../store/actions/user";
+import { removeProduct } from "../../store/actions/product";
 import "./ProductCard.css";
 
 class ProductCard extends Component {
@@ -84,12 +85,25 @@ class ProductCard extends Component {
                 }}
               >
                 &nbsp;
+                {this.props.myCompanyProducts &&
+                this.props.company.myCompany ? (
+                  <div
+                    onClick={() =>
+                      this.props.removeProduct(
+                        product._id,
+                        this.props.company.myCompany._id
+                      )
+                    }
+                    className="remove"
+                  >
+                    X
+                  </div>
+                ) : null}
               </div>
               <div className="card__detail">
                 <ul>
                   <li>Name of Product: {product.name}</li>
-
-                  <li>Company: {product.company.name}</li>
+                  <li>Market: {product.company.name}</li>
                   <li>Small Price: {product.smallPrice}</li>
                   <li>Big Price: {product.bigPrice}</li>
                   <li>Medium Price: {product.medPrice}</li>
@@ -118,7 +132,7 @@ class ProductCard extends Component {
               <div className="card__detail">
                 <ul>
                   <li>Name of Product: {product.name}</li>
-                  <li>Company: {product.company.name}</li>
+                  <li>Market: {product.company.name}</li>
                   <li>Small Price: {product.smallPrice}</li>
                   <li>Big Price: {product.bigPrice}</li>
                   <li>Medium Price: {product.medPrice}</li>
@@ -183,13 +197,15 @@ class ProductCard extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  company: state.company
 });
 
 export default withRouter(
   connect(mapStateToProps, {
     addProductToCard,
     getUserData,
-    deleteQuantityError
+    deleteQuantityError,
+    removeProduct
   })(ProductCard)
 );

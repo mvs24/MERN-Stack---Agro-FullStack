@@ -90,7 +90,7 @@ class TodayProductCard extends Component {
               <div className="card__detail">
                 <ul>
                   <li>Name: {product.name}</li>
-                  <li>Company: {product.company.name}</li>
+                  <li>Market: {product.company.name}</li>
                   <li>Small Price: {product.smallPrice}</li>
                   <li>Big Price: {product.bigPrice}</li>
                   <li>Medium Price: {product.medPrice}</li>
@@ -119,7 +119,7 @@ class TodayProductCard extends Component {
               <div className="card__detail">
                 <ul>
                   <li>Name: {product.name}</li>
-                  <li>Company: {product.company.name}</li>
+                  <li>Market: {product.company.name}</li>
                   <li>Small Price: {product.smallPrice}</li>
                   <li>Big Price: {product.bigPrice}</li>
                   <li>Medium Price: {product.medPrice}</li>

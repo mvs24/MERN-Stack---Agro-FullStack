@@ -8,7 +8,8 @@ import ProductCard from "../ProductCard/ProductCard";
 import {
   loadMoreProducts,
   loadLessProducts,
-  getNrOfTodayProducts
+  getNrOfTodayProducts,
+  getProductsLength
 } from "../../store/actions/product";
 import { getUserData } from "../../store/actions/user";
 import Header from "../Header/Header";
@@ -16,21 +17,21 @@ import Header from "../Header/Header";
 class CompanyDetail extends React.Component {
   componentDidMount() {
     this.props.getUserData();
-    this.getProductsLength();
     this.props.getNrOfTodayProducts();
+    this.props.getProductsLength(this.props.match.params.cid);
   }
 
   state = {
-    page: 1,
-    productsLength: ""
+    page: 1
+    // productsLength: ""
   };
 
-  getProductsLength = async () => {
-    let productsLength = await axios.get(
-      `/api/product/companyProductsLength/${this.props.match.params.cid}`
-    );
-    this.setState({ productsLength: productsLength.data });
-  };
+  // getProductsLength = async () => {
+  //   let productsLength = await axios.get(
+  //     `/api/product/companyProductsLength/${this.props.match.params.cid}`
+  //   );
+  //   this.setState({ productsLength: productsLength.data });
+  // };
 
   loadMore = async (page, cid) => {
     await this.props.loadMoreProducts(page, cid);
@@ -58,6 +59,7 @@ class CompanyDetail extends React.Component {
 
     if (productsLength === "") return null;
     if (!this.props.user.user) return null;
+    // if(!this.props.product.productsLength) return null;
 
     if (this.props.product.nrTodayProducts === null) return null;
 
@@ -72,13 +74,18 @@ class CompanyDetail extends React.Component {
             <div className="grid" style={{ minHeight: `${minHeight}vh` }}>
               {products &&
                 products.map(product => (
-                  <ProductCard key={product._id} product={product} />
+                  <ProductCard
+                    key={product._id}
+                    product={product}
+                    myCompanyProducts={myCompanyProducts}
+                  />
                 ))}
             </div>
           </div>{" "}
         </div>
       );
     }
+    console.log(this.props.match);
     return (
       <div>
         <Header
@@ -89,7 +96,7 @@ class CompanyDetail extends React.Component {
           <div className="companyDetail_container">
             <div className="companyDetailInfo">
               <h3 className="companyName">
-                Company: <span>{name}</span>
+                Market: <span>{name}</span>
               </h3>
               <div className="placeUser">
                 <p>Place: {place}</p>
@@ -100,10 +107,17 @@ class CompanyDetail extends React.Component {
             </div>
             <div className="companyProducts">
               {!products ? (
-                <div style={{color: 'green'}}>No products found for this company</div>
+                <div style={{ color: "green" }}>
+                  No products found for this company
+                </div>
               ) : (
-                <span style={{ padding: "1rem", color: 'green' }}>
-                  Total: {productsLength} Products
+                <span style={{ padding: "1rem", color: "green" }}>
+                  Total: {this.props.product.productsLength}{" "}
+                  {this.props.product.productsLength === 1 ? (
+                    <span>Product</span>
+                  ) : (
+                    <span>Products</span>
+                  )}
                 </span>
               )}
             </div>
@@ -111,7 +125,11 @@ class CompanyDetail extends React.Component {
           <div className="grid" style={{ minHeight: `${minHeight}vh` }}>
             {products &&
               products.map(product => (
-                <ProductCard key={product._id} product={product} />
+                <ProductCard
+                  key={product._id}
+                  product={product}
+                  myCompanyProducts={myCompanyProducts}
+                />
               ))}
           </div>
           {myCompanyProducts === true ? null : (
@@ -154,7 +172,8 @@ class CompanyDetail extends React.Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  product: state.product
+  product: state.product,
+  company: state.company
 });
 
 export default withRouter(
@@ -162,6 +181,7 @@ export default withRouter(
     loadMoreProducts,
     loadLessProducts,
     getUserData,
-    getNrOfTodayProducts
+    getNrOfTodayProducts,
+    getProductsLength
   })(CompanyDetail)
 );

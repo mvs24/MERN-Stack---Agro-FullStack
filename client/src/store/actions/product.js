@@ -9,8 +9,11 @@ import {
   LOAD_MORE_PRODUCTS,
   LOAD_LESS_PRODUCTS,
   LOAD_MORE_TODAY_PRODUCTS,
-  NR_OF_TODAY_PRODUCTS
+  NR_OF_TODAY_PRODUCTS,
+  REMOVE_PRODUCT,
+  PRODUCTS_LENGTH
 } from "./types";
+import { getMyCompany, getCompanyProducts } from "./company";
 
 export const addNewProduct = (companyId, data, history) => dispatch => {
   axios
@@ -37,13 +40,13 @@ export const getAllProducts = cid => dispatch => {
       dispatch({
         type: ALL_PRODUCTS_MY_COMPANY,
         payload: res.data
-      }); 
+      });
     })
     .catch(err => {
       dispatch({
         type: ALL_PRODUCTS_MY_COMPANY_ERROR,
         payload: err.response.data
-      }); 
+      });
     });
 };
 
@@ -108,4 +111,28 @@ export const getNrOfTodayProducts = () => dispatch => {
       payload: res.data
     });
   });
+};
+
+export const getProductsLength = cid => dispatch => {
+  axios.get(`/api/product/companyProductsLength/${cid}`).then(res =>
+    dispatch({
+      type: PRODUCTS_LENGTH,
+      payload: res.data
+    })
+  );
+};
+
+export const removeProduct = (pid, cid) => dispatch => {
+  axios
+    .delete("/api/product/remove/" + pid)
+    .then(res => {
+      dispatch(getAllProducts(cid));
+      dispatch(getNrOfTodayProducts());
+
+      dispatch(getCompanyProducts(cid));
+      dispatch(getProductsLength(cid));
+    })
+    .catch(err => {
+      console.log(err.response.data);
+    });
 };

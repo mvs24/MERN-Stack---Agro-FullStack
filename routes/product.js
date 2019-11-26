@@ -176,4 +176,12 @@ router.get("/numberOfTodayProducts", auth, (req, res) => {
   });
 });
 
+router.delete('/remove/:prodId', auth, protect('seller'), (req, res) => {
+  Product.find({user: req.user._id}).then(products => {
+      Product.findOneAndRemove({_id: req.params.prodId}).then(product => res.status(200).json(products.filter(prod => prod._id !== product._id)))
+  }).catch(err => {
+    return res.status(400).json('You do not have access to delete this product')
+  })
+})
+
 module.exports = router;

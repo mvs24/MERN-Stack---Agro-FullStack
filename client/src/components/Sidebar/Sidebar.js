@@ -21,7 +21,7 @@ class Sidebar extends Component {
       <div className="allCompanies">
         <div className="companies">
           {" "}
-          <span>Companies: {this.props.company.nrOfCompanies}</span>{" "}
+          <span>Markets: {this.props.company.nrOfCompanies}</span>{" "}
         </div>
         {companies.map(company => (
           <Company key={company._id} company={company} />

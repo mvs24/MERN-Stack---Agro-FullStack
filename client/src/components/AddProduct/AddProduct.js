@@ -77,7 +77,7 @@ class AddProduct extends Component {
         >
           <div className="signUpContainer">
             <div className="createAccount">
-              <h1>Create a product for your company</h1>
+              <h1>Create a product for your market</h1>
             </div>
             <div className="formContainer">
               <div className="input">

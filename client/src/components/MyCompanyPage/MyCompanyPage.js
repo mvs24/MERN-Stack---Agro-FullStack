@@ -37,6 +37,7 @@ class MyCompanyPage extends Component {
           lastname={myCompany.user.lastname}
           products={myCompanyProducts}
           myCompanyProducts={true}
+         
         />
       </div>
     );

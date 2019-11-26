@@ -50,6 +50,7 @@
 .card__picture {
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   background-blend-mode: screen;
+  position: relative;
 }
 .card__heading {
   font-size: 1.3rem;
@@ -153,4 +154,16 @@
         width: 95%;
         z-index: 4;
     }
+}
+
+.remove{
+
+  border: 3px solid red;
+  position: absolute;
+  top: -1%;
+  background: red;
+  right: 0.2%;
+  border-radius: 55%;
+  z-index: 100;
+  cursor: pointer;
 }

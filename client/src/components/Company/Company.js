@@ -17,7 +17,7 @@ const Company = props => {
 
       >
         <div>
-          <h5 className="info"> Company: {companyName}</h5>
+          <h5 className="info"> Market: {companyName}</h5>
         </div>
         <div className="company_info">
           <div>
