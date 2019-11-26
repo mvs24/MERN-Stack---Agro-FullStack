@@ -8,7 +8,8 @@ import { COMPANY_CREATION_ERROR,
          GET_COMPANY_DETAILS,
          GET_MY_COMPANY,
          GET_MY_COMPANY_ERROR,
-         GET_COMPANY_PRODUCTS
+         GET_COMPANY_PRODUCTS,
+         NR_OF_COMPANIES
 } from './types';
 
 
@@ -21,11 +22,10 @@ export const createCompany = (data, history) => dispatch => {
        })
        history.push('/signIn');
    }).catch(err => {
-       console.log(err.response.data)
-    //    dispatch({
-    //        type: COMPANY_CREATION_ERROR,
-    //        payload: err.response.data
-    //    })
+       dispatch({
+           type: COMPANY_CREATION_ERROR,
+           payload: err.response.data
+       })
    })
 }
 
@@ -39,6 +39,15 @@ export const getAllCompanies = () => dispatch => {
         type: GET_COMPANIES_ERROR,
         payload: err.response.data
     }))
+}
+
+export const getNrOfCompanies = () => dispatch => {
+    axios.get('/api/company/comp/length').then(res => {
+        dispatch({
+            type: NR_OF_COMPANIES,
+            payload: res.data
+        })
+    })
 }
 
 export const getCompanyDetails = (companyId) => dispatch => {

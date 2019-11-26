@@ -60,7 +60,7 @@ class CreateCompany extends Component {
                   placeholder="Name of the Market"
                   type="text"
                 />
-                <i className="fas fa-signature icon"></i>
+                <i class="fas fa-lightbulb icon"></i>
                 {companyErrors ? (
                   <div className="error">
                     {companyErrors.name ? (
@@ -74,7 +74,7 @@ class CreateCompany extends Component {
                   value={this.state.companyPlace}
                   onChange={this.onChange}
                   name="companyPlace"
-                  placeholder="Place of the market"
+                  placeholder="Place of the Market"
                   type="text"
                 />
                 <i className="fas fa-location-arrow icon"></i>

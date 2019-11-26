@@ -28,11 +28,11 @@ const Header = ({ userData, nrTodayProducts, children, reload }) => {
             <i className="fas fa-home"></i>
           </Link>
         </div>
-        <div className="user">
+        <div className="user" style={{color: 'rgb(150, 82, 129)'}}>
           Welcome: {userData.name + "  "} 
           {userData.lastname}
         </div>
-        <div className="user">Today's Products: {nrTodayProducts}</div>
+        <div className="user" style={{color: 'rgb(150, 82, 129)'}}>Today's Products: {nrTodayProducts}</div>
         <div className="cart">
           <div className="icon-flex">
             {userData.role !== "user" ? null : (

@@ -31,6 +31,7 @@ class TodayProductCard extends Component {
     }
 
     await this.props.addProductToCard(dataToBuy);
+    alert("Product added to the card!")
     await this.props.getUserData();
     await this.props.getUserData();
     setTimeout(() => {

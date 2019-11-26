@@ -1,45 +1,45 @@
-.header_container{
-    max-height: 5rem;
-    background: rgb(139, 201, 142);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.header_container {
+  max-height: 5rem;
+  background: rgb(139, 201, 142);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.user{
-    font-size: 18px;
-    font-style: italic;
-    padding: 0.5rem;
+.user {
+  font-size: 18px;
+  font-style: italic;
+  padding: 0.5rem;
 }
-.u-center-text{
-    text-align: center;
-    margin-top: 50rem;
+.u-center-text {
+  text-align: center;
+  margin-top: 50rem;
 }
 .icon-flex {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 .iconLink {
-    font-size: 28px;
-    position: relative;
-    color: white;
+  font-size: 28px;
+  position: relative;
+  color: white;
 }
-.iconLink:not(:last-child){
-    margin-right: 5rem;
+.iconLink:not(:last-child) {
+  margin-right: 5rem;
 }
 .fa-sign-out-alt::after {
-    content: "";
-    display: block;
-    border: 0.4px solid red;
-    border-radius: 50%;
+  content: "";
+  display: block;
+  border: 0.4px solid red;
+  border-radius: 50%;
 }
-.cartLength{
-    position: absolute;
-    top: -10%;
-    right: -40%;
-    color: red;
-    font-size: 15px;
-    border: 2px solid white;
-    border-radius: 60%;
+.cartLength {
+  position: absolute;
+  top: -10%;
+  right: -40%;
+  color: red;
+  font-size: 15px;
+  border: 2px solid white;
+  border-radius: 60%;
 }
 
 /* @media screen and (min-width: 976px) {
@@ -48,20 +48,29 @@
    }
 } */
 @media (max-width: 908px) {
-    .user{
-        font-size: 14px;
-    }
-    .iconLink{
-        font-size: 20px;
-    }
-    .cartLength{
-        position: absolute;
-        top: -10%;
-        right: -40%;
-        color: red;
-        font-size: 11px;
-        border: 1px solid white;
-        border-radius: 40%;
-    }
-    
+  .user {
+    font-size: 14px;
+  }
+  .iconLink {
+    font-size: 20px;
+  }
+  .cartLength {
+    position: absolute;
+    top: -10%;
+    right: -40%;
+    color: red;
+    font-size: 11px;
+    border: 1px solid white;
+    border-radius: 40%;
+  }
+}
+.fa-home {
+  color: rgb(81, 81, 207);
+}
+.fa-shopping-cart {
+  color: rgb(81, 81, 207);
+}
+.fa-sign-out-alt{
+  color: rgb(81, 81, 207);
+
 }

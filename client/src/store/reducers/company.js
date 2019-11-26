@@ -8,13 +8,15 @@ import {
   GET_MY_COMPANY,
   SIGN_OUT_USER,
   ADD_NEW_PRODUCT,
-  REMOVE_QUANTITY_OF_PRODUCT
+  REMOVE_QUANTITY_OF_PRODUCT,
+  NR_OF_COMPANIES
 } from "../actions/types";
 
 const initialState = {
   companyError: null,
   companies: [],
   myCompanyError: null,
+  nrOfCompanies: null,
   myCompany: null,
   companyDetail: null,
   companyDetailError: null
@@ -42,6 +44,11 @@ export default (state = initialState, action) => {
         ...state,
         companyDetailError: action.payload
       };
+    case NR_OF_COMPANIES:
+      return {
+        ...state,
+        nrOfCompanies: action.payload
+      }
     case GET_COMPANY_DETAILS:
       return {
         ...state,

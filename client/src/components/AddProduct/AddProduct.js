@@ -24,7 +24,8 @@ class AddProduct extends Component {
     productBigPrice: "",
     images: {
       value: []
-    }
+    },
+    priceErr: ""
   };
 
   imagesHandler = images => {
@@ -46,13 +47,20 @@ class AddProduct extends Component {
 
     const data = { ...this.state };
     data.images = this.state.images.value;
-    this.props.addNewProduct(cid, data, this.props.history);
+   
+    if (data.productBigPrice * 1 < data.productSmallPrice * 1) {
+      this.setState({
+        priceErr: "Big Price can not be less than small Price"
+      });
+    } else {
+      this.props.addNewProduct(cid, data, this.props.history);
+    }
   };
 
   render() {
     const companyId = this.props.match.params.cid;
     const { productError } = this.props.product;
-    
+
     if (!this.props.user.user) return null;
     if (this.props.product.nrTodayProducts === null) return null;
 
@@ -80,7 +88,7 @@ class AddProduct extends Component {
                   placeholder="Name of the Product"
                   type="text"
                 />
-                <i className="fas fa-user icon"></i>
+                <i className="fas fa-lightbulb icon"></i>
                 {productError ? (
                   <div className="error">
                     {productError.productName ? (
@@ -94,10 +102,10 @@ class AddProduct extends Component {
                   value={this.state.productQuantity}
                   onChange={this.onChange}
                   name="productQuantity"
-                  placeholder="Quantity (kg)"
+                  placeholder="Quantity (Unit or Kg)"
                   type="number"
                 />
-                <i className="fas fa-user icon"></i>
+                <i className="icon">=</i>
                 {productError ? (
                   <div className="error">
                     {productError.productQuantity ? (
@@ -114,7 +122,7 @@ class AddProduct extends Component {
                   placeholder="Price ($), Starting from"
                   type="number"
                 />
-                <i className="fas fa-user icon"></i>
+                <i className="fas fa-dollar-sign icon"></i>
                 {productError ? (
                   <div className="error">
                     {productError.productSmallPrice ? (
@@ -131,7 +139,7 @@ class AddProduct extends Component {
                   placeholder="Price ($), Ending to"
                   type="number"
                 />
-                <i className="fas fa-user icon"></i>
+                <i className="fas fa-dollar-sign icon"></i>
                 {productError ? (
                   <div className="error">
                     {productError.productBigPrice ? (
@@ -147,6 +155,9 @@ class AddProduct extends Component {
             <button className="signUpBtn createBtn">CREATE PRODUCT</button>
           </div>
         </form>
+        {this.state.priceErr !== "" && (
+          <span style={{ color: "red" }}>{this.state.priceErr}</span>
+        )}
       </div>
     );
   }

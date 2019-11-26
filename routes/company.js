@@ -45,6 +45,10 @@ router.get("/", auth, (req, res) => {
     .catch(err => res.status(400).json(err));
 });
 
+router.get('/comp/length', auth, (req, res) => {
+  Company.find().then(companies => res.json(companies.length))
+})
+
 router.get("/:companyId", auth, (req, res) => {
   Company.findOne({ _id: req.params.companyId })
     .populate("user")
