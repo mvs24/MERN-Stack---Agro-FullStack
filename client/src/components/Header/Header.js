@@ -13,7 +13,7 @@ const Header = ({ userData, nrTodayProducts, children, reload }) => {
   const signOut = () => {
     dispatch(signOutUser());
   };
- 
+
   if (!userData)
     return (
       <div className="u-center-text">
@@ -28,11 +28,15 @@ const Header = ({ userData, nrTodayProducts, children, reload }) => {
             <i className="fas fa-home"></i>
           </Link>
         </div>
-        <div className="user" style={{color: 'rgb(150, 82, 129)'}}>
-          Welcome: {userData.name + "  "} 
-          {userData.lastname}
+        <div className="user white">
+          <p className="white">
+            Welcome: {userData.name + "  "}
+            {userData.lastname}
+          </p>
         </div>
-        <div className="user" style={{color: 'rgb(150, 82, 129)'}}>Today's Products: {nrTodayProducts}</div>
+        <div className="user">
+          <p className="white">Today's Products: {nrTodayProducts}</p>
+        </div>
         <div className="cart">
           <div className="icon-flex">
             {userData.role !== "user" ? null : (

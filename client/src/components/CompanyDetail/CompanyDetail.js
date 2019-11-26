@@ -100,9 +100,9 @@ class CompanyDetail extends React.Component {
             </div>
             <div className="companyProducts">
               {!products ? (
-                <div>No products found for this company</div>
+                <div style={{color: 'green'}}>No products found for this company</div>
               ) : (
-                <span style={{ padding: "1rem" }}>
+                <span style={{ padding: "1rem", color: 'green' }}>
                   Total: {productsLength} Products
                 </span>
               )}

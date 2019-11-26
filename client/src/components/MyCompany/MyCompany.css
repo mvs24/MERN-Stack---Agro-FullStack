@@ -1,0 +1,50 @@
+.myCompanyCnt {
+  margin-left: 20%;
+}
+.block {
+  display: inline-block;
+}
+.linkCnt {
+    padding: 1rem;
+    margin-bottom: 0.3rem;
+  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  background-image: linear-gradient(120deg, white -50%, green 50%, white 30%);
+  background-size: 200%;
+  transition: all 1s ease;
+}
+.linkCnt:hover{
+    background-position: 100%;
+    color: green
+}
+.addButton {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: transparent;
+font-size: 16px;
+  padding: 1rem 1rem;
+  align-self: center;
+  color: white;
+  border: 1px solid white;
+  background-image: linear-gradient(120deg, white -50%, green 50%, white 30%);
+  background-size: 200%;
+  transition: all 1s ease;
+  font-weight: 300;
+  transition: all 1s ease-in-out;
+}
+.addButton:hover{
+    background-position: 100%;
+    color: green;
+}
+
+@media screen and (max-width: 962px) {
+  .addButton {
+    padding: 0.7rem 2rem;
+    width: 100%;
+    border-radius: 0%;
+  }
+}

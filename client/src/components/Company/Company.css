@@ -16,12 +16,12 @@
   text-decoration: none;
 }
 
-.company_container:hover {
+/* .company_container:hover {
   background: white;
 }
 .company_container:hover .info {
   color: rgb(94, 192, 94);
-}
+} */
 .company_info {
   display: flex;
   justify-content: space-around;
@@ -71,4 +71,16 @@ h6 {
     font-size: 10px;
   }
 }
+.effect{
+  background-image: linear-gradient(120deg, white -50%, green 50%, white 30%);
+  background-size: 200%;
+  transition: all 1s ease;
+}
 
+.effect:hover {
+  background-position: 100%;
+  color: white;
+}
+.effect:hover .info{
+  color: green;
+}
