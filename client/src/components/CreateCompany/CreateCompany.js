@@ -7,7 +7,8 @@ import { createCompany } from "../../store/actions/company";
 class CreateCompany extends Component {
   state = {
     companyName: "",
-    companyPlace: ""
+    companyPlace: "",
+    companyError: null
   };
 
   onChange = e => {
@@ -20,8 +21,16 @@ class CreateCompany extends Component {
     e.preventDefault();
 
     let user = undefined;
+    if (!this.props.location.state) {
+      this.setState({
+        companyError:
+          "You do not have permission to create a market. You need to be a seller!!"
+      });
+      return;
+    }
+
     if (this.props.location.state.data) {
-       user = this.props.location.state.data;
+      user = this.props.location.state.data;
     }
 
     let data = {
@@ -34,13 +43,13 @@ class CreateCompany extends Component {
 
   render() {
     const companyErrors = this.props.company.companyError;
-    // console.log(companyErrors);
+
     return (
       <div>
         <form className="signUp" onSubmit={this.create} autoComplete="off">
           <div className="signUpContainer">
             <div className="createAccount">
-              <h1>Create your Company</h1>
+              <h1>Create your Market</h1>
             </div>
             <div className="formContainer">
               <div className="input">
@@ -48,10 +57,10 @@ class CreateCompany extends Component {
                   value={this.state.companyName}
                   onChange={this.onChange}
                   name="companyName"
-                  placeholder="Name of the Company"
+                  placeholder="Name of the Market"
                   type="text"
                 />
-                <i className="fas fa-user icon"></i>
+                <i className="fas fa-signature icon"></i>
                 {companyErrors ? (
                   <div className="error">
                     {companyErrors.name ? (
@@ -65,10 +74,10 @@ class CreateCompany extends Component {
                   value={this.state.companyPlace}
                   onChange={this.onChange}
                   name="companyPlace"
-                  placeholder="Place of the company"
+                  placeholder="Place of the market"
                   type="text"
                 />
-                <i className="fas fa-user icon"></i>
+                <i className="fas fa-location-arrow icon"></i>
                 {companyErrors ? (
                   <div className="error">
                     {companyErrors.place ? (
@@ -78,9 +87,15 @@ class CreateCompany extends Component {
                 ) : null}
               </div>
             </div>
-            <button className="signUpBtn">CREATE COMPANY</button>
+
+            <button className="signUpBtn" disabled={!this.props.location}>
+              CREATE MARKET
+            </button>
           </div>
         </form>
+        {this.state.companyError && (
+          <span style={{ color: "red" }}>{this.state.companyError}</span>
+        )}
       </div>
     );
   }

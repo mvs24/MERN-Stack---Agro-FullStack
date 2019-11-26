@@ -7,11 +7,11 @@ import { getNrOfTodayProducts } from "../../store/actions/product";
 import Header from "../Header/Header";
 import CartItem from "../CartItem/CartItem";
 import StripeButton from "../../utils/StripeButton";
- 
+
 class MyCart extends Component {
   componentDidMount() {
     this.props.getUserData();
-    this.props.getNrOfTodayProducts()
+    this.props.getNrOfTodayProducts();
   }
 
   render() {
@@ -22,11 +22,14 @@ class MyCart extends Component {
       return acc + cur.price;
     }, 0);
 
-    if(this.props.product.nrTodayProducts === null) return null;
+    if (this.props.product.nrTodayProducts === null) return null;
 
     return (
       <div className="shopCart__container">
-        <Header userData={user} nrTodayProducts={this.props.product.nrTodayProducts}/>
+        <Header
+          userData={user}
+          nrTodayProducts={this.props.product.nrTodayProducts}
+        />
         <div className="cart__background">
           <span>Shopping Cart</span>
         </div>
@@ -42,10 +45,7 @@ class MyCart extends Component {
                 Total Price: <strong>${totalPrice}</strong>{" "}
               </span>
             </div>
-            <StripeButton
-              user={user}
-              price={totalPrice}
-            />
+            <StripeButton user={user} price={totalPrice} />
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@ class MyCart extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user, 
+  user: state.user,
   product: state.product
 });
 

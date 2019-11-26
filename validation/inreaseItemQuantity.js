@@ -4,6 +4,7 @@ const validateIncreaseItemQuantity = (data, product) => {
   let validation = [];
 
   if (data.quantity > product.quantity - 1) {
+
     errors.increaseError = "You can not buy more than " + product.quantity;
     isValid = false;
     validation.unshift(isValid, errors);

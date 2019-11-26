@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./SignUp.css";
 import { Link } from "react-router-dom";
-import Select from 'react-select'
+import Select from "react-select";
 
 import { signUpUser, goToCompany } from "../../store/actions/user";
 
 const options = [
-  { value: 'user', label: 'User' },
-  { value: 'seller', label: 'Seller' }
+  { value: "user", label: "User" },
+  { value: "seller", label: "Seller" }
 ];
 
 export class SignUp extends Component {
@@ -17,8 +17,8 @@ export class SignUp extends Component {
     lastname: "",
     email: "",
     password: "",
-    place: '', 
-    role: 'user'
+    place: "",
+    role: "user"
   };
 
   onChange = e => {
@@ -37,15 +37,15 @@ export class SignUp extends Component {
       place: this.state.place,
       role: this.state.role.value
     };
-    if(data.role === 'seller') {
-      this.props.goToCompany(data, this.props.history)
+    if (data.role === "seller") {
+      this.props.goToCompany(data, this.props.history);
     } else {
       this.props.signUpUser(data, this.props.history);
     }
   };
 
   handleChange = role => {
-    this.setState({role})
+    this.setState({ role });
   };
 
   render() {
@@ -68,7 +68,7 @@ export class SignUp extends Component {
             </div>
           </div>
         </div>
-        <form className="signUp" onSubmit={this.signUp} autoComplete='off'>
+        <form className="signUp" onSubmit={this.signUp} autoComplete="off">
           <div className="signUpContainer">
             <div className="createAccount">
               <h1>Create Account</h1>
@@ -86,7 +86,9 @@ export class SignUp extends Component {
                 <i className="fas fa-user icon"></i>
                 {registerErrors ? (
                   <div className="error">
-                    {registerErrors.name ? <span>{registerErrors.name}</span> : null}
+                    {registerErrors.name ? (
+                      <span>{registerErrors.name}</span>
+                    ) : null}
                   </div>
                 ) : null}
               </div>
@@ -101,7 +103,9 @@ export class SignUp extends Component {
                 <i className="fas fa-user icon"></i>
                 {registerErrors ? (
                   <div className="error">
-                    {registerErrors.lastname ? <span>{registerErrors.lastname}</span> : null}
+                    {registerErrors.lastname ? (
+                      <span>{registerErrors.lastname}</span>
+                    ) : null}
                   </div>
                 ) : null}
               </div>
@@ -116,7 +120,9 @@ export class SignUp extends Component {
                 <i className="fas fa-envelope icon"></i>
                 {registerErrors ? (
                   <div className="error">
-                    {registerErrors.email ? <span>{registerErrors.email}</span> : null}
+                    {registerErrors.email ? (
+                      <span>{registerErrors.email}</span>
+                    ) : null}
                   </div>
                 ) : null}
               </div>
@@ -131,7 +137,9 @@ export class SignUp extends Component {
                 <i className="fas fa-lock icon"></i>
                 {registerErrors ? (
                   <div className="error">
-                    {registerErrors.password ? <span>{registerErrors.password}</span> : null}
+                    {registerErrors.password ? (
+                      <span>{registerErrors.password}</span>
+                    ) : null}
                   </div>
                 ) : null}
               </div>
@@ -143,31 +151,22 @@ export class SignUp extends Component {
                   placeholder="Living place"
                   type="text"
                 />
-                <i className="fas fa-envelope icon"></i>
+                <i className="fas fa-map-marker-alt"></i>
                 {registerErrors ? (
                   <div className="error">
-                    {registerErrors.place ? <span>{registerErrors.place}</span> : null}
+                    {registerErrors.place ? (
+                      <span>{registerErrors.place}</span>
+                    ) : null}
                   </div>
                 ) : null}
               </div>
-              <Select 
-               value={role}
-               onChange={this.handleChange}
-               options={options}
-               autoFocus
-               placeholder='User'
+              <Select
+                value={role}
+                onChange={this.handleChange}
+                options={options}
+                autoFocus
+                placeholder="User"
               />
-              {/* {this.state.roleChanged && (<div className='input'>
-                <input
-                  value={this.state.company}
-                  onChange={this.onChange}
-                  name="company"
-                  placeholder="Your Company"
-                  type="text"
-                  required
-                />
-                <i className="fas fa-envelope icon"></i>
-              </div>)} */}
             </div>
             <button className="signUpBtn" onClick={this.signUp}>
               SIGN UP
@@ -183,7 +182,4 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(
-  mapStateToProps,
-  {signUpUser, goToCompany}
-)(SignUp);
+export default connect(mapStateToProps, { signUpUser, goToCompany })(SignUp);

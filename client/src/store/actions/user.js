@@ -127,7 +127,7 @@ export const increaseItemQuantity = item => dispatch => {
       dispatch({
         type: INCREASE_ITEM_QUANTITY,
         payload: res.data
-      });
+      }); 
     })
     .catch(err => {
       dispatch({

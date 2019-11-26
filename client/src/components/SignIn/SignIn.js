@@ -35,7 +35,7 @@ class SignIn extends Component {
         <form className="signUp" onSubmit={this.signIn} autoComplete='off'>
           <div className="signUpContainer">
             <div className="createAccount">
-              <h1>Sign in to Social Network</h1>
+              <h1>Sign in to Agro Price</h1>
             </div>
 
             <div className="formContainer">

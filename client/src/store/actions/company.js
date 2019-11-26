@@ -21,10 +21,11 @@ export const createCompany = (data, history) => dispatch => {
        })
        history.push('/signIn');
    }).catch(err => {
-       dispatch({
-           type: COMPANY_CREATION_ERROR,
-           payload: err.response.data
-       })
+       console.log(err.response.data)
+    //    dispatch({
+    //        type: COMPANY_CREATION_ERROR,
+    //        payload: err.response.data
+    //    })
    })
 }
 
