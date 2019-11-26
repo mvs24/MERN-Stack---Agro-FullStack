@@ -32,6 +32,7 @@ class CompanyDetails extends Component {
         place={companyDetail.place}
         name={companyDetail.name}
         products={companyProducts}
+        
       />
     );
   }

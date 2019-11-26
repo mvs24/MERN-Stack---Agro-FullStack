@@ -147,7 +147,7 @@ router.get(
   protect("user", "seller", "admin"),
   (req, res) => {
     Product.find({ company: req.params.cid, quantity : { $gt: 0 } })
-      .then(products => res.json(products))
+    .then(products => res.json(products))
       .catch(err => res.status(400).json(err));
   }
 );

@@ -49,7 +49,8 @@ class CompanyDetail extends React.Component {
       place,
       name,
       products,
-      todayProducts
+      todayProducts,
+      myCompanyProducts
     } = this.props;
 
     let minHeight = products ? Math.ceil(products.length / 3) * 100 : undefined;
@@ -113,36 +114,38 @@ class CompanyDetail extends React.Component {
                 <ProductCard key={product._id} product={product} />
               ))}
           </div>
-          <div className="btns__container">
-            {this.state.page > 1 && (
-              <button
-                className="loadLessBtn"
-                onClick={() =>
-                  this.loadLess(
-                    this.state.page - 1,
-                    this.props.match.params.cid
-                  )
-                }
-              >
-                Load Less
-              </button>
-            )}
-            {products.length < 6 ||
-            (products.length === 6 &&
-              productsLength % products.length === 0) ? null : (
-              <button
-                className="loadMoreBtn"
-                onClick={() =>
-                  this.loadMore(
-                    this.state.page + 1,
-                    this.props.match.params.cid
-                  )
-                }
-              >
-                Load More
-              </button>
-            )}
-          </div>
+          {myCompanyProducts === true ? null : (
+            <div className="btns__container">
+              {this.state.page > 1 && (
+                <button
+                  className="loadLessBtn"
+                  onClick={() =>
+                    this.loadLess(
+                      this.state.page - 1,
+                      this.props.match.params.cid
+                    )
+                  }
+                >
+                  Load Less
+                </button>
+              )}
+              {products.length < 6 ||
+              (products.length === 6 &&
+                productsLength % products.length === 0) ? null : (
+                <button
+                  className="loadMoreBtn"
+                  onClick={() =>
+                    this.loadMore(
+                      this.state.page + 1,
+                      this.props.match.params.cid
+                    )
+                  }
+                >
+                  Load More
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     );

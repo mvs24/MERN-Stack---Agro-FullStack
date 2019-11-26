@@ -14,12 +14,12 @@ class MyCompanyPage extends Component {
     this.props.getUserData();
     this.props.getMyCompany();
     this.props.getAllProducts(this.props.match.params.cid);
-   
   }
 
   render() {
     const myCompany = this.props.company.myCompany;
     const myCompanyId = this.props.match.params.cid;
+    if(!myCompanyId) return null;
     if (!myCompany) return <Spinner />;
     if (!this.props.user.user) return null;
     if (this.props.product.nrOfTodayProducts === null) return null;
@@ -27,16 +27,16 @@ class MyCompanyPage extends Component {
     const { myCompanyProducts } = this.props.product;
     if (!myCompanyProducts) return null;
 
-    return (
+    return ( 
       <div>
         <CompanyDetail
-        
           cid={myCompanyId}
           name={myCompany.name}
           place={myCompany.place}
           username={myCompany.user.name}
           lastname={myCompany.user.lastname}
           products={myCompanyProducts}
+          myCompanyProducts={true}
         />
       </div>
     );
@@ -52,5 +52,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   getAllProducts,
   getUserData,
-  getMyCompany
+  getMyCompany, 
+  // getCompanyProducts
 })(MyCompanyPage);

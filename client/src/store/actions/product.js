@@ -37,13 +37,13 @@ export const getAllProducts = cid => dispatch => {
       dispatch({
         type: ALL_PRODUCTS_MY_COMPANY,
         payload: res.data
-      });
+      }); 
     })
     .catch(err => {
       dispatch({
         type: ALL_PRODUCTS_MY_COMPANY_ERROR,
         payload: err.response.data
-      });
+      }); 
     });
 };
 
