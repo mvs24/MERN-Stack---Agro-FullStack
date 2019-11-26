@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { addNewProduct } from "../../store/actions/product";
+import {
+  addNewProduct,
+  getNrOfTodayProducts
+} from "../../store/actions/product";
 import { getMyCompany } from "../../store/actions/company";
 import { getUserData } from "../../store/actions/user";
 import FileUpload from "../../utils/FileUpload";
-import Header from '../Header/Header'
+import Header from "../Header/Header";
 
 class AddProduct extends Component {
   componentDidMount() {
     this.props.getUserData();
     this.props.getMyCompany();
+    this.props.getNrOfTodayProducts();
   }
 
   state = {
@@ -48,11 +52,16 @@ class AddProduct extends Component {
   render() {
     const companyId = this.props.match.params.cid;
     const { productError } = this.props.product;
-    if(!this.props.user.user) return null;
+    
+    if (!this.props.user.user) return null;
+    if (this.props.product.nrTodayProducts === null) return null;
 
     return (
       <div>
-        <Header userData={this.props.user.user}/>
+        <Header
+          userData={this.props.user.user}
+          nrTodayProducts={this.props.product.nrTodayProducts}
+        />
         <form
           className="signUp addProductForm"
           onSubmit={e => this.createProduct(e, companyId)}
@@ -148,6 +157,9 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps, { addNewProduct, getMyCompany, getUserData })(
-  AddProduct
-);
+export default connect(mapStateToProps, {
+  addNewProduct,
+  getMyCompany,
+  getUserData,
+  getNrOfTodayProducts
+})(AddProduct);

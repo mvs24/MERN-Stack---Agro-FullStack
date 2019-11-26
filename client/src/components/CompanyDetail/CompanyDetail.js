@@ -7,7 +7,8 @@ import "./CompanyDetail.css";
 import ProductCard from "../ProductCard/ProductCard";
 import {
   loadMoreProducts,
-  loadLessProducts
+  loadLessProducts,
+  getNrOfTodayProducts
 } from "../../store/actions/product";
 import { getUserData } from "../../store/actions/user";
 import Header from "../Header/Header";
@@ -16,8 +17,9 @@ class CompanyDetail extends React.Component {
   componentDidMount() {
     this.props.getUserData();
     this.getProductsLength();
+    this.props.getNrOfTodayProducts();
   }
- 
+
   state = {
     page: 1,
     productsLength: ""
@@ -56,10 +58,15 @@ class CompanyDetail extends React.Component {
     if (productsLength === "") return null;
     if (!this.props.user.user) return null;
 
+    if (this.props.product.nrTodayProducts === null) return null;
+
     if (todayProducts) {
       return (
         <div>
-          <Header userData={this.props.user.user} />
+          <Header
+            userData={this.props.user.user}
+            nrTodayProducts={this.props.product.nrTodayProducts}
+          />
           <div>
             <div className="grid" style={{ minHeight: `${minHeight}vh` }}>
               {products &&
@@ -73,7 +80,10 @@ class CompanyDetail extends React.Component {
     }
     return (
       <div>
-        <Header userData={this.props.user.user} />
+        <Header
+          userData={this.props.user.user}
+          nrTodayProducts={this.props.product.nrTodayProducts}
+        />
         <div>
           <div className="companyDetail_container">
             <div className="companyDetailInfo">
@@ -140,11 +150,15 @@ class CompanyDetail extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  product: state.product
 });
 
 export default withRouter(
-  connect(mapStateToProps, { loadMoreProducts, loadLessProducts, getUserData })(
-    CompanyDetail
-  )
+  connect(mapStateToProps, {
+    loadMoreProducts,
+    loadLessProducts,
+    getUserData,
+    getNrOfTodayProducts
+  })(CompanyDetail)
 );

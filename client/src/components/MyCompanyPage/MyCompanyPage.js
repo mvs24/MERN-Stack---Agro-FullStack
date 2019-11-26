@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { getAllProducts } from "../../store/actions/product";
+import {
+  getAllProducts
+} from "../../store/actions/product";
 import { getUserData } from "../../store/actions/user";
 import { getMyCompany } from "../../store/actions/company";
 import CompanyDetail from "../CompanyDetail/CompanyDetail";
@@ -12,6 +14,7 @@ class MyCompanyPage extends Component {
     this.props.getUserData();
     this.props.getMyCompany();
     this.props.getAllProducts(this.props.match.params.cid);
+   
   }
 
   render() {
@@ -19,16 +22,15 @@ class MyCompanyPage extends Component {
     const myCompanyId = this.props.match.params.cid;
     if (!myCompany) return <Spinner />;
     if (!this.props.user.user) return null;
+    if (this.props.product.nrOfTodayProducts === null) return null;
 
     const { myCompanyProducts } = this.props.product;
     if (!myCompanyProducts) return null;
 
-    console.log(myCompanyProducts)
- 
-
     return (
       <div>
         <CompanyDetail
+        
           cid={myCompanyId}
           name={myCompany.name}
           place={myCompany.place}

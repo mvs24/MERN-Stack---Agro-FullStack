@@ -15,7 +15,8 @@ import {
   PAYMENT_SUCCESS,
   INCREASE_ITEM_QUANTITY_ERROR,
   ADD_PRODUCT_TO_CARD_ERROR,
-  DELETE_CARD_ERROR
+  DELETE_CARD_ERROR,
+  REMOVE_QUANTITY_OF_PRODUCT
 } from "./types";
 
 export const signUpUser = (userData, history) => dispatch => {
@@ -100,7 +101,10 @@ export const addProductToCard = (dataToBuy) => dispatch => {
 
 export const removeQuantityOfProduct = user => dispatch => {
   axios.post("/api/user/removeQuantityOfProduct", user.cart).then(res => {
-    console.log(res.data);
+    dispatch({
+      type: REMOVE_QUANTITY_OF_PRODUCT,
+      payload: res.data
+    })
   });
 };
 

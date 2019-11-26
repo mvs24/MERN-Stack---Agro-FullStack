@@ -250,6 +250,8 @@ router.post("/paymentSuccess/:userId", auth, protect("user"), (req, res) => {
   });
 });
 
+
+
 router.post("/successPayment/email", auth, (req, res) => {
   const smtpTransport = nodemailer.createTransport({
     service: "gmail",

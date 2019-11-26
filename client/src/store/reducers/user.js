@@ -11,7 +11,8 @@ import { USER_ERROR,
          INCREASE_ITEM_QUANTITY_ERROR,
          ADD_PRODUCT_TO_CARD_ERROR,
          CHECK_ITEM_QUANTITIES_ERROR,
-         DELETE_CARD_ERROR
+         DELETE_CARD_ERROR,
+         REMOVE_QUANTITY_OF_PRODUCT
 } from "../actions/types";
 
 const initialState = {
@@ -112,6 +113,10 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 addProductToCardError: ''
+            }
+        case REMOVE_QUANTITY_OF_PRODUCT:
+            return {
+                ...state
             }
         default: 
             return state;

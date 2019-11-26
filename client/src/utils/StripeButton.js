@@ -15,13 +15,14 @@ class StripeButton extends Component {
   }
 
   onToken = token => {
-    this.props.paymentSuccess(this.props.user);
+    this.props.paymentSuccess(this.props.user.user);
     this.props.paymentSuccessMail(token);
     alert("Payment successful");
-    this.props.removeQuantityOfProduct(this.props.user);
+    this.props.removeQuantityOfProduct(this.props.user.user);
   };
 
-  render() {
+  render() { 
+    // console.log(this.props.user)
     const publishableKey = "pk_test_zUIsJ0pP0ioBysHoQcStX9cC00X97vuB7d";
     const priceForStripe = this.props.price * 100;
 
