@@ -21,7 +21,7 @@ class StripeButton extends Component {
     this.props.removeQuantityOfProduct(this.props.user.user);
   };
 
-  render() { 
+  render() {
     const publishableKey = "pk_test_zUIsJ0pP0ioBysHoQcStX9cC00X97vuB7d";
     const priceForStripe = this.props.price * 100;
 
@@ -32,7 +32,6 @@ class StripeButton extends Component {
       <div>
         <div>
           <StripeCheckout
-         
             disabled={!enableToBuy}
             label="Pay now"
             name="AGRO PRICE"
