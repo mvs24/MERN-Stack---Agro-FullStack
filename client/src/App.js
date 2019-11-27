@@ -10,31 +10,28 @@ import AddProduct from "./components/AddProduct/AddProduct";
 import MyCompanyPage from "./components/MyCompanyPage/MyCompanyPage";
 import MyCart from "./components/MyCart/MyCart";
 import PrivateRoute from "./hoc/PrivateRoute";
+import Auth from "./hoc/Auth";
 
 export default () => {
   return (
     <BrowserRouter>
-      <Route path="/createCompany" exact component={CreateCompany} />
-      <Route path="/signIn" exact component={SignIn} />
-      <Route path="/" exact component={SignUp} />
       <Switch>
-        <PrivateRoute path="/home" exact component={Home} />{" "}
-      </Switch>
-      <Switch>
-        <PrivateRoute path="/company/:cid" component={CompanyDetails} />
-      </Switch>
-      <Switch>
-        <PrivateRoute
+        <Route
+          path="/createCompany"
+          exact
+          component={Auth(CreateCompany, true)}
+        />
+        <Route path="/signIn" exact component={Auth(SignIn, false)} />
+        <Route path="/" exact component={Auth(SignUp, false)} />
+        <Route path="/home" exact component={Auth(Home, true)} />
+        <Route path="/company/:cid" component={Auth(CompanyDetails, true)} />
+        <Route
           path="/myCompanyPage/:cid"
           exact
-          component={MyCompanyPage}
+          component={Auth(MyCompanyPage, true)}
         />
-      </Switch>
-      <Switch>
-        <PrivateRoute path="/addProduct/:cid" component={AddProduct} />
-      </Switch>
-      <Switch>
-        <PrivateRoute path="/cart" exact component={MyCart} />
+        <Route path="/addProduct/:cid" component={Auth(AddProduct, true)} />
+        <Route path="/cart" exact component={Auth(MyCart, true)} />
       </Switch>
     </BrowserRouter>
   );

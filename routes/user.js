@@ -22,11 +22,9 @@ router.post("/register", (req, res) => {
   User.findOne({ email: req.body.email })
     .then(user => {
       if (user) {
-        let errors = {}
-        errors.email = "User already exists"
-        return res
-          .status(400) 
-          .json({err:errors });
+        let errors = {};
+        errors.email = "User already exists";
+        return res.status(400).json({ err: errors });
       } else {
         const newUser = new User({
           name: req.body.name,
@@ -290,5 +288,10 @@ router.post("/removeQuantityOfProduct", auth, protect("user"), (req, res) => {
     });
   });
 });
+
+router.get('/auth', auth, (req, res) => {
+  if (req.user._id) return res.status(200).json(true);
+  return res.status(200).json(false); 
+})
 
 module.exports = router;

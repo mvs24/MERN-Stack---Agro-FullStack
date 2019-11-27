@@ -1,17 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Redirect, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 
-function PrivateRoute({ component: Component, user, ...rest }) {
+import { getUserData } from "../store/actions/user";
+
+const PrivateRoute = ({ component: Component, user, ...rest }) => {
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(getUserData());
+  // }, []);
+
+  // if(user.user === null) return null;
+
   return (
     <Route
       {...rest}
-      render={props =>
-        user !== null ? <Component {...props} /> : <Redirect to="/" />
-      }
+      render={props => {
+        if (user.user) {
+          return <Component {...props} />;
+        } 
+        else {
+          return <Redirect to="/" />;
+        }
+      }}
     />
   );
-}
+};
 
 const mapStateToProps = state => {
   return {
@@ -19,6 +34,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(
-  connect(mapStateToProps, null, null, { pure: false })(PrivateRoute)
-);
+export default withRouter(connect(mapStateToProps)(PrivateRoute));

@@ -20,6 +20,16 @@ const Header = ({ userData, nrTodayProducts, children, reload }) => {
         <Spinner />
       </div>
     );
+
+    if(userData.name.length > 12) {
+      userData.name = userData.name.substring(0, 11);
+      userData.name += '...';
+    }
+    if(userData.lastname.length > 12) {
+      userData.lastname = userData.lastname.substring(0, 11);
+      userData.lastname += '...';
+    }
+
   return (
     <div>
       <div className="header_container">

@@ -12,7 +12,8 @@ import { USER_ERROR,
          ADD_PRODUCT_TO_CARD_ERROR,
          CHECK_ITEM_QUANTITIES_ERROR,
          DELETE_CARD_ERROR,
-         REMOVE_QUANTITY_OF_PRODUCT
+         REMOVE_QUANTITY_OF_PRODUCT,
+         AUTH
 } from "../actions/types";
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
     registerError: null,
     loginError: null,
     addProductToCardError: '',
-    checkItemQuantitiesError: null
+    checkItemQuantitiesError: null,
+    isAuthenticated: false
 };
 
 export default (state = initialState, action) => {
@@ -117,6 +119,11 @@ export default (state = initialState, action) => {
         case REMOVE_QUANTITY_OF_PRODUCT:
             return {
                 ...state
+            }
+        case AUTH:
+            return {
+                ...state,
+                isAuthenticated: action.payload
             }
         default: 
             return state;
