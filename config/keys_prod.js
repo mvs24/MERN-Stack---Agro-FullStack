@@ -6,3 +6,4 @@ module.exports = {
   superSecret: process.env.SUPER_SECRET,
   pass: process.env.PASS
 };
+ 
