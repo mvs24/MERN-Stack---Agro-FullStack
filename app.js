@@ -10,7 +10,7 @@ const app = express();
 
 const {auth} = require('./middleware/auth')
 const {protect} = require('./middleware/protect')
-const keys = require('./config/keys_dev')
+const keys = require('./config/keys')
 
 mongoose.Promise = global.Promise;
 // "mongodb://localhost:27017/agro";
