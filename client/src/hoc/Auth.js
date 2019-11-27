@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import axios from "axios";
 
 import Spinner from "../components/Spinner/Spinner";
@@ -37,5 +36,5 @@ export default (ComposedClass, reload) => {
     }
   }
 
-  return connect()(Auth);
+  return Auth;
 };
