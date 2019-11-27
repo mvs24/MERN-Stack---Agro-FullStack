@@ -16,8 +16,7 @@ import {
   INCREASE_ITEM_QUANTITY_ERROR,
   ADD_PRODUCT_TO_CARD_ERROR,
   DELETE_CARD_ERROR,
-  REMOVE_QUANTITY_OF_PRODUCT,
-  AUTH
+  REMOVE_QUANTITY_OF_PRODUCT
 } from "./types";
 
 export const signUpUser = (userData, history) => dispatch => {
@@ -168,9 +167,3 @@ export const deleteQuantityError = () => dispatch => {
     type: DELETE_CARD_ERROR
   })
 }
-
-// export const auth = () => dispatch =>{
-//   axios.get('/api/user/auth').then(res => {
-//     return res.data;
-//   })
-// }

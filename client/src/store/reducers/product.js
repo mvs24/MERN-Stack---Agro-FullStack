@@ -4,7 +4,6 @@ import { ADD_NEW_PRODUCT_ERROR,
          GET_TODAY_PRODUCTS, 
          LOAD_MORE_TODAY_PRODUCTS,
          NR_OF_TODAY_PRODUCTS,
-         REMOVE_QUANTITY_OF_PRODUCT, 
          REMOVE_PRODUCT, 
          PRODUCTS_LENGTH
 } from "../actions/types";

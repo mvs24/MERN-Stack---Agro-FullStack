@@ -8,7 +8,6 @@ import {
   GET_MY_COMPANY,
   SIGN_OUT_USER,
   ADD_NEW_PRODUCT,
-  REMOVE_QUANTITY_OF_PRODUCT,
   NR_OF_COMPANIES
 } from "../actions/types";
 

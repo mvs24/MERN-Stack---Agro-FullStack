@@ -87,13 +87,14 @@
   border: none;
   outline: none;
   background: rgb(38, 175, 100);
-  padding: 1rem 5rem;
+  padding: 1rem 2rem;
   color: white;
   border: 1px solid white;
-  border-radius: 1.5rem;
+  /* border-radius: 1.5rem; */
   font-weight: 300;
   transition: all 1s ease-in-out;
 }
+
 .pointer {
   cursor: pointer;
 }
@@ -153,6 +154,10 @@
     .card__side{
         width: 95%;
         z-index: 4;
+    }
+    .btnPos{
+      font-size: 14px;
+      padding: 0.5rem;
     }
 }
 

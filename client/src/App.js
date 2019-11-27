@@ -9,7 +9,8 @@ import CompanyDetails from "./components/CompanyDetails/CompanyDetails";
 import AddProduct from "./components/AddProduct/AddProduct";
 import MyCompanyPage from "./components/MyCompanyPage/MyCompanyPage";
 import MyCart from "./components/MyCart/MyCart";
-import PrivateRoute from "./hoc/PrivateRoute";
+import PageNotFound from './components/404Page/404Page'
+
 import Auth from "./hoc/Auth";
 
 export default () => {
@@ -24,14 +25,15 @@ export default () => {
         <Route path="/signIn" exact component={Auth(SignIn, false)} />
         <Route path="/" exact component={Auth(SignUp, false)} />
         <Route path="/home" exact component={Auth(Home, true)} />
-        <Route path="/company/:cid" component={Auth(CompanyDetails, true)} />
+        <Route path="/company/:cid" exact component={Auth(CompanyDetails, true)} />
         <Route
           path="/myCompanyPage/:cid"
           exact
           component={Auth(MyCompanyPage, true)}
         />
-        <Route path="/addProduct/:cid" component={Auth(AddProduct, true)} />
+        <Route path="/addProduct/:cid" exact component={Auth(AddProduct, true)} />
         <Route path="/cart" exact component={Auth(MyCart, true)} />
+        <Route component={PageNotFound} />
       </Switch>
     </BrowserRouter>
   );

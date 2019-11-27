@@ -7,7 +7,6 @@ import { COMPANY_CREATION_ERROR,
          GET_COMPANY_DETAILS_ERROR,
          GET_COMPANY_DETAILS,
          GET_MY_COMPANY,
-         GET_MY_COMPANY_ERROR,
          GET_COMPANY_PRODUCTS,
          NR_OF_COMPANIES
 } from './types';

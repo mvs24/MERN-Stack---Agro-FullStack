@@ -14,9 +14,9 @@
 }
 
 @media (max-width: 700px){
-    .myCompany {
+    /* .myCompany {
         display: none;
-    }
+    } */
     .products {
         width: 50%;
         left: 40%;

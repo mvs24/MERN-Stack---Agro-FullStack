@@ -10,10 +10,9 @@ import {
   LOAD_LESS_PRODUCTS,
   LOAD_MORE_TODAY_PRODUCTS,
   NR_OF_TODAY_PRODUCTS,
-  REMOVE_PRODUCT,
   PRODUCTS_LENGTH
 } from "./types";
-import { getMyCompany, getCompanyProducts } from "./company";
+import { getCompanyProducts } from "./company";
 
 export const addNewProduct = (companyId, data, history) => dispatch => {
   axios
@@ -45,7 +44,7 @@ export const getAllProducts = cid => dispatch => {
     .catch(err => {
       dispatch({
         type: ALL_PRODUCTS_MY_COMPANY_ERROR,
-        payload: err.response.data
+        payload: err.response.data.name
       });
     });
 };

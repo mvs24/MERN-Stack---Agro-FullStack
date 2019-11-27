@@ -1,4 +1,4 @@
-import { GET_COMPANY_PRODUCTS, LOAD_MORE_PRODUCTS, LOAD_LESS_PRODUCTS, REMOVE_QUANTITY_OF_PRODUCT } from "../actions/types";
+import { GET_COMPANY_PRODUCTS, LOAD_MORE_PRODUCTS, LOAD_LESS_PRODUCTS } from "../actions/types";
 
 const initialState = {
     companyProducts: []

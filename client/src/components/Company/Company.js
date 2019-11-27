@@ -7,16 +7,16 @@ const Company = props => {
   let companyName = props.company.name;
   let companyOwner = props.company.user;
 
-  if (companyName.length > 14) {
-    companyName = companyName.substring(0, 13);
+  if (companyName.length > 11) {
+    companyName = companyName.substring(0, 10);
     companyName += "...";
   }
-  if (companyOwner.name.length > 8) {
-    companyOwner.name = companyOwner.name.substring(0, 7);
+  if (companyOwner.name.length > 7) {
+    companyOwner.name = companyOwner.name.substring(0, 6);
     companyOwner.name += "...";
   }
-  if (companyOwner.lastname.length > 8) {
-    companyOwner.lastname = companyOwner.lastname.substring(0, 7);
+  if (companyOwner.lastname.length > 7) {
+    companyOwner.lastname = companyOwner.lastname.substring(0, 6);
     companyOwner.lastname += "...";
   }
 
