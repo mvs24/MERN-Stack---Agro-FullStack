@@ -49,7 +49,7 @@ class MyCompany extends Component {
           <Link
           className='linkCnt'
           to={{ pathname: `/myCompanyPage/${myCompany._id}` }}>
-            My Company: {myCompany.name}
+            My Market: {myCompany.name}
           </Link>
         </div>
         <div className='buttonCnt'>
