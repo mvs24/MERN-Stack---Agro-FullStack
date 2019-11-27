@@ -22,3 +22,10 @@
   justify-content: flex-start;
   align-items: flex-start;
 }
+@media (max-width: 900px) {
+  .flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

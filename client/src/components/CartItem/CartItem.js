@@ -36,31 +36,28 @@ class CartItem extends Component {
     }
 
     return (
-      <div>
-        <div className="cartItem">
-          <div className="img__container">
-            <img src={image} alt="" />
-          </div>
-          <div className="productName">{item.nameOfProduct}</div>
-          <div>
-            <div className="flex">
-              <div onClick={() => this.decreaseQuantity(item)}>
-                <i className="fas fa-chevron-left link"></i>
-              </div>
-              <p className="quantity">Quantity: {item.quantity}</p>
-              <div onClick={() => this.increaseQuantity(item)}>
-                <i className="fas fa-chevron-right link"></i>
-              </div>
+      <div className="cartItem">
+        <div className="img__container">
+          <img src={image} alt="" />
+        </div>
+        <div className="productName">{item.nameOfProduct}</div>
+        <div>
+          <div className="flex flex2">
+            <div onClick={() => this.decreaseQuantity(item)}>
+              <i className="fas fa-chevron-left link"></i>
+            </div>
+            <p className="quantity">Quantity: {item.quantity}</p>
+            <div onClick={() => this.increaseQuantity(item)}>
+              <i className="fas fa-chevron-right link"></i>
             </div>
           </div>
-          <div>
-            <span className="price">Price: {item.price}</span>
-          </div>
-          <div onClick={() => this.removeItem(item)}>
-            <i className="fas fa-trash-alt link"></i>
-          </div>
         </div>
-        <div></div>
+        <div>
+          <span className="price">Price: ${item.price}</span>
+        </div>
+        <div onClick={() => this.removeItem(item)}>
+          <i className="fas fa-trash-alt link"></i>
+        </div>
       </div>
     );
   }

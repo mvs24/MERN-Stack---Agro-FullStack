@@ -31,7 +31,7 @@ class TodayProductCard extends Component {
     }
 
     await this.props.addProductToCard(dataToBuy);
-    alert("Product added to the card!")
+
     await this.props.getUserData();
     await this.props.getUserData();
     setTimeout(() => {
@@ -111,7 +111,7 @@ class TodayProductCard extends Component {
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   height: "14.375rem"
-                }} 
+                }}
               >
                 &nbsp;
               </div>

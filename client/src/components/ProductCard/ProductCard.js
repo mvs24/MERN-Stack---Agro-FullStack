@@ -30,7 +30,7 @@ class ProductCard extends Component {
       dataToBuy.image = product.images[0].url;
     }
 
-    this.props.addProductToCard(dataToBuy);
+    await this.props.addProductToCard(dataToBuy);
     await this.props.getUserData();
     await this.props.getUserData();
     setTimeout(() => {
