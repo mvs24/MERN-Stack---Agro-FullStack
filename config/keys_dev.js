@@ -4,5 +4,6 @@ module.exports = {
   cloud_name: "ddnfmuxo5",
   api_key: "887347439998624",
   api_secret: "4bpXMvUX7UQLZ6vFSWK8hhXMYbU", 
-  superSecret: "randomSuperSecretToken___"
+  superSecret: "randomSuperSecretToken___",
+  pass: 'agroprice123_'
 };

@@ -12,7 +12,7 @@ const { validateUser } = require("../validation/user");
 const {
   validateIncreaseItemQuantity
 } = require("../validation/inreaseItemQuantity");
-const mailPass = require("../mailKeys/mail");
+const keys = require("../config/keys");
 
 router.post("/register", (req, res) => {
   const validation = validateUser(req.body);
@@ -255,7 +255,7 @@ router.post("/successPayment/email", auth, (req, res) => {
     service: "gmail",
     auth: {
       user: "agropriceapp@gmail.com",
-      pass: mailPass.pass
+      pass: keys.pass
     }
   });
 
