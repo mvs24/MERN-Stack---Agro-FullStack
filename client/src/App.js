@@ -19,7 +19,7 @@ export default () => {
         <Route
           path="/createCompany"
           exact
-          component={Auth(CreateCompany, true)}
+          component={Auth(CreateCompany, false)}
         />
         <Route path="/signIn" exact component={Auth(SignIn, false)} />
         <Route path="/" exact component={Auth(SignUp, false)} />

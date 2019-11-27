@@ -23,15 +23,7 @@ class CompanyDetail extends React.Component {
 
   state = {
     page: 1
-    // productsLength: ""
   };
-
-  // getProductsLength = async () => {
-  //   let productsLength = await axios.get(
-  //     `/api/product/companyProductsLength/${this.props.match.params.cid}`
-  //   );
-  //   this.setState({ productsLength: productsLength.data });
-  // };
 
   loadMore = async (page, cid) => {
     await this.props.loadMoreProducts(page, cid);
@@ -59,7 +51,6 @@ class CompanyDetail extends React.Component {
 
     if (productsLength === "") return null;
     if (!this.props.user.user) return null;
-    // if(!this.props.product.productsLength) return null;
 
     if (this.props.product.nrTodayProducts === null) return null;
 
@@ -85,7 +76,7 @@ class CompanyDetail extends React.Component {
         </div>
       );
     }
-    console.log(this.props.match);
+
     return (
       <div>
         <Header
