@@ -250,32 +250,32 @@ router.post("/paymentSuccess/:userId", auth, protect("user"), (req, res) => {
   });
 });
 
-router.post("/successPayment/email", auth, (req, res) => {
-  const smtpTransport = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "agropriceapp@gmail.com",
-      pass: keys.pass
-    }
-  });
+// router.post("/successPayment/email", auth, (req, res) => {
+//   const smtpTransport = nodemailer.createTransport({
+//     service: "gmail",
+//     auth: {
+//       user: "agropriceapp@gmail.com",
+//       pass: keys.pass
+//     }
+//   });
 
-  let mail = {
-    from: "Agro Price <agropriceapp@gmail.com>",
-    to: req.body.card.email,
-    subject: "Payment Success",
-    text: `Successful payment of the products`,
-    html: "<b>Successful payment</b>"
-  };
+//   let mail = {
+//     from: "Agro Price <agropriceapp@gmail.com>",
+//     to: req.body.card.email,
+//     subject: "Payment Success",
+//     text: `Successful payment of the products`,
+//     html: "<b>Successful payment</b>"
+//   };
 
-  smtpTransport.sendMail(mail, (err, res) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Email sent");
-    }
-    smtpTransport.close();
-  });
-});
+//   smtpTransport.sendMail(mail, (err, res) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("Email sent");
+//     }
+//     smtpTransport.close();
+//   });
+// });
 
 router.post("/removeQuantityOfProduct", auth, protect("user"), (req, res) => {
   const userCart = req.body;

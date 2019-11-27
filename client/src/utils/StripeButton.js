@@ -4,7 +4,7 @@ import StripeCheckout from "react-stripe-checkout";
 
 import {
   paymentSuccess,
-  paymentSuccessMail,
+  // paymentSuccessMail,
   removeQuantityOfProduct,
   getUserData
 } from "../store/actions/user";
@@ -16,7 +16,7 @@ class StripeButton extends Component {
 
   onToken = token => {
     this.props.paymentSuccess(this.props.user.user);
-    this.props.paymentSuccessMail(token);
+    // this.props.paymentSuccessMail(token);
     alert("Payment successful");
     this.props.removeQuantityOfProduct(this.props.user.user);
   };
@@ -62,7 +62,7 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   paymentSuccess,
-  paymentSuccessMail,
+  // paymentSuccessMail,
   removeQuantityOfProduct,
   getUserData
 })(StripeButton);

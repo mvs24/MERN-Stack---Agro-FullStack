@@ -158,9 +158,9 @@ export const paymentSuccess = user => dispatch => {
   });
 };
 
-export const paymentSuccessMail = token => dispatch => {
-  axios.post("/api/user/successPayment/email", token);
-};
+// export const paymentSuccessMail = token => dispatch => {
+//   axios.post("/api/user/successPayment/email", token);
+// };
 
 export const deleteQuantityError = () => dispatch => {
   dispatch({
