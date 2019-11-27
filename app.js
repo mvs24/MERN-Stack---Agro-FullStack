@@ -10,10 +10,12 @@ const app = express();
 
 const {auth} = require('./middleware/auth')
 const {protect} = require('./middleware/protect')
+const keys = require('./config/keys_dev')
 
 mongoose.Promise = global.Promise;
+// "mongodb://localhost:27017/agro";
 
-const mongoURI = "mongodb://localhost:27017/agro";
+const mongoURI = keys.mongoURI
 mongoose.connect(
   mongoURI,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
@@ -27,9 +29,9 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 cloudinary.config({
-  cloud_name: 'ddnfmuxo5',
-  api_key: '887347439998624',
-  api_secret: '4bpXMvUX7UQLZ6vFSWK8hhXMYbU'
+  cloud_name: keys.cloud_name,
+  api_key: keys.api_key,
+  api_secret: keys.api_secret
 })
 
 const user = require("./routes/user");
