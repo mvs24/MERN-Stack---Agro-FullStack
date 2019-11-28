@@ -26,7 +26,7 @@ const store = createStore(
   initialState,
   compose(
     applyMiddleware(...middleware)
-  )
+  ) 
 );
 
 ReactDOM.render(
