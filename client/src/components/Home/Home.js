@@ -33,7 +33,7 @@ class Home extends Component {
         <div className="products">
           <TodayProducts />
         </div>
-        <div className="myCompany">
+        <div className="myCompany myCompanyMedia">
           <MyCompany userData={this.props.user.user} />
         </div>
       </main> 

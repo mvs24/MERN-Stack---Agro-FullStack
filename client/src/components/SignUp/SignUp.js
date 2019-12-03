@@ -25,7 +25,7 @@ export class SignUp extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-  };
+  }; 
 
   signUp = e => {
     e.preventDefault();

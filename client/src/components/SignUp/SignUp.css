@@ -197,3 +197,23 @@ body {
   color: rgb(190, 81, 81);
   font-size: 12px;
 }
+
+@media screen and (max-width: 600px) {
+  .signUp {
+    /* display: inline-block;
+    margin-left: 2.5rem; */
+    text-align: center;
+    padding-left: 2rem
+  }
+  .icon, 
+  .fa-map-marker-alt{
+    display: none;
+  }
+  .signUpBtn {
+    padding: 0.75rem 3rem;
+    border-radius: 0;
+    /* margin-top: -0.06rem; */
+    /* margin-top: -1rem; */
+    margin-bottom: 0.4rem;
+  }
+}

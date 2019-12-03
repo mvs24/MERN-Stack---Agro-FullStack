@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import './404Page.css';
+import "./404Page.css";
 
 const PageNotFound = () => (
-  <div className='container'>
+  <div className="container">
     <h1>404 Error Page</h1>
-   
+
     <section className="error-container">
       <span>4</span>
       <span>
@@ -13,7 +13,6 @@ const PageNotFound = () => (
       </span>
       <span>4</span>
     </section>
-    
   </div>
 );
 

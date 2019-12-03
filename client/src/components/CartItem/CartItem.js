@@ -53,7 +53,7 @@ class CartItem extends Component {
           </div>
         </div>
         <div>
-          <span className="price">Price: ${item.price}</span>
+          <span className="price">Price: ${item.price.toFixed(2)}</span>
         </div>
         <div onClick={() => this.removeItem(item)}>
           <i className="fas fa-trash-alt link"></i>

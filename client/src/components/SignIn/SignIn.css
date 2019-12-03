@@ -23,8 +23,9 @@
 
 @media screen and (max-width: 562px) {
   .inputS input {
-    width: 70%;
+    width: 90%;
     text-align: center;
+    display: inline-block;
   }
   .inputS {
     margin-left: 20%;

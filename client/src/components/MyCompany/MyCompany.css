@@ -1,6 +1,14 @@
 .myCompanyCnt {
   margin-left: 20%;
 }
+@media (max-width: 800px) {
+  .linkCnt {
+    font-size: 12px !important;
+  }
+  .addButton {
+    font-size: 12px !important;
+  }
+}
 .block {
   display: inline-block;
 }

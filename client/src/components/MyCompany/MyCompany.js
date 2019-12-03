@@ -22,28 +22,6 @@ class MyCompany extends Component {
     const myCompany = this.props.company.myCompany;
 
     return (
-      // <div style={{margin: '1rem'}}>
-      //   <div className="myCompanyContainer" style={{margin: '0.3rem'}}>
-      //     <Link
-      //       style={{ textDecoration: "white", color: "#eee", marginLeft: '1rem' }}
-      //       to={{ pathname: `/myCompanyPage/${myCompany._id}` }}
-      //       className="myCompanyName"
-      //     >
-      //       <h3>
-      //         My Company: <span>{myCompany.name}</span>
-      //       </h3>
-      //     </Link>
-      //     <div className="btnContainer">
-      //       <button
-      //         className="button addBtn"
-      //         style={{margin: '1rem'}}
-      //         onClick={() => this.addProduct(myCompany._id, this.props.history)}
-      //       >
-      //         Add a new Product
-      //       </button>
-      //     </div>
-      //   </div>
-      // </div>
       <div className='myCompanyCnt'>
         <div className='block'>
           <Link

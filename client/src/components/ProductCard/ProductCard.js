@@ -106,7 +106,7 @@ class ProductCard extends Component {
                   <li>Market: {product.company.name}</li>
                   <li>Small Price: {product.smallPrice}</li>
                   <li>Big Price: {product.bigPrice}</li>
-                  <li>Medium Price: {product.medPrice}</li>
+                  <li>Medium Price: {product.medPrice.toFixed(2)}</li>
                   <li>Quantity: {product.quantity}</li>
                   <li>
                     Date:{" "}
@@ -135,7 +135,7 @@ class ProductCard extends Component {
                   <li>Market: {product.company.name}</li>
                   <li>Small Price: {product.smallPrice}</li>
                   <li>Big Price: {product.bigPrice}</li>
-                  <li>Medium Price: {product.medPrice}</li>
+                  <li>Medium Price: {product.medPrice.toFixed(2)}</li>
                   <li>Quantity: {product.quantity}</li>
                   <li>
                     Date:{" "}

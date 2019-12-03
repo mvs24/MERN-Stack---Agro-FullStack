@@ -1,5 +1,5 @@
 .main {
-    width: 100%;
+  width: 100%;
   position: relative;
 }
 .products {
@@ -13,33 +13,20 @@
   left: 80%;
 }
 
-@media (max-width: 700px){
-    /* .myCompany {
-        display: none;
-    } */
-    .products {
-        width: 50%;
-        left: 40%;
-
-    }
+@media (max-width: 700px) {
+  .products {
+    width: 50%;
+    left: 40%;
+  }
 }
-/* @media (min-width: 700px){
-    .products{
-        width: 60% ;
-        left: 40%;
-    }
-} */
-/* @media (min-width: 900px){
-    .products{
-        width: 60% ;
-        left: 40%;
-    }
-} */
-/* @media (min-width: 668px){
-    .products{
-        width: 70% ;
-        left: 40%;
-        height: 35rem;
-    }
-   
-} */
+@media (max-width: 800px) {
+  .myCompanyMedia {
+    position: absolute;
+    top: 150%;
+    left: 0;
+    width: 18%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row !important;
+  }
+}

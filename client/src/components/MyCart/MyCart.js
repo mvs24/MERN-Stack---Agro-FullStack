@@ -42,7 +42,7 @@ class MyCart extends Component {
           <div>
             <div>
               <span>
-                Total Price: <strong>${totalPrice}</strong>{" "}
+                Total Price: <strong>${totalPrice.toFixed(2)}</strong>{" "}
               </span>
             </div>
             <StripeButton user={user} price={totalPrice} />

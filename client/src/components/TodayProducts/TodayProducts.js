@@ -40,18 +40,17 @@ class TodayProducts extends Component {
     const { nrTodayProducts } = this.props.product;
 
     if (nrTodayProducts === null) return null;
-
     return (
       <div className="today__products">
-        <div className="grid2">
+        <div className="grid2 gridMedia">
           {todayProducts.map(product => (
             <TodayProductCard key={product._id} product={product} />
           ))}
         </div>
-        <div> 
+        <div>
           <button
             disabled={this.state.page === 2}
-            className="load__less"
+            className="load__less loadLess2"
             onClick={() => this.loadLess(this.state.page - 2)}
           >
             Load Less
@@ -59,7 +58,7 @@ class TodayProducts extends Component {
 
           <button
             disabled={nrTodayProducts - this.state.page <= 0}
-            className="load__more"
+            className="load__more loadMore2"
             onClick={() => this.loadMore(this.state.page + 2)}
           >
             Load More

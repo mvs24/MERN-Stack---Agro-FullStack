@@ -95,7 +95,7 @@ class CompanyDetail extends React.Component {
                 </p>
               </div>
             </div>
-            <div className="companyProducts">
+            <div className="companyProducts ">
               {!products ? (
                 <div style={{ color: "green" }}>
                   No products found for this company
@@ -112,16 +112,37 @@ class CompanyDetail extends React.Component {
               )}
             </div>
           </div>
-          <div className="grid" style={{ minHeight: `${minHeight}vh` }}>
-            {products &&
-              products.map(product => (
-                <ProductCard
-                  key={product._id}
-                  product={product}
-                  myCompanyProducts={myCompanyProducts}
-                />
-              ))}
-          </div>
+          {myCompanyProducts ? (
+            <div
+              className="grid gridMedia gridMedia2"
+              style={{ minHeight: `${minHeight}vh` }}
+            >
+              {products &&
+                products.map(product => (
+                  <ProductCard
+                    className="productGrid"
+                    key={product._id}
+                    product={product}
+                    myCompanyProducts={myCompanyProducts}
+                  />
+                ))}
+            </div>
+          ) : (
+            <div
+              className="grid gridMedia"
+              style={{ minHeight: `${minHeight}vh` }}
+            >
+              {products &&
+                products.map(product => (
+                  <ProductCard
+                    className="productGrid"
+                    key={product._id}
+                    product={product}
+                    myCompanyProducts={myCompanyProducts}
+                  />
+                ))}
+            </div>
+          )}
           {myCompanyProducts === true ? null : (
             <div className="btns__container">
               {this.state.page > 1 && (
