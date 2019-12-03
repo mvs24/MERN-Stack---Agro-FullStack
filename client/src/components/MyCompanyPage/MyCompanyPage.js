@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import {
-  getAllProducts
-} from "../../store/actions/product";
+import { getAllProducts } from "../../store/actions/product";
 import { getUserData } from "../../store/actions/user";
 import { getMyCompany } from "../../store/actions/company";
 import CompanyDetail from "../CompanyDetail/CompanyDetail";
@@ -19,7 +17,7 @@ class MyCompanyPage extends Component {
   render() {
     const myCompany = this.props.company.myCompany;
     const myCompanyId = this.props.match.params.cid;
-    if(!myCompanyId) return null;
+    if (!myCompanyId) return null;
     if (!myCompany) return <Spinner />;
     if (!this.props.user.user) return null;
     if (this.props.product.nrOfTodayProducts === null) return null;
@@ -27,8 +25,8 @@ class MyCompanyPage extends Component {
     const { myCompanyProducts } = this.props.product;
     if (!myCompanyProducts) return null;
 
-    return ( 
-      <div>
+    return (
+      <div style={{ height: "100%" }}>
         <CompanyDetail
           cid={myCompanyId}
           name={myCompany.name}
@@ -37,7 +35,6 @@ class MyCompanyPage extends Component {
           lastname={myCompany.user.lastname}
           products={myCompanyProducts}
           myCompanyProducts={true}
-         
         />
       </div>
     );
@@ -53,6 +50,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   getAllProducts,
   getUserData,
-  getMyCompany, 
+  getMyCompany
   // getCompanyProducts
 })(MyCompanyPage);

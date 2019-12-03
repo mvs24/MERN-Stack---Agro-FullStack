@@ -115,7 +115,7 @@ class CompanyDetail extends React.Component {
           {myCompanyProducts ? (
             <div
               className="grid gridMedia gridMedia2"
-              style={{ minHeight: `${minHeight}vh` }}
+              style={{ minHeight: `${Math.ceil(products.length / 3) * 100}vh` }}
             >
               {products &&
                 products.map(product => (
